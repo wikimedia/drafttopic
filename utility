@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+from drafttopic import drafttopic
+
+drafttopic.main()
