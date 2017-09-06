@@ -44,13 +44,13 @@ def test_getWikiProjectsFromSectionIntroText():
 
 def test_getSubCategories():
     parser = WikiProjectsParser(WPDPage)
-    pageSections = parser.getSections(parser.session, 'Wikipedia:WikiProject_Council/Directory/Culture')
+    pageSections = parser.getSections('Wikipedia:WikiProject_Council/Directory/Culture')
     parsed_file = 'culture_parsed.json'
     topics = {}
     if isCached(parsed_file):
         topics = json.loads(fetchTestSectionText(parsed_file))
     else:
-        topics, _ = parser.getSubCategories(parser.session,
+        topics, _ = parser.getSubCategories(
                                       'Wikipedia:WikiProject_Council/Directory/Culture',
                                         pageSections, 0, 0)
         cacheText(parsed_file, topics)

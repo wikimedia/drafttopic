@@ -61,10 +61,6 @@ WPMainHeadingRegex =\
         r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='
 WPListingRegex =\
         r'See the full listing \[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_,/ ]+)'
-WPMainLinksRegex1 =\
-        r'\[\[Wikipedia:WikiProject_Council/Directory/([A-Za-z_]+)/([A-Za-z_])\|([A-Za-z]+)\]\]'
-WPMainLinksRegex2 =\
-        r'\[\[Wikipedia:WikiProject_Council/Directory/([A-Za-z_]+)\|([A-Za-z]+)\]\]'
 
 WPSectionNextHeadingRegex = r'(.+)[=]{2,}'
 
@@ -100,9 +96,9 @@ class WikiProjectsParser:
         dirname = self.rootDir
         self.logger.info("Starting WikiProjects parsing")
         wp = {}
-        topSections = self.getSections(self.session, dirname)
+        sections = self.getSections(dirname)
         projectsStarted = False
-        for sec in topSections:
+        for sec in sections:
             # Ignore starting sections
             if sec['toclevel'] == 1:
                 if projectsStarted:
@@ -115,22 +111,20 @@ class WikiProjectsParser:
                                 'root_url': sec['fromtitle'],
                                 'index': sec['index']}
             # Get entries in this section
-            self.logger.info("Fetching entries for section:{}".format(name))
-            section = self.getSectionText(self.session, dirname, sec['index'])
+            self.logger.info("Fetching entries for section :{}".format(name))
+            section = self.getSectionText(dirname, sec['index'])
             mainHeading = re.search(WPMainHeadingRegex, section)
             if mainHeading:
                 wp[sec['line']]['url'] = WPDPage + '/' + mainHeading.group(1)
-                pageSections = self.getSections(self.session, wp[sec['line']]['url'])
-                wp[sec['line']]['topics'], _ = self.getSubCategories(self.session,
+                subPageSections = self.getSections(wp[sec['line']]['url'])
+                wp[sec['line']]['topics'], _ = self.getSubCategories(
                                                                   wp[sec['line']]['url'],
-                                                                  pageSections,
+                                                                  subPageSections,
                                                                   0, 0)
-
-
         self.logger.info("Ended WikiProjects parsing")
         return wp
 
-    def getSubCategories(self, session, page, sections, index, level):
+    def getSubCategories(self, page, sections, index, level):
         wp = {}
         prevTopic = None
         self.logger.info("Index:{}, Level:{}".format(index, level))
@@ -138,7 +132,7 @@ class WikiProjectsParser:
         while idx < len(sections):
             if sections[idx]['toclevel'] - 1 > level:
                 subCategories, newIdx = self.getSubCategories(
-                        session, page, sections, idx, level+1)
+                            page, sections, idx, level+1)
                 idx = newIdx
                 if subCategories:
                     wp[prevTopic]['topics'] = {**wp[prevTopic]['topics'],
@@ -153,7 +147,7 @@ class WikiProjectsParser:
                 entry['index'] = sections[idx]['index']
                 entry['topics'] = {}
                 introProjects = self.getWikiProjectsFromSectionIntro(
-                                                session, page, idx + 1)
+                                                    page, idx + 1)
                 if introProjects:
                     entry['topics'] = introProjects
                 wp[entry['name']] = entry
@@ -161,12 +155,12 @@ class WikiProjectsParser:
             idx += 1
         return wp, len(sections)
     
-    def getWikiProjectsFromSectionIntro(self, session, page, index):
+    def getWikiProjectsFromSectionIntro(self, page, index):
         """
         Only gets wikiprojects in intro part of sections, or if this is the leaf
         section, WikiProjects in subsequent subsections not handled here
         """
-        wikitext = self.getSectionText(session, page, index)
+        wikitext = self.getSectionText(page, index)
         return self.getWikiProjectsFromSectionIntroText(wikitext)
 
     def getWikiProjectsFromSectionIntroText(self, wikitext):
@@ -185,22 +179,22 @@ class WikiProjectsParser:
             match = re.search(WPListingRegex, wikitext)
             if match:
                 pageUrl = WPDPage + '/' + match.group(1)
-                sections = self.getSections(self.session, pageUrl)
-                wp, _ = self.getSubCategories(self.session, pageUrl, sections, 0, 0)
+                sections = self.getSections(pageUrl)
+                wp, _ = self.getSubCategories(pageUrl, sections, 0, 0)
         return wp
 
-    def getSectionText(self, session, page, section):
+    def getSectionText(self, page, section):
         self.logger.info("Fetching section {} from page {}".format(section, page))
-        section = session.get(action='parse', page=page, prop='wikitext',
+        section = self.session.get(action='parse', page=page, prop='wikitext',
                                section=section)
         return section['parse']['wikitext']['*']
 
-    def getSections(self, session, page):
+    def getSections(self, page):
         """
         Takes an api session and a page title and returns the sections on a page
         """
         self.logger.info("Fetching sections of {}".format(page))
-        sections = session.get(action='parse', page=page, prop='sections')
+        sections = self.session.get(action='parse', page=page, prop='sections')
         return sections['parse']['sections']
 
     def getWikiProjectsFromTable(self,wikitext):
