@@ -38,8 +38,8 @@ import json
 import re
 import logging
 import docopt
-import pdb
 import sys
+
 
 def main(argv=None):
     args = docopt.docopt(__doc__, argv=argv)
@@ -48,188 +48,175 @@ def main(argv=None):
         level=logging.DEBUG if args['--debug'] else logging.WARNING,
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
-    
+
     if args['--output'] == "<stdout>":
         output_f = sys.stdout
     else:
         output_f = open(args['--output'], "w")
-    
+
     run(output_f)
 
-WPDPage = 'Wikipedia:WikiProject_Council/Directory'
-WPMainHeadingRegex =\
-        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='
-WPListingRegex =\
-        r'See the full listing \[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_,/ ]+)'
-WPMainLinksRegex1 =\
-        r'\[\[Wikipedia:WikiProject_Council/Directory/([A-Za-z_]+)/([A-Za-z_])\|([A-Za-z]+)\]\]'
-WPMainLinksRegex2 =\
-        r'\[\[Wikipedia:WikiProject_Council/Directory/([A-Za-z_]+)\|([A-Za-z]+)\]\]'
 
-WPSectionNextHeadingRegex = r'(.+)[=]{2,}'
+wpd_page = 'Wikipedia:WikiProject_Council/Directory'
+wp_main_heading_regex =\
+        r'\[\[{}/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='.format(wpd_page)
+wp_listing_regex =\
+        r'See the full listing \[\[{}/([A-Za-z_,/ ]+)'.format(wpd_page)
 
-WPSectionRegex =\
+wp_section_nextheading_regex = r'(.+)[=]{2,}'
+
+wp_section_regex =\
         r'{{Wikipedia:WikiProject Council/Directory/WikiProject\n'\
-        '\|project = ([a-zA-Z_: ]+)\n'\
-        '\|shortname = ([a-zA-Z ]+)\n'\
+        '\|project = ([a-zA-Z_: -]+)\n'\
+        '\|shortname = ([a-zA-Z\(\) -]+)\n'\
         '\|active = (yes|no)\n([^}]*)}}'
 # To check listing in other wikiprojects
-WPSectionRegexListed =\
+wp_section_regex_listed =\
         r'listed-in = ([A-Za-z#/:_ ]+)'
+
 
 def run(output):
     logger = logging.getLogger(__name__)
-    parser = WikiProjectsParser(WPDPage, logger)
-    wps = parser.parseWpDirectory()
+    parser = WikiProjectsParser(wpd_page, logger)
+    wps = parser.parse_wp_directory()
     output.write(json.dumps(wps, indent=4))
 
-class WikiProjectsParser:
-    def __init__(self, WPDPage, logger):
-        self.rootDir = WPDPage
-        self.logger = logger
-        self.session = mwapi.Session('https://en.wikipedia.org', user_agent='WP-dev')
 
-    def parseWpDirectory(self):
+class WikiProjectsParser:
+    def __init__(self, wpd_page, logger=None):
+        self.root_dir = wpd_page
+        if logger:
+            self.logger = logger
+        else:
+            self.logger = logging.getLogger(__name__)
+        self.session = mwapi.Session('https://en.wikipedia.org',
+                                     user_agent='WP-dev')
+
+    def parse_wp_directory(self):
         """
         Parses the top level WikiProjects directory
         Entry point for WikiProjects parsing
         """
-        dirname = self.rootDir
+        dirname = self.root_dir
         self.logger.info("Starting WikiProjects parsing")
         wp = {}
-        topSections = self.getSections(self.session, dirname)
-        projectsStarted = False
-        for sec in topSections:
+        sections = self.get_sections(dirname)
+        projects_started = False
+        for sec in sections:
             # Ignore starting sections
             if sec['toclevel'] == 1:
-                if projectsStarted:
+                if projects_started:
                     break
                 else:
                     continue
-            projectsStarted = True
+            projects_started = True
             name = sec['line'].replace('&nbsp;', '')
             wp[sec['line']] = {'name': name,
-                                'root_url': sec['fromtitle'],
-                                'index': sec['index']}
+                               'root_url': sec['fromtitle'],
+                               'index': sec['index']}
             # Get entries in this section
-            self.logger.info("Fetching entries for section:{}".format(name))
-            section = self.getSectionText(self.session, dirname, sec['index'])
-            mainHeading = re.search(WPMainHeadingRegex, section)
-            if mainHeading:
-                wp[sec['line']]['url'] = WPDPage + '/' + mainHeading.group(1)
-                wp[sec['line']]['topics'] = self.getSubCategories(self.session,
-                                                            wp[sec['line']]['url'])
-
-
+            self.logger.info("Fetching entries for section :{}".format(name))
+            section = self.get_section_text(dirname, sec['index'])
+            main_heading = re.search(wp_main_heading_regex, section)
+            if main_heading:
+                wp[sec['line']]['url'] = wpd_page + '/' + main_heading.group(1)
+                sub_page_sections = self.get_sections(wp[sec['line']]['url'])
+                wp[sec['line']]['topics'], _ = self.get_sub_categories(
+                                                      wp[sec['line']]['url'],
+                                                      sub_page_sections,
+                                                      0, 0)
         self.logger.info("Ended WikiProjects parsing")
         return wp
 
-    def getSubCategories(self, session, page):
-        """
-        Parses a one level down-sub directory page, looking for sections
-        and table listings
-        """
-        self.logger.info("Starting subdirectory {} parsing".format(page))
+    def get_sub_categories(self, page, sections, index, level):
         wp = {}
-        sections = self.getSections(session, page)
-        titlestack = [sections[0]['line']]
-        prevLevel = sections[0]['toclevel']
-        wp['name'] = sections[0]['line']
-        wp['root_url'] = sections[0]['fromtitle']
-        wp['index'] = sections[0]['index']
-        wp['topics'] = {}
-        wpS = {}
-        wpS['topics'] = {}
-        wpS['topics'][wp['name']] = wp
-        for sec in sections:
-            # New level starts
-            if sec['toclevel'] > prevLevel:
-                initVals =  {'name': sec['line'], 'index':
-                            sec['index'], 'root_url':
-                            sec['fromtitle'], 'topics': {}}
-                titlestack.append(sec['line'])
-                tmpwp = wpS
-                for title in titlestack[:-1]:
-                    tmpwp = tmpwp['topics'][title]
+        prev_topic = None
+        self.logger.info("Index:{}, Level:{}".format(index, level))
+        idx = index
+        while idx < len(sections):
+            if sections[idx]['toclevel'] - 1 > level:
+                sub_categories, new_idx = self.get_sub_categories(
+                            page, sections, idx, level+1)
+                idx = new_idx
+                if sub_categories:
+                    wp[prev_topic]['topics'] = {**wp[prev_topic]['topics'],
+                                                **sub_categories}
+                continue
+            elif sections[idx]['toclevel'] - 1 < level:
+                return wp, idx
+            else:
+                entry = {}
+                entry['name'] = sections[idx]['line']
+                entry['root_url'] = sections[idx]['fromtitle']
+                entry['index'] = sections[idx]['index']
+                entry['topics'] = {}
+                intro_projects = self.get_wikiprojects_from_section_intro(
+                                                    page, idx + 1)
+                if intro_projects:
+                    entry['topics'] = intro_projects
+                wp[entry['name']] = entry
+            prev_topic = sections[idx]['line']
+            idx += 1
+        return wp, len(sections)
 
-                tmpwp['topics'][sec['line']] = initVals
-            elif sec['toclevel'] < prevLevel:
-                titlestack.pop()
-                titlestack.pop()
-                initVals =  {'name': sec['line'], 'index':
-                            sec['index'], 'root_url':
-                            sec['fromtitle'], 'topics': {}}
-                titlestack.append(sec['line'])
-                tmpwp = wpS
-                for title in titlestack[:-1]:
-                    tmpwp = tmpwp['topics'][title]
-
-                tmpwp['topics'][sec['line']] = initVals
-            introProjects = self.getSectionIntro(session, page, sec['index'])
-            if introProjects:
-                self.setWikiProjects(wpS, titlestack, introProjects)
-            prevLevel = sec['toclevel']
-        return wpS['topics']
-
-    def setWikiProjects(self, wp, titlestack, projects, key = None):
-        tmpwp = wp
-        for title in titlestack:
-            tmpwp = tmpwp['topics'][title]
-        if key:
-            tmpwp['topics'][key] = {**tmpwp['topics'], **projects}
-        else:
-            tmpwp['topics'] = {**tmpwp['topics'], **projects}
-
-
-    def getSectionIntro(self, session, page, index):
+    def get_wikiprojects_from_section_intro(self, page, index):
         """
-        Only gets wikiprojects in intro part of sections, or if this is the leaf
-        section, subsections handled recursively
+        Only gets wikiprojects in intro part of sections, or if this is the
+        leaf section, WikiProjects in subsequent subsections not handled here
         """
+        wikitext = self.get_section_text(page, index)
+        return self.get_wikiprojects_from_section_intro_text(wikitext)
+
+    def get_wikiprojects_from_section_intro_text(self, wikitext):
         wp = {}
-        wikitext = self.getSectionText(session, page, index).split('\n')
         # remove first heading
+        wikitext = wikitext.split('\n')
         wikitext = '\n'.join(wikitext[1:])
-        match = re.search(WPSectionNextHeadingRegex, wikitext, re.MULTILINE)
+        match = re.search(wp_section_nextheading_regex, wikitext,
+                          re.MULTILINE)
         if match:
             wikitext = wikitext[:match.start()]
-            wp = self.getWpSection(wikitext)
+            wp = self.get_wikiprojects_from_table(wikitext)
         else:
-            wp = self.getWpSection(wikitext)
+            wp = self.get_wikiprojects_from_table(wikitext)
         if not wp:
             # Try to match a 'See full listing here' entry
-            match = re.search(WPListingRegex, wikitext)
+            match = re.search(wp_listing_regex, wikitext)
             if match:
-                wp = self.getSubCategories(session, WPDPage + '/' + match.group(1))
+                page_url = wpd_page + '/' + match.group(1)
+                sections = self.get_sections(page_url)
+                wp, _ = self.get_sub_categories(page_url, sections, 0, 0)
         return wp
 
-    def getSectionText(self, session, page, section):
-        self.logger.info("Fetching section {} from page {}".format(section, page))
-        section = session.get(action='parse', page=page, prop='wikitext',
-                               section=section)
+    def get_section_text(self, page, section):
+        self.logger.info("Fetching section {} from page {}".format(section,
+                                                                   page))
+        section = self.session.get(action='parse', page=page, prop='wikitext',
+                                   section=section)
         return section['parse']['wikitext']['*']
 
-    def getSections(self, session, page):
+    def get_sections(self, page):
         """
-        Takes an api session and a page title and returns the sections on a page
+        Takes an api session and a page title and returns the sections on a
+        page
         """
         self.logger.info("Fetching sections of {}".format(page))
-        sections = session.get(action='parse', page=page, prop='sections')
+        sections = self.session.get(action='parse', page=page,
+                                    prop='sections')
         return sections['parse']['sections']
 
-    def getWpSection(self,wikitext):
+    def get_wikiprojects_from_table(self, wikitext):
         """
-        Takes a WikiProject section, and returns individual WikiProjects
+        Takes a WikiProjects table listing, and returns individual WikiProjects
         """
         wp = {}
-        matches = re.findall(WPSectionRegex, wikitext)
+        matches = re.findall(wp_section_regex, wikitext)
         for match in matches:
             remaining = match[3]
-            listedIn = re.search(WPSectionRegexListed, remaining)
+            listed_in = re.search(wp_section_regex_listed, remaining)
             # Listed somewhere else, so skip
-            if listedIn:
+            if listed_in:
                 continue
             wp[match[1]] = {'name': match[0], 'shortname': match[1], 'active':
                             match[2]}
         return wp
-
