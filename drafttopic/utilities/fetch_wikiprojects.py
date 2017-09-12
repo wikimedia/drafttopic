@@ -41,6 +41,24 @@ import docopt
 import sys
 
 
+wpd_page = 'Wikipedia:WikiProject_Council/Directory'
+wp_main_heading_regex =\
+        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='  # noqa: E501
+wp_listing_regex =\
+        r'See the full listing \[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_,/ ]+)'  # noqa: E501
+
+wp_section_nextheading_regex = r'(.+)[=]{2,}'
+
+wp_section_regex =\
+        r'{{Wikipedia:WikiProject Council/Directory/WikiProject\n'\
+        '\|project = ([a-zA-Z_: -]+)\n'\
+        '\|shortname = ([a-zA-Z\(\) -]+)\n'\
+        '\|active = (yes|no)\n([^}]*)}}'
+# To check listing in other wikiprojects
+wp_section_regex_listed =\
+        r'listed-in = ([A-Za-z#/:_ ]+)'
+
+
 def main(argv=None):
     args = docopt.docopt(__doc__, argv=argv)
 
@@ -55,24 +73,6 @@ def main(argv=None):
         output_f = open(args['--output'], "w")
 
     run(output_f)
-
-
-wpd_page = 'Wikipedia:WikiProject_Council/Directory'
-wp_main_heading_regex =\
-        r'\[\[{}/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='.format(wpd_page)
-wp_listing_regex =\
-        r'See the full listing \[\[{}/([A-Za-z_,/ ]+)'.format(wpd_page)
-
-wp_section_nextheading_regex = r'(.+)[=]{2,}'
-
-wp_section_regex =\
-        r'{{Wikipedia:WikiProject Council/Directory/WikiProject\n'\
-        '\|project = ([a-zA-Z_: -]+)\n'\
-        '\|shortname = ([a-zA-Z\(\) -]+)\n'\
-        '\|active = (yes|no)\n([^}]*)}}'
-# To check listing in other wikiprojects
-wp_section_regex_listed =\
-        r'listed-in = ([A-Za-z#/:_ ]+)'
 
 
 def run(output):
