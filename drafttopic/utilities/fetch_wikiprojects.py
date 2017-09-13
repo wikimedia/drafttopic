@@ -104,8 +104,8 @@ class WikiProjectsParser:
         try:
             sections = self.get_sections(dirname)
         except IOError as e:
-            self.logger.warn("Failed to get sections in root"
-                            "directory, exiting...")
+            self.logger.warn(
+                "Failed to get sections in root ,directory, exiting...")
             return None
         projects_started = False
         for sec in sections:
@@ -121,25 +121,29 @@ class WikiProjectsParser:
                                'root_url': sec['fromtitle'],
                                'index': sec['index']}
             section = self.get_section_text(dirname, sec['index'])
+            main_heading = None
             if section:
                 main_heading = re.search(wp_main_heading_regex, section)
-                if main_heading:
-                    try:
-                        wp[sec['line']]['url'] = wpd_page + '/' + main_heading.group(1)
-                        # Get entries in this section
-                        self.logger.info("Fetching entries for section: {}".format(name))
-                        sub_page_sections = self.get_sections(wp[sec['line']]['url'])
-                        wp[sec['line']]['topics'], _ = self.get_sub_categories(
-                                                          wp[sec['line']]['url'],
-                                                          sub_page_sections,
-                                                          0, 0)
-                    except IOError as e:
-                        self.logger.warn("Skipping: {}".
-                                         format(wp[sec['line']]['url']))
-                        pass
-                    except:
-                        self.logger.warn("Unexpected error: ", sys.exc_info()[0])
-                        pass
+            if section and main_heading:
+                try:
+                    wp[sec['line']]['url'] = wpd_page + '/' +\
+                        main_heading.group(1)
+                    # Get entries in this section
+                    self.logger.info(
+                        "Fetching entries for section: {}".format(name))
+                    sub_page_sections =\
+                        self.get_sections(wp[sec['line']]['url'])
+                    wp[sec['line']]['topics'], _ = self.get_sub_categories(
+                                                      wp[sec['line']]['url'],
+                                                      sub_page_sections,
+                                                      0, 0)
+                except IOError as e:
+                    self.logger.warn("Skipping: {}".
+                                     format(wp[sec['line']]['url']))
+                    pass
+                except:
+                    self.logger.warn("Unexpected error: ", sys.exc_info()[0])
+                    pass
         self.logger.info("Ended WikiProjects parsing")
         return wp
 
@@ -207,8 +211,8 @@ class WikiProjectsParser:
         self.logger.info("Fetching section {} from page {}".format(section,
                                                                    page))
         try:
-            section = self.session.get(action='parse', page=page, prop='wikitext',
-                                   section=section)
+            section = self.session.get(action='parse', page=page,
+                                       prop='wikitext', section=section)
             return section['parse']['wikitext']['*']
         except IOError as e:
             self.logger.warn("Failed to request section: {} from {}".
@@ -224,7 +228,7 @@ class WikiProjectsParser:
         self.logger.info("Fetching sections of {}".format(page))
         try:
             sections = self.session.get(action='parse', page=page,
-                                    prop='sections')
+                                        prop='sections')
             return sections['parse']['sections']
         except IOError as e:
             self.logger.warn("Failed to fetch sections for {}".format(page))
