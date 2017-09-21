@@ -39,6 +39,7 @@ import re
 import logging
 import docopt
 import sys
+import traceback
 
 
 wpd_page = 'Wikipedia:WikiProject_Council/Directory'
@@ -100,7 +101,13 @@ class WikiProjectsParser:
         dirname = self.root_dir
         self.logger.info("Starting WikiProjects parsing")
         wp = {}
-        sections = self.get_sections(dirname)
+        sections = None
+        try:
+            sections = self.get_sections(dirname)
+        except IOError as e:
+            self.logger.warn(
+                "Failed to get sections in root ,directory, exiting...")
+            return None
         projects_started = False
         for sec in sections:
             # Ignore starting sections
@@ -114,17 +121,31 @@ class WikiProjectsParser:
             wp[sec['line']] = {'name': name,
                                'root_url': sec['fromtitle'],
                                'index': sec['index']}
-            # Get entries in this section
-            self.logger.info("Fetching entries for section :{}".format(name))
             section = self.get_section_text(dirname, sec['index'])
-            main_heading = re.search(wp_main_heading_regex, section)
-            if main_heading:
-                wp[sec['line']]['url'] = wpd_page + '/' + main_heading.group(1)
-                sub_page_sections = self.get_sections(wp[sec['line']]['url'])
-                wp[sec['line']]['topics'], _ = self.get_sub_categories(
+            main_heading = None
+            if section:
+                main_heading = re.search(wp_main_heading_regex, section)
+            if section and main_heading:
+                try:
+                    wp[sec['line']]['url'] = wpd_page + '/' +\
+                        main_heading.group(1)
+                    # Get entries in this section
+                    self.logger.info(
+                        "Fetching entries for section: {}".format(name))
+                    sub_page_sections =\
+                        self.get_sections(wp[sec['line']]['url'])
+                    wp[sec['line']]['topics'], _ = self.get_sub_categories(
                                                       wp[sec['line']]['url'],
                                                       sub_page_sections,
                                                       0, 0)
+                except IOError as e:
+                    self.logger.warn("Skipping: {}".
+                                     format(wp[sec['line']]['url']))
+                    pass
+                except:
+                    self.logger.warn("Unexpected error: ",
+                                     traceback.format_exc())
+                    pass
         self.logger.info("Ended WikiProjects parsing")
         return wp
 
@@ -191,9 +212,15 @@ class WikiProjectsParser:
     def get_section_text(self, page, section):
         self.logger.info("Fetching section {} from page {}".format(section,
                                                                    page))
-        section = self.session.get(action='parse', page=page, prop='wikitext',
-                                   section=section)
-        return section['parse']['wikitext']['*']
+        try:
+            section = self.session.get(action='parse', page=page,
+                                       prop='wikitext', section=section)
+            return section['parse']['wikitext']['*']
+        except IOError as e:
+            self.logger.warn("Failed to request section: {} from {}".
+                             format(section, page))
+            self.logger.warn(traceback.format_exc())
+        return None
 
     def get_sections(self, page):
         """
@@ -201,9 +228,14 @@ class WikiProjectsParser:
         page
         """
         self.logger.info("Fetching sections of {}".format(page))
-        sections = self.session.get(action='parse', page=page,
-                                    prop='sections')
-        return sections['parse']['sections']
+        try:
+            sections = self.session.get(action='parse', page=page,
+                                        prop='sections')
+            return sections['parse']['sections']
+        except IOError as e:
+            self.logger.warn("Failed to fetch sections for {}".format(page))
+            self.logger.warn(traceback.format_exc())
+            raise IOError
 
     def get_wikiprojects_from_table(self, wikitext):
         """
