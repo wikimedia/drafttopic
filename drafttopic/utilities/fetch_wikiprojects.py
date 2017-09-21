@@ -39,6 +39,7 @@ import re
 import logging
 import docopt
 import sys
+import traceback
 
 
 wpd_page = 'Wikipedia:WikiProject_Council/Directory'
@@ -142,7 +143,8 @@ class WikiProjectsParser:
                                      format(wp[sec['line']]['url']))
                     pass
                 except:
-                    self.logger.warn("Unexpected error: ", sys.exc_info()[0])
+                    self.logger.warn("Unexpected error: ",
+                                     traceback.format_exc())
                     pass
         self.logger.info("Ended WikiProjects parsing")
         return wp
@@ -217,7 +219,7 @@ class WikiProjectsParser:
         except IOError as e:
             self.logger.warn("Failed to request section: {} from {}".
                              format(section, page))
-            self.logger.warn(e)
+            self.logger.warn(traceback.format_exc())
         return None
 
     def get_sections(self, page):
@@ -232,7 +234,7 @@ class WikiProjectsParser:
             return sections['parse']['sections']
         except IOError as e:
             self.logger.warn("Failed to fetch sections for {}".format(page))
-            self.logger.warn(e)
+            self.logger.warn(traceback.format_exc())
             raise IOError
 
     def get_wikiprojects_from_table(self, wikitext):
