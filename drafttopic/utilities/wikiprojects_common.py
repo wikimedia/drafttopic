@@ -5,7 +5,7 @@ import json
 def wptemplate2directory(template_name, wikiprojects, directory=[]):
     """
     Convert a WikiProject template name to a path within the
-    WikiProject Directory hierarchy.  
+    WikiProject Directory hierarchy.
 
     :Parameters:
     template_name : str
@@ -14,7 +14,7 @@ def wptemplate2directory(template_name, wikiprojects, directory=[]):
       The wikiprojects directory tree
 
     :Returns:
-    A directory path as a list of strings ordered from top to bottom.  
+    A directory path as a list of strings ordered from top to bottom.
     E.g. "maths rating" returns ["stem", "mathematics"]
     """
     for key in wikiprojects:
@@ -52,4 +52,3 @@ def fetch_section_text(filename, logger):
         logger.warn("Failed to read test file: {}".format(filename))
         return None
     return wikitext
-
