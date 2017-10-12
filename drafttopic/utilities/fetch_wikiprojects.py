@@ -26,12 +26,13 @@ which contain actual WikiProjects name and has only three fields:
     name, shortname, active
 
 Usage:
-    fetch_wikiprojects [--output=<path>] [--debug]
+    fetch_wikiprojects [--output=<path>] [--debug] [--mid-level]
 
 Options:
     --output=<path>       Path to an file to write output to
                           [default: <stdout>]
     --debug               Print debug logging
+    --mid-level           Generate mid-level projects list
 """
 import datetime
 import mwapi
@@ -49,6 +50,11 @@ wp_main_heading_regex =\
         r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='  # noqa: E501
 wp_listing_regex =\
         r'See the full listing \[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_,/ ]+)'  # noqa: E501
+
+wp_main_links_regex1 =\
+        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)/([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
+wp_main_links_regex2 =\
+        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)#([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
 
 wp_section_nextheading_regex = r'(.+)[=]{2,}'
 
@@ -79,13 +85,17 @@ def main(argv=None):
         output_f = output_f + '_' + curr_time
         output_f = open(output_f, "w")
 
-    run(output_f)
+    run(output_f, True)
 
 
-def run(output):
+def run(output, is_mid_level=False):
     logger = logging.getLogger(__name__)
     parser = WikiProjectsParser(wpd_page, logger)
-    wps = parser.parse_wp_directory()
+    wps = {}
+    if is_mid_level:
+        wps = parser.parse_mid_level()
+    else:
+        wps = parser.parse_wp_directory()
     output.write(json.dumps(wps, indent=4))
 
 
@@ -98,6 +108,41 @@ class WikiProjectsParser:
             self.logger = logging.getLogger(__name__)
         self.session = mwapi.Session('https://en.wikipedia.org',
                                      user_agent='WP-dev')
+
+    def parse_mid_level(self):
+        """
+        Parses the mid level WikiProjects from the directory
+        """
+        dirname = self.root_dir
+        self.logger.info("Starting WikiProjects mid-level parsing")
+        mid_level_wp = {'wikiprojects': []}
+        sections = None
+        try:
+            sections = self.get_sections(dirname)
+        except IOError as e:
+            self.logger.warn(
+                "Failed to get sections in root ,directory, exiting...")
+            return None
+        projects_started = False
+        for sec in sections:
+            # Ignore starting sections
+            if sec['toclevel'] == 1:
+                if projects_started:
+                    break
+                else:
+                    continue
+            projects_started = True
+            section = self.get_section_text(dirname, sec['index'])
+            if section:
+                # Extract and store the name of the mid-level section
+                # which can be indexed in the wikiprojects data structure
+                links_type_1 = re.findall(wp_main_links_regex1, section)
+                for entities in links_type_1:
+                    mid_level_wp['wikiprojects'].append(entities[2])
+                links_type_2 = re.findall(wp_main_links_regex2, section)
+                for entities in links_type_2:
+                    mid_level_wp['wikiprojects'].append(entities[2])
+        return mid_level_wp
 
     def parse_wp_directory(self):
         """
