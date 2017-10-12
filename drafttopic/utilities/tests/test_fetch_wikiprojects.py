@@ -4,7 +4,6 @@ from ..fetch_wikiprojects import wpd_page
 from ..wikiprojects_common import is_cached, fetch_section_text, cache_text
 import logging
 import json
-import os
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +11,7 @@ excluded_keys = ['topics', 'root_url', 'index', 'name', 'url']
 
 
 def test_wiki_projects_from_table():
-    table = fetch_section_text('performing_arts.test', logger)
+    table = fetch_section_text('performing_arts.test')
     parser = WikiProjectsParser(wpd_page)
     topics = parser.get_wikiprojects_from_table(table)
     topics = {'topics': topics}
@@ -33,7 +32,7 @@ def test_wiki_projects_from_table():
 
 def test_get_wikiprojects_from_section_intro_text():
     parser = WikiProjectsParser(wpd_page)
-    wikitext = fetch_section_text('television.test', logger)
+    wikitext = fetch_section_text('television.test')
     topics = parser.get_wikiprojects_from_section_intro_text(wikitext)
     topics = {'topics': topics}
     actual_topics = {
@@ -58,14 +57,14 @@ def test_get_sub_categories():
     parsed_file = 'culture_parsed.json'
     topics = {}
     if is_cached(parsed_file):
-        topics = json.loads(fetch_section_text(parsed_file, logger))
+        topics = json.loads(fetch_section_text(parsed_file))
     else:
         topics, _ = parser.get_sub_categories(
             'Wikipedia:WikiProject_Council/Directory/Culture',
             page_sections, 0, 0)
         cache_text(parsed_file, topics, logger)
     actual_sections = json.loads(
-        fetch_section_text('culture_toc.json', logger))['sections']
+        fetch_section_text('culture_toc.json'))['sections']
     wp_topics_compare_with_toc(actual_sections, topics, 0, 0)
 
 

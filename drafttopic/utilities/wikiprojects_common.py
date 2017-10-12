@@ -1,5 +1,7 @@
 import os
 import json
+import logging
+logger = logging.getLogger(__name__)
 
 
 def wptemplate2directory(template_name, wikiprojects, directory=[]):
@@ -43,7 +45,7 @@ def cache_text(filename, result, logger):
         logger.warn("Failed to write to cache file: {}".format(filename))
 
 
-def fetch_section_text(filename, logger):
+def fetch_section_text(filename):
     try:
         f = open('testfiles/{}'.format(filename), 'r')
         wikitext = f.read()
