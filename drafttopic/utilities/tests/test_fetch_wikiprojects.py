@@ -1,9 +1,9 @@
 from nose.tools import eq_
 from ..fetch_wikiprojects import WikiProjectsParser
 from ..fetch_wikiprojects import wpd_page
+from ..wikiprojects_common import is_cached, fetch_section_text, cache_text
 import logging
 import json
-import os
 
 logger = logging.getLogger(__name__)
 
@@ -62,33 +62,10 @@ def test_get_sub_categories():
         topics, _ = parser.get_sub_categories(
             'Wikipedia:WikiProject_Council/Directory/Culture',
             page_sections, 0, 0)
-        cache_text(parsed_file, topics)
+        cache_text(parsed_file, topics, logger)
     actual_sections = json.loads(
         fetch_section_text('culture_toc.json'))['sections']
     wp_topics_compare_with_toc(actual_sections, topics, 0, 0)
-
-
-def is_cached(filename):
-    return os.path.exists('testfiles/{}'.format(filename))
-
-
-def cache_text(filename, result):
-    try:
-        f = open('testfiles/{}'.format(filename), 'w')
-        f.write(json.dumps(result))
-        f.close()
-    except IOError as e:
-        logger.warn("Failed to write to cache file: {}".format(filename))
-
-
-def fetch_section_text(filename):
-    try:
-        f = open('testfiles/{}'.format(filename), 'r')
-        wikitext = f.read()
-        f.close()
-    except IOError as e:
-        logger.warn("Failed to read test file: {}".format(filename))
-    return wikitext
 
 
 def wp_topics_compare_with_toc(toc_topics, parsed_wp_tree, index, level):
