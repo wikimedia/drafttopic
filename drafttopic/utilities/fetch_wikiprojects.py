@@ -26,7 +26,7 @@ which contain actual WikiProjects name and has only three fields:
     name, shortname, active
 
 Usage:
-    fetch_wikiprojects [--output=<path>] [--debug] [--mid-level]
+    fetch_wikiprojects [--output=<path>] [--debug]
 
 Options:
     --output=<path>       Path to an file to write output to
@@ -43,6 +43,7 @@ import docopt
 import sys
 import time
 import traceback
+from .wikiprojects_common import wptemplate2directory
 
 
 wpd_page = 'Wikipedia:WikiProject_Council/Directory'
@@ -50,11 +51,6 @@ wp_main_heading_regex =\
         r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_, ]+)\|([A-Za-z_, ]+)\]\]='  # noqa: E501
 wp_listing_regex =\
         r'See the full listing \[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_,/ ]+)'  # noqa: E501
-
-wp_main_links_regex1 =\
-        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)/([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
-wp_main_links_regex2 =\
-        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)#([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
 
 wp_section_nextheading_regex = r'(.+)[=]{2,}'
 
@@ -66,6 +62,11 @@ wp_section_regex =\
 # To check listing in other wikiprojects
 wp_section_regex_listed =\
         r'listed-in = ([A-Za-z#/:_ ]+)'
+
+wp_main_links_regex1 =\
+        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)/([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
+wp_main_links_regex2 =\
+        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)#([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
 
 
 def main(argv=None):
@@ -92,10 +93,7 @@ def run(output, is_mid_level=False):
     logger = logging.getLogger(__name__)
     parser = WikiProjectsParser(wpd_page, logger)
     wps = {}
-    if is_mid_level:
-        wps = parser.parse_mid_level()
-    else:
-        wps = parser.parse_wp_directory()
+    wps = parser.parse_wp_directory()
     output.write(json.dumps(wps, indent=4))
 
 
@@ -107,15 +105,18 @@ class WikiProjectsParser:
         else:
             self.logger = logging.getLogger(__name__)
         self.session = mwapi.Session('https://en.wikipedia.org',
-                                     user_agent='WP-dev')
+                                     user_agent='WikiProject directory \
+                                     parser. #wikimedia-ai')
 
-    def parse_mid_level(self):
+    def parse_mid_level(self, wp_directory):
         """
-        Parses the mid level WikiProjects from the directory
+        Parses and generates the mapping of mid level WikiProject topics
+        to actual active WikiProjects cotained in them by reading the
+        full WikiProjects directory
         """
         dirname = self.root_dir
         self.logger.info("Starting WikiProjects mid-level parsing")
-        mid_level_wp = {'wikiprojects': []}
+        mid_level_wp = {'wikiprojects': {}}
         sections = None
         try:
             sections = self.get_sections(dirname)
@@ -138,11 +139,54 @@ class WikiProjectsParser:
                 # which can be indexed in the wikiprojects data structure
                 links_type_1 = re.findall(wp_main_links_regex1, section)
                 for entities in links_type_1:
-                    mid_level_wp['wikiprojects'].append(entities[2])
+                    mid_level_wp['wikiprojects'][entities[2]] = []
                 links_type_2 = re.findall(wp_main_links_regex2, section)
                 for entities in links_type_2:
-                    mid_level_wp['wikiprojects'].append(entities[2])
+                    mid_level_wp['wikiprojects'][entities[1]] = []
+
+        # Now proceed to fetch leaf level wikiprojects within each mid-level
+        # topic
+        for project in mid_level_wp['wikiprojects']:
+            path = wptemplate2directory(project, wp_directory)
+            if path is None or len(path) == 0:
+                self.logger.warn("Path not found for {}".format(project))
+                continue
+            path.append(project)
+            wp_topics = self.get_topics_from_wp_directory(wp_directory, path)
+            mid_level_wp['wikiprojects'][project] = wp_topics
+
         return mid_level_wp
+
+    def get_topics_from_wp_directory(self, wp, path):
+        """
+        Give a path, returns all the contained the leaf level
+        WikiProject topics
+        """
+        path.reverse()
+        while len(path) > 0:
+            entry = path.pop()
+            wp = wp[entry]['topics']
+        # by now wp contains the relevant WikiProject category sub structure
+        names = self.get_leaf_nodes(wp)
+        return names
+
+    def get_leaf_nodes(self, wp):
+        """
+        Accepts a WikiProject directory substructure and returns all contained
+        leaf nodes, i.e. all contained WikiProjects
+        """
+        names = []
+        for name in wp:
+            if 'topics' not in wp[name]:
+                if wp[name]['active'] == 'yes':
+                    names.append(wp[name]['name'])
+            else:
+                child_names = self.get_leaf_nodes(wp[name]['topics'])
+                # To avoid nested lists
+                if child_names:
+                    for child in child_names:
+                        names.append(child)
+        return names
 
     def parse_wp_directory(self):
         """

@@ -50,6 +50,59 @@ def test_get_wikiprojects_from_section_intro_text():
     wp_topics_compare(actual_topics, topics)
 
 
+def test_get_leaf_nodes():
+    parser = WikiProjectsParser(wpd_page)
+    page_sections = parser.get_sections(
+        'Wikipedia:WikiProject_Council/Directory/Culture')
+    parsed_file = 'culture_parsed.json'
+    topics = {}
+    if is_cached(parsed_file):
+        topics = json.loads(fetch_section_text(parsed_file))
+    else:
+        topics, _ = parser.get_sub_categories(
+            'Wikipedia:WikiProject_Council/Directory/Culture',
+            page_sections, 0, 0)
+        cache_text(parsed_file, topics, logger)
+    music_topics = topics['Culture and the arts'][
+        'topics']['Performing arts']['topics']['Music']['topics']
+    actual_music_topics = [
+            "Wikipedia:WikiProject Music",
+            "Wikipedia:WikiProject Music theory",
+            "Wikipedia:WikiProject Composers",
+            "Wikipedia:WikiProject Richard Wagner",
+            "Wikipedia:WikiProject Songs",
+            "Wikipedia:WikiProject Alternative music",
+            "Wikipedia:WikiProject Black Metal",
+            "Wikipedia:WikiProject Christian music",
+            "Wikipedia:WikiProject Electronic music",
+            "Wikipedia:WikiProject Hip hop",
+            "Wikipedia:WikiProject Industrial",
+            "Wikipedia:WikiProject Metal",
+            "Wikipedia:WikiProject Post-hardcore",
+            "Wikipedia:WikiProject Progressive Rock",
+            "Wikipedia:WikiProject Punk music",
+            "Wikipedia:WikiProject Reggae",
+            "Wikipedia:WikiProject Rock music",
+            "Wikipedia:WikiProject Drum Corps",
+            "Wikipedia:WikiProject Marching band",
+            "Wikipedia:WikiProject Roots music",
+            "Wikipedia:WikiProject Australian music",
+            "Wikipedia:WikiProject Canadian music",
+            "Wikipedia:WikiProject Indian music",
+            "Wikipedia:WikiProject Musicians",
+            "Wikipedia:WikiProject Guitarists",
+            "Wikipedia:WikiProject Coldplay",
+            "Wikipedia:WikiProject Katy Perry",
+            "Wikipedia:WikiProject Madonna",
+            "Wikipedia:WikiProject Pink Floyd",
+            "Wikipedia:WikiProject Albums",
+            "Wikipedia:WikiProject Discographies",
+            "Wikipedia:WikiProject Record Production"
+        ]
+    wikiproject_topics = parser.get_leaf_nodes(music_topics)
+    eq_(wikiproject_topics, actual_music_topics)
+
+
 def test_get_sub_categories():
     parser = WikiProjectsParser(wpd_page)
     page_sections = parser.get_sections(
