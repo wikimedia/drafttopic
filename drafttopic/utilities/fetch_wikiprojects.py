@@ -32,7 +32,6 @@ Options:
     --output=<path>       Path to an file to write output to
                           [default: <stdout>]
     --debug               Print debug logging
-    --mid-level           Generate mid-level projects list
 """
 import datetime
 import mwapi
@@ -86,10 +85,10 @@ def main(argv=None):
         output_f = output_f + '_' + curr_time
         output_f = open(output_f, "w")
 
-    run(output_f, True)
+    run(output_f)
 
 
-def run(output, is_mid_level=False):
+def run(output):
     logger = logging.getLogger(__name__)
     parser = WikiProjectsParser(wpd_page, logger)
     wps = {}
