@@ -33,12 +33,14 @@ Options:
                           [default: <stdout>]
     --debug               Print debug logging
 """
+import datetime
 import mwapi
 import json
 import re
 import logging
 import docopt
 import sys
+import time
 import traceback
 
 
@@ -71,7 +73,11 @@ def main(argv=None):
     if args['--output'] == "<stdout>":
         output_f = sys.stdout
     else:
-        output_f = open(args['--output'], "w")
+        output_f = args['--output']
+        ts = time.time()
+        curr_time = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+        output_f = output_f + '_' + curr_time
+        output_f = open(output_f, "w")
 
     run(output_f)
 
@@ -118,29 +124,29 @@ class WikiProjectsParser:
                     continue
             projects_started = True
             name = sec['line'].replace('&nbsp;', '')
-            wp[sec['line']] = {'name': name,
-                               'root_url': sec['fromtitle'],
-                               'index': sec['index']}
+            wp[name] = {'name': name,
+                        'root_url': sec['fromtitle'],
+                        'index': sec['index']}
             section = self.get_section_text(dirname, sec['index'])
             main_heading = None
             if section:
                 main_heading = re.search(wp_main_heading_regex, section)
             if section and main_heading:
                 try:
-                    wp[sec['line']]['url'] = wpd_page + '/' +\
+                    wp[name]['url'] = wpd_page + '/' +\
                         main_heading.group(1)
                     # Get entries in this section
                     self.logger.info(
                         "Fetching entries for section: {}".format(name))
                     sub_page_sections =\
-                        self.get_sections(wp[sec['line']]['url'])
-                    wp[sec['line']]['topics'], _ = self.get_sub_categories(
-                                                      wp[sec['line']]['url'],
+                        self.get_sections(wp[name]['url'])
+                    wp[name]['topics'], _ = self.get_sub_categories(
+                                                      wp[name]['url'],
                                                       sub_page_sections,
                                                       0, 0)
                 except IOError as e:
                     self.logger.warn("Skipping: {}".
-                                     format(wp[sec['line']]['url']))
+                                     format(wp[name]['url']))
                     pass
                 except:
                     self.logger.warn("Unexpected error: ",
