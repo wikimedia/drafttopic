@@ -114,7 +114,7 @@ class WikiProjectsParser:
         full WikiProjects directory
         """
         dirname = self.root_dir
-        print("Starting WikiProjects mid-level parsing")
+        self.logger.info("Starting WikiProjects mid-level parsing")
         mid_level_wp = {'wikiprojects': {}}
         sections = None
         try:
@@ -154,7 +154,7 @@ class WikiProjectsParser:
             wp_topics = self.get_topics_from_wp_directory(wp_directory, path)
             mid_level_wp['wikiprojects'][project] = wp_topics
 
-        print("Finished mid-level WikiProjects parsing")
+        self.logger.info("Finished mid-level WikiProjects parsing")
         return mid_level_wp
 
     def get_topics_from_wp_directory(self, wp, path):
@@ -194,7 +194,7 @@ class WikiProjectsParser:
         Entry point for WikiProjects parsing
         """
         dirname = self.root_dir
-        print("Starting WikiProjects directory parsing")
+        self.logger.info("Starting WikiProjects directory parsing")
         wp = {}
         sections = None
         try:
