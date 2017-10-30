@@ -24,3 +24,11 @@ Use the following utility from root directory to generate machine-readable WikiP
 ```
 ./utility fetch_wikiprojects --output <output_file_name.json>
 ```
+
+## Generating mid-level category to WikiProjects mapping
+
+Use the following utility from root directory to generate a mapping of high-level topic categories to list of WikiProjects contained in them:
+
+```
+./utility trim_wikiprojects --wikiprojects wp --output outmid
+```
