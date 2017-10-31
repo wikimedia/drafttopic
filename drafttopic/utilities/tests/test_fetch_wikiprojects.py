@@ -99,7 +99,8 @@ def test_get_leaf_nodes():
         "Wikipedia:WikiProject Record Production"
     ]
     wikiproject_topics = parser.get_leaf_nodes(music_topics)
-    assert wikiproject_topics == actual_music_topics
+    assert len(wikiproject_topics) == len(actual_music_topics) and\
+        sorted(wikiproject_topics) == sorted(actual_music_topics)
 
 
 def test_get_sub_categories():
