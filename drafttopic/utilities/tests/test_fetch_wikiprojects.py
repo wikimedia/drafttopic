@@ -1,4 +1,3 @@
-from nose.tools import eq_
 from ..fetch_wikiprojects import WikiProjectsParser
 from ..fetch_wikiprojects import wpd_page
 from ..wikiprojects_common import is_cached, fetch_section_text, cache_text
@@ -100,7 +99,7 @@ def test_get_leaf_nodes():
             "Wikipedia:WikiProject Record Production"
         ]
     wikiproject_topics = parser.get_leaf_nodes(music_topics)
-    eq_(wikiproject_topics, actual_music_topics)
+    assert wikiproject_topics == actual_music_topics
 
 
 def test_get_sub_categories():
@@ -140,7 +139,7 @@ def wp_topics_compare_with_toc(toc_topics, parsed_wp_tree, index, level):
         elif toc_topics[idx]['toclevel'] - 1 < level:
             return idx
         else:
-            eq_(toc_topics[idx]['line'] in parsed_wp_tree.keys(), True)
+           assert toc_topics[idx]['line'] in parsed_wp_tree.keys()
         prev_topic = toc_topics[idx]['line']
         idx += 1
     return len(toc_topics)
@@ -153,6 +152,6 @@ def wp_topics_compare(actual_wp_tree, parsed_wp_tree):
     for key in actual_wp_tree.keys():
         if key not in excluded_keys:
             logger.info('Comparing:{}'.format(key))
-            eq_(actual_wp_tree[key]['name'], parsed_wp_tree[key]['name'], True)
+            assert actual_wp_tree[key]['name'], parsed_wp_tree[key]['name']
     if 'topics' in actual_wp_tree:
         wp_topics_compare(actual_wp_tree['topics'], parsed_wp_tree['topics'])
