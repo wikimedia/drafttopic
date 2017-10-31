@@ -54,18 +54,18 @@ wp_listing_regex =\
 wp_section_nextheading_regex = r'(.+)[=]{2,}'
 
 wp_section_regex =\
-        r'{{Wikipedia:WikiProject Council/Directory/WikiProject\n'\
-        '\|project = ([a-zA-Z_: -]+)\n'\
-        '\|shortname = ([a-zA-Z\(\) -]+)\n'\
-        '\|active = (yes|no)\n([^}]*)}}'
+    r'{{Wikipedia:WikiProject Council/Directory/WikiProject\n'\
+    '\|project = ([a-zA-Z_: -]+)\n'\
+    '\|shortname = ([a-zA-Z\(\) -]+)\n'\
+    '\|active = (yes|no)\n([^}]*)}}'
 # To check listing in other wikiprojects
 wp_section_regex_listed =\
-        r'listed-in = ([A-Za-z#/:_ ]+)'
+    r'listed-in = ([A-Za-z#/:_ ]+)'
 
 wp_main_links_regex1 =\
-        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)/([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
+    r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)/([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
 wp_main_links_regex2 =\
-        r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)#([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
+    r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)#([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
 
 
 def main(argv=None):
@@ -230,9 +230,9 @@ class WikiProjectsParser:
                     sub_page_sections =\
                         self.get_sections(wp[name]['url'])
                     wp[name]['topics'], _ = self.get_sub_categories(
-                                                      wp[name]['url'],
-                                                      sub_page_sections,
-                                                      0, 0)
+                        wp[name]['url'],
+                        sub_page_sections,
+                        0, 0)
                 except IOError as e:
                     self.logger.warn("Skipping: {}".
                                      format(wp[name]['url']))
@@ -252,7 +252,7 @@ class WikiProjectsParser:
         while idx < len(sections):
             if sections[idx]['toclevel'] - 1 > level:
                 sub_categories, new_idx = self.get_sub_categories(
-                            page, sections, idx, level+1)
+                    page, sections, idx, level + 1)
                 idx = new_idx
                 if sub_categories:
                     wp[prev_topic]['topics'] = {**wp[prev_topic]['topics'],
@@ -267,7 +267,7 @@ class WikiProjectsParser:
                 entry['index'] = sections[idx]['index']
                 entry['topics'] = {}
                 intro_projects = self.get_wikiprojects_from_section_intro(
-                                                    page, idx + 1)
+                    page, idx + 1)
                 if intro_projects:
                     entry['topics'] = intro_projects
                 wp[entry['name']] = entry

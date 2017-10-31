@@ -26,7 +26,7 @@ def wptemplate2directory(template_name, wikiprojects, directory=[]):
                 path_new = directory[:]
                 path_new.append(key)
                 path = wptemplate2directory(
-                        template_name, val['topics'], path_new)
+                    template_name, val['topics'], path_new)
                 if path is not None:
                     return path
             return directory
