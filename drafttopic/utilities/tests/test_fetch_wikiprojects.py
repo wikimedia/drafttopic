@@ -65,39 +65,39 @@ def test_get_leaf_nodes():
     music_topics = topics['Culture and the arts'][
         'topics']['Performing arts']['topics']['Music']['topics']
     actual_music_topics = [
-            "Wikipedia:WikiProject Music",
-            "Wikipedia:WikiProject Music theory",
-            "Wikipedia:WikiProject Composers",
-            "Wikipedia:WikiProject Richard Wagner",
-            "Wikipedia:WikiProject Songs",
-            "Wikipedia:WikiProject Alternative music",
-            "Wikipedia:WikiProject Black Metal",
-            "Wikipedia:WikiProject Christian music",
-            "Wikipedia:WikiProject Electronic music",
-            "Wikipedia:WikiProject Hip hop",
-            "Wikipedia:WikiProject Industrial",
-            "Wikipedia:WikiProject Metal",
-            "Wikipedia:WikiProject Post-hardcore",
-            "Wikipedia:WikiProject Progressive Rock",
-            "Wikipedia:WikiProject Punk music",
-            "Wikipedia:WikiProject Reggae",
-            "Wikipedia:WikiProject Rock music",
-            "Wikipedia:WikiProject Drum Corps",
-            "Wikipedia:WikiProject Marching band",
-            "Wikipedia:WikiProject Roots music",
-            "Wikipedia:WikiProject Australian music",
-            "Wikipedia:WikiProject Canadian music",
-            "Wikipedia:WikiProject Indian music",
-            "Wikipedia:WikiProject Musicians",
-            "Wikipedia:WikiProject Guitarists",
-            "Wikipedia:WikiProject Coldplay",
-            "Wikipedia:WikiProject Katy Perry",
-            "Wikipedia:WikiProject Madonna",
-            "Wikipedia:WikiProject Pink Floyd",
-            "Wikipedia:WikiProject Albums",
-            "Wikipedia:WikiProject Discographies",
-            "Wikipedia:WikiProject Record Production"
-        ]
+        "Wikipedia:WikiProject Music",
+        "Wikipedia:WikiProject Music theory",
+        "Wikipedia:WikiProject Composers",
+        "Wikipedia:WikiProject Richard Wagner",
+        "Wikipedia:WikiProject Songs",
+        "Wikipedia:WikiProject Alternative music",
+        "Wikipedia:WikiProject Black Metal",
+        "Wikipedia:WikiProject Christian music",
+        "Wikipedia:WikiProject Electronic music",
+        "Wikipedia:WikiProject Hip hop",
+        "Wikipedia:WikiProject Industrial",
+        "Wikipedia:WikiProject Metal",
+        "Wikipedia:WikiProject Post-hardcore",
+        "Wikipedia:WikiProject Progressive Rock",
+        "Wikipedia:WikiProject Punk music",
+        "Wikipedia:WikiProject Reggae",
+        "Wikipedia:WikiProject Rock music",
+        "Wikipedia:WikiProject Drum Corps",
+        "Wikipedia:WikiProject Marching band",
+        "Wikipedia:WikiProject Roots music",
+        "Wikipedia:WikiProject Australian music",
+        "Wikipedia:WikiProject Canadian music",
+        "Wikipedia:WikiProject Indian music",
+        "Wikipedia:WikiProject Musicians",
+        "Wikipedia:WikiProject Guitarists",
+        "Wikipedia:WikiProject Coldplay",
+        "Wikipedia:WikiProject Katy Perry",
+        "Wikipedia:WikiProject Madonna",
+        "Wikipedia:WikiProject Pink Floyd",
+        "Wikipedia:WikiProject Albums",
+        "Wikipedia:WikiProject Discographies",
+        "Wikipedia:WikiProject Record Production"
+    ]
     wikiproject_topics = parser.get_leaf_nodes(music_topics)
     assert wikiproject_topics == actual_music_topics
 
@@ -134,12 +134,12 @@ def wp_topics_compare_with_toc(toc_topics, parsed_wp_tree, index, level):
             idx = wp_topics_compare_with_toc(
                 toc_topics,
                 parsed_wp_tree[prev_topic]['topics'],
-                idx, level+1)
+                idx, level + 1)
             continue
         elif toc_topics[idx]['toclevel'] - 1 < level:
             return idx
         else:
-           assert toc_topics[idx]['line'] in parsed_wp_tree.keys()
+            assert toc_topics[idx]['line'] in parsed_wp_tree.keys()
         prev_topic = toc_topics[idx]['line']
         idx += 1
     return len(toc_topics)
