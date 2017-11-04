@@ -255,8 +255,7 @@ class WikiProjectsParser:
                     page, sections, idx, level + 1)
                 idx = new_idx
                 if sub_categories:
-                    wp[prev_topic]['topics'] = {**wp[prev_topic]['topics'],
-                                                **sub_categories}
+                    wp[prev_topic]['topics'].update(sub_categories)
                 continue
             elif sections[idx]['toclevel'] - 1 < level:
                 return wp, idx
