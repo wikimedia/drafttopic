@@ -165,7 +165,7 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
                 else:
                     if 'templates' in page_doc:
                         new_templates = extract_wikiproject_templates(
-                                page_doc['templates'])
+                            page_doc['templates'])
                         for tpl in new_templates:
                             try:
                                 rev_doc_map[pageid]['templates'].append(tpl)
