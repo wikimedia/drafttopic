@@ -78,7 +78,8 @@ def main(argv=None):
 
 def run(session, observations, output, mid_level_wp, verbose):
 
-    for ob in fetch_page_wikiprojects(session, observations, verbose=verbose):
+    for ob in fetch_page_wikiprojects(session, observations,
+                                      mid_level_wp, verbose=verbose):
         dump_observation(ob, output)
 
 
@@ -103,7 +104,8 @@ def fetch_page_wikiprojects(session, observations, mid_level_wp,
     """
     batches = chunkify(observations, 25)
     executor = ThreadPoolExecutor(max_workers=4)
-    _fetch_wikiprojects_info = build_fetch_wikiprojects_info(session)
+    _fetch_wikiprojects_info = build_fetch_wikiprojects_info(session,
+                                                             mid_level_wp)
 
     for annotated_batch in executor.map(_fetch_wikiprojects_info, batches):
         for annotated_item in annotated_batch:
