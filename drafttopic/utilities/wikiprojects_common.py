@@ -39,6 +39,17 @@ def wptemplate2directory(template_name, wikiprojects, directory=[]):
     return None
 
 
+def invert_mid_level_projects(wp):
+    # Generates inverse mappings
+    wprojects = wp['wikiprojects']
+    wp['inverse_wp'] = {}
+    for cat in wprojects:
+        wps = wprojects[cat]
+        for wikiproject in wps:
+            wp['inverse_wp'][wikiproject] = cat
+    return wp
+
+
 def is_cached(filename):
     return os.path.exists('testfiles/{}'.format(filename))
 
