@@ -32,3 +32,18 @@ Use the following utility from root directory to generate a mapping of high-leve
 ```
 ./utility trim_wikiprojects --wikiprojects wp --output outmid
 ```
+
+## Labeling a list of page-ids with the wikiprojects and mid-level categories each page belongs to
+
+Use the following utility from root directory to label a list of page-ids with the wikiprojects and the mid-level categories the page belongs to.
+
+```
+./utility fetch_page_wikiprojects --api-host=https://en.wikipedia.org/ --input=wikiproject_page_ids.json --output=enwiki.labeled_wikiprojects.json --mid_level_wp=outmid.json --verbose
+```
+
+In above, the input to the script should be a json containing a list of
+observations, each observation having a **page\_id: <page-id>** mapping.
+Additionally also pass the mid-level wikiprojects json for the script to
+generate wikiprojects to mid-level categories mapping. The script augments the
+given list with the mentioned fields, writing them to a new file specified by
+<output>
