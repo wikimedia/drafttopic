@@ -65,7 +65,7 @@ def main(argv=None):
         with open(args['--mid_level_wp']) as fwp:
             mid_level_wp = json.loads(fwp.read())
     except:
-        logger.warn("Failed to load mid-level wikiprojects file, check and run\
+        logger.error("Failed to load mid-level wikiprojects file, check and run\
                     again")
         pdb.set_trace()
         sys.exit()
@@ -151,30 +151,32 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
         # latest_revid and wikiproject templates
         rev_doc_map = {}
         for result in doc:
-            for page_doc in result['query']['pages']:
+            page_documents = None
+            try:
+                page_documents = result['query']['pages']
+            except (KeyError, IndexError):
+                logger.warn("No results returned.")
+                continue
+            for page_doc in page_documents:
                 pageid = page_doc['pageid']
-                # seeing the page id for the first time
-                if pageid not in rev_doc_map:
-                    rev_doc_map[pageid] = \
-                        {'page_id': pageid, 'rev_id': page_doc['lastrevid'],
-                         'templates': []}
+                try:
+                    # seeing the page id for the first time
+                    if pageid not in rev_doc_map:
+                        rev_doc_map[pageid] = \
+                            {'page_id': pageid,
+                             'rev_id': page_doc['lastrevid'], 'templates': []}
+                    # some templates for this pageid were processed in previous
+                    # batches, update the list with new one's
                     if 'templates' in page_doc:
-                        rev_doc_map[pageid]['templates'] =\
-                            extract_wikiproject_templates(
-                                page_doc['templates'])
-                # some templates for this pageid were processed in previous
-                # batches, update the list with new one's
-                else:
-                    if 'templates' in page_doc:
-                        new_templates = extract_wikiproject_templates(
+                        templates = extract_wikiproject_templates(
                             page_doc['templates'])
-                        for tpl in new_templates:
-                            try:
-                                rev_doc_map[pageid]['templates'].append(tpl)
-                            except:
-                                logger.warn("error in processing templates for\
-                                            {0}".format(pageid))
-                                pdb.set_trace()
+                        for tpl in templates:
+                            rev_doc_map[pageid]['templates'].append(tpl)
+                except:
+                    logger.error("error processing templates for\
+                                {0}".format(pageid))
+                    logger.error("Templates:{0}".format(page_doc['templates']))
+                    logger.error(traceback.format_exc())
         # All the templates processed for the batch, now generate mid-level
         # categories
         for pageid, doc in rev_doc_map.items():
@@ -185,7 +187,8 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
         annotated_observations = []
         for ob in observations:
             if ob['page_id'] not in rev_doc_map:
-                logger.warn("Could not find information for {0}".format(ob))
+                logger.warn("Could not find information for {0},\
+                            skipping".format(ob['page_id']))
             else:
                 try:
                     rev_doc = rev_doc_map[ob['page_id']]
