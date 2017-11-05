@@ -42,8 +42,8 @@ Use the following utility from root directory to label a list of page-ids with t
 ```
 
 In above, the input to the script should be a json containing a list of
-observations, each observation having a **page\_id: <page-id>** mapping.
+observations, each observation having a **page\_id: \<page-id\>** mapping.
 Additionally also pass the mid-level wikiprojects json for the script to
 generate wikiprojects to mid-level categories mapping. The script augments the
 given list with the mentioned fields, writing them to a new file specified by
-<output>
+**"output"**
