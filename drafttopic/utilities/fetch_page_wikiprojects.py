@@ -91,8 +91,6 @@ def fetch_page_wikiprojects(session, observations, mid_level_wp,
         session : :class:`mwapi.Session`
             An API session to use for querying
         observations : `iterable`(`dict`)
-            A collection of observations to annotate
-        observations : `iterable`(`dict`)
             A dictionary containing WikiProjects to mid-level categories
             mappings
         verbose : `bool`
@@ -175,7 +173,6 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
                 except:
                     logger.error("error processing templates for\
                                 {0}".format(pageid))
-                    logger.error("Templates:{0}".format(page_doc['templates']))
                     logger.error(traceback.format_exc())
         # All the templates processed for the batch, now generate mid-level
         # categories
