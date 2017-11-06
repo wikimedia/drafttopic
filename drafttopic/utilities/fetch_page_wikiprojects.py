@@ -24,6 +24,7 @@ import logging
 import sys
 import pdb
 import traceback
+from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from itertools import islice
 
@@ -73,7 +74,12 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
+    start_time = datetime.now()
     run(session, observations, output, mid_level_wp, verbose)
+    end_time = datetime.now()
+    time_elapsed = end_time - start_time
+    if verbose:
+        print('Time taken (hh:mm:ss.ms): {}'.format(time_elapsed))
 
 
 def run(session, observations, output, mid_level_wp, verbose):
