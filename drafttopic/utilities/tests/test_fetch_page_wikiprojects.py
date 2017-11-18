@@ -26,10 +26,10 @@ def test_extract_wikiproject_templates():
 
 
 mwapi_responses = [{'query': {'pages': [
-    {'pageid': 123, 'templates': [], 'lastrevid': 121},
+    {'pageid': 123, 'templates': [], 'lastrevid': 121, 'title': 'Page A'},
     {'pageid': 456, 'templates': [
         {'title': 'Template:WikiProject abc'}, {'title': 'xyz'}],
-     'lastrevid': 111}
+        'lastrevid': 111, 'title': 'Page B'}
 ]}}, {'query': {'pages': [
     {'pageid': 123, 'templates': [
         {'title': 'Template:WikiProject xyz'}, {'title': 'abc'}]},
@@ -50,12 +50,14 @@ def test_fetch_page_wikiprojects(mock_session):
     mid_level_wp = {'inverse_wp': {}}
     _fetch_wikiprojects_info = build_fetch_wikiprojects_info(mock_session,
                                                              mid_level_wp)
-    obs = [{'page_id': 123}, {'page_id': 456}, {'page_id': 789}]
+    obs = [{'talk_page_id': 123}, {'talk_page_id': 456}, {'talk_page_id': 789}]
     observations = _fetch_wikiprojects_info(obs)
     actual_observations = [
-        {'page_id': 123, 'rev_id': 121, 'templates':
-         ['Template:WikiProject xyz'], 'mid_level_categories': []},
-        {'page_id': 456, 'rev_id': 111, 'templates':
-         ['Template:WikiProject abc'], 'mid_level_categories': []}
+        {'talk_page_id': 123, 'rev_id': 121, 'templates':
+         ['Template:WikiProject xyz'], 'mid_level_categories': [],
+            'talk_page_title': 'Page A'},
+        {'talk_page_id': 456, 'rev_id': 111, 'templates':
+         ['Template:WikiProject abc'], 'mid_level_categories': [],
+         'talk_page_title': 'Page B'}
     ]
     assert observations == actual_observations
