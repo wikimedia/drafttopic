@@ -150,11 +150,11 @@ class WikiProjectsParser:
                 links_type_1 = re.findall(wp_main_links_regex1, section)
                 for entities in links_type_1:
                     mid_level_coll[entities[2]] = \
-                            INDEX_TO_TOPLEVEL_MAP[sec['index']]
+                        INDEX_TO_TOPLEVEL_MAP[sec['index']]
                 links_type_2 = re.findall(wp_main_links_regex2, section)
                 for entities in links_type_2:
                     mid_level_coll[entities[1]] = \
-                            INDEX_TO_TOPLEVEL_MAP[sec['index']]
+                        INDEX_TO_TOPLEVEL_MAP[sec['index']]
 
         # Now proceed to fetch leaf level wikiprojects within each mid-level
         # topic
