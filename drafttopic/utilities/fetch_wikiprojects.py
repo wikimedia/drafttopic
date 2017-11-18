@@ -68,6 +68,16 @@ wp_main_links_regex2 =\
     r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)#([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501
 
 
+# Below is just a hard coding between top-level categories on
+# Wikipedia:WikiProject_Council/Directory and their respective indexes on the
+# page to add prefixes to mid-level categories. This should be changed in case
+# the respective indexes change.  To get indexes use:
+# https://en.wikipedia.org/w/api.php?action=parse&page=Wikipedia:WikiProject_Council/Directory&prop=sections  # noqa: E501
+INDEX_TO_TOPLEVEL_MAP = {'2': 'Culture', '3': 'Geography',
+                         '4': 'History_And_Society', '5': 'STEM',
+                         '6': 'Assistance', '7': 'Admin'}
+
+
 def main(argv=None):
     args = docopt.docopt(__doc__, argv=argv)
 
@@ -124,6 +134,7 @@ class WikiProjectsParser:
                 "Failed to get sections in root ,directory, exiting...")
             return None
         projects_started = False
+        mid_level_coll = {}
         for sec in sections:
             # Ignore starting sections
             if sec['toclevel'] == 1:
@@ -138,21 +149,24 @@ class WikiProjectsParser:
                 # which can be indexed in the wikiprojects data structure
                 links_type_1 = re.findall(wp_main_links_regex1, section)
                 for entities in links_type_1:
-                    mid_level_wp['wikiprojects'][entities[2]] = []
+                    mid_level_coll[entities[2]] = \
+                            INDEX_TO_TOPLEVEL_MAP[sec['index']]
                 links_type_2 = re.findall(wp_main_links_regex2, section)
                 for entities in links_type_2:
-                    mid_level_wp['wikiprojects'][entities[1]] = []
+                    mid_level_coll[entities[1]] = \
+                            INDEX_TO_TOPLEVEL_MAP[sec['index']]
 
         # Now proceed to fetch leaf level wikiprojects within each mid-level
         # topic
-        for project in mid_level_wp['wikiprojects']:
+        for project in mid_level_coll:
             path = wptemplate2directory(project, wp_directory)
             if path is None or len(path) == 0:
                 self.logger.warn("Path not found for {}".format(project))
                 continue
             path.append(project)
             wp_topics = self.get_topics_from_wp_directory(wp_directory, path)
-            mid_level_wp['wikiprojects'][project] = wp_topics
+            common_wp_name = mid_level_coll[project] + '.' + project
+            mid_level_wp['wikiprojects'][common_wp_name] = wp_topics
 
         self.logger.info("Finished mid-level WikiProjects parsing")
         return mid_level_wp
