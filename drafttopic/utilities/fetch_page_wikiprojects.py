@@ -148,7 +148,8 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
     def _fetch_wikiprojects_info(observations):
         doc = session.get(
             action='query', prop='templates|info', formatversion=2,
-            tlnamespace=10, pageids=[ob['talk_page_id'] for ob in observations],
+            tlnamespace=10, pageids=[
+                ob['talk_page_id'] for ob in observations],
             continuation=True)
         # The above returns a generator for doc, iterating over which we get
         # results for the set of page_ids in batches. We iterate over each
