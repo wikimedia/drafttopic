@@ -32,7 +32,7 @@ import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
 from .wikiprojects_common import invert_mid_level_projects,\
-                                 WIKIPROJECT_FETCH_THREADS
+        WIKIPROJECT_FETCH_THREADS
 
 
 logger = logging.getLogger(__name__)
