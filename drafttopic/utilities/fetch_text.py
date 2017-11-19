@@ -61,8 +61,8 @@ def fetch_text(session, labelings, verbose=False):
         verbose : `bool`
             Print dots and stuff
     :Returns:
-        An `iterator` of labelings augmented with 'page_id', 'rev_id' and
-        'text'.  Note that labelings of articles that aren't found will not be
+        An `iterator` of labelings augmented with 'text'.  Note that labelings
+        of articles that aren't found will not be
         included.
     """
 
@@ -73,14 +73,13 @@ def fetch_text(session, labelings, verbose=False):
             if verbose:
                 sys.stderr.write("?")
                 sys.stderr.write(
-                    labeling['page_title'] + " " + labeling['timestamp'])
+                    labeling['page_title'])
                 sys.stderr.flush()
         else:
             if verbose:
                 sys.stderr.write(".")
                 sys.stderr.flush()
 
-            labeling['rev_id'] = rev_doc.get("revid")
             text = rev_doc.get("*")
             if not_an_article(text):
                 labeling['text'] = None
