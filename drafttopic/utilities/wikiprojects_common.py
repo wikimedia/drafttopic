@@ -4,6 +4,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+WIKIPROJECT_FETCH_THREADS = 4
+
+
 def wptemplate2directory(template_name, wikiprojects, directory=[]):
     """
     Convert a WikiProject template name to a path within the
@@ -37,6 +40,17 @@ def wptemplate2directory(template_name, wikiprojects, directory=[]):
             if path is not None:
                 return path
     return None
+
+
+def invert_mid_level_projects(wp):
+    # Generates inverse mappings
+    wprojects = wp['wikiprojects']
+    wp['inverse_wp'] = {}
+    for cat in wprojects:
+        wps = wprojects[cat]
+        for wikiproject in wps:
+            wp['inverse_wp'][wikiproject] = cat
+    return wp
 
 
 def is_cached(filename):
