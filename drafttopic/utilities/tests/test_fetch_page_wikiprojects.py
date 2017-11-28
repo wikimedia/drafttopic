@@ -26,12 +26,12 @@ def test_extract_wikiproject_templates():
 
 
 mwapi_responses = [{'query': {'pages': [
-    {'pageid': 123, 'templates': [], 'lastrevid': 121, 'title': 'Page A'},
+    {'pageid': 123, 'templates': [], 'title': 'Page A'},
     {'pageid': 456, 'templates': [
         {'title': 'Template:WikiProject abc'}, {'title': 'xyz'}],
         'lastrevid': 111, 'title': 'Page B'}
 ]}}, {'query': {'pages': [
-    {'pageid': 123, 'templates': [
+    {'pageid': 123, 'lastrevid': 121, 'templates': [
         {'title': 'Template:WikiProject xyz'}, {'title': 'abc'}]},
     {'pageid': 456, 'templates': []}
 ]}}]
