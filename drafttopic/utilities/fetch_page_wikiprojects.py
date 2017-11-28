@@ -170,10 +170,16 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
                     if pageid not in rev_doc_map:
                         rev_doc_map[pageid] = \
                             {'talk_page_id': pageid,
-                             'rev_id': page_doc['lastrevid'], 'templates': [],
-                             'talk_page_title': page_doc['title']}
+                             'rev_id': -1, 'templates': [],
+                             'talk_page_title': ''}
                     # some templates for this pageid were processed in previous
                     # batches, update the list with new one's
+                    if 'lastrevid' in page_doc:
+                        rev_doc_map[pageid]['rev_id'] = \
+                            page_doc['lastrevid']
+                    if 'title' in page_doc:
+                        rev_doc_map[pageid]['talk_page_title'] = \
+                            page_doc['title']
                     if 'templates' in page_doc:
                         templates = extract_wikiproject_templates(
                             page_doc['templates'])
