@@ -67,13 +67,13 @@ def fetch_text(session, labelings, verbose=False):
     """
 
     for labeling in labelings:
-        rev_doc = get_rev_from_title(session, labeling['page_title'])
+        rev_doc = get_rev_from_title(session, labeling['talk_page_title'])
 
         if rev_doc is None:
             if verbose:
                 sys.stderr.write("?")
                 sys.stderr.write(
-                    labeling['page_title'])
+                    labeling['talk_page_title'])
                 sys.stderr.flush()
         else:
             if verbose:
