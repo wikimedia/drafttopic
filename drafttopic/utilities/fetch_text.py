@@ -14,12 +14,21 @@
                             (with text) out to. [default: <stdout>]
         --verbose           Prints dots and stuff to stderr
 """
+import logging
 import re
 import sys
+from itertools import islice
+from concurrent.futures import ThreadPoolExecutor
 
 import mwapi
+from mw.lib import title as mwtitle
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
+from .wikiprojects_common import WIKIPROJECT_FETCH_THREADS
+
+
+logger = logging.getLogger(__name__)
+REDIRECT_RE = re.compile("#redirect", re.I)
 
 
 def main(argv=None):
@@ -44,10 +53,8 @@ def main(argv=None):
 
 
 def run(labelings, output, session, verbose):
-
-    for labeling in fetch_text(session, labelings, verbose=verbose):
-        if labeling['text'] is not None:
-            dump_observation(labeling, output)
+    for ob in fetch_text(session, labelings, verbose):
+        dump_observation(ob, output)
 
 
 def fetch_text(session, labelings, verbose=False):
@@ -66,58 +73,71 @@ def fetch_text(session, labelings, verbose=False):
         included.
     """
 
-    for labeling in labelings:
-        rev_doc = get_rev_from_title(session, labeling['talk_page_title'])
+    batches = chunkify(labelings, 25)
+    executor = ThreadPoolExecutor(max_workers=WIKIPROJECT_FETCH_THREADS)
+    _fetch_text = build_fetch_text_extractor(session)
 
-        if rev_doc is None:
-            if verbose:
-                sys.stderr.write("?")
-                sys.stderr.write(
-                    labeling['talk_page_title'])
-                sys.stderr.flush()
-        else:
+    for annotated_batch in executor.map(_fetch_text, batches):
+        for annotated_item in annotated_batch:
+            yield annotated_item
             if verbose:
                 sys.stderr.write(".")
                 sys.stderr.flush()
-
-            text = rev_doc.get("*")
-            if not_an_article(text):
-                labeling['text'] = None
-            else:
-                labeling['text'] = text
-
-            yield labeling
-
     if verbose:
         sys.stderr.write("\n")
-        sys.stderr.flush()
 
 
-def get_rev_from_title(session, page_title):
-    doc = session.get(action="query", prop="revisions", titles=page_title,
-                      rvprop=["content"], redirects=True)
+def build_fetch_text_extractor(session):
 
-    try:
-        page_doc = list(doc['query']['pages'].values())[0]
-    except (KeyError, IndexError):
-        # No pages found
-        return None
+    def _fetch_text(labelings):
+        docs = session.get(
+            action="query", prop="revisions", rvprop=["content"],
+            redirects=True, titles=[ob['talk_page_title'] for ob in labelings],
+            continuation=True, formatversion=2
+        )
+        rev_doc_map = {}
+        for result in docs:
+            page_documents = None
+            try:
+                page_documents = result['query']['pages']
+            except (KeyError, IndexError):
+                logger.warn("No results returned.")
+                continue
+            for page_doc in page_documents:
+                try:
+                    text = page_doc['revisions'][0]['content']
+                    if is_article(text):
+                        title = mwtitle.normalize(page_doc['title'])
+                        rev_doc_map[title] = text
+                except (KeyError, IndexError):
+                    continue
 
-    try:
-        rev_doc = page_doc['revisions'][0]
-        rev_doc['page'] = {k: v for k, v in page_doc.items()
-                           if k != "revisions"}
-    except (KeyError, IndexError):
-        # No revisions matched
-        return None
+        augmented_observations = []
+        for ob in labelings:
+            title = ob['talk_page_title']
+            ob['text'] = ''
+            if mwtitle.normalize(title) in rev_doc_map:
+                ob['text'] = rev_doc_map[title]
+            else:
+                sys.stderr.write("?")
+                sys.stderr.write(title)
+                sys.stderr.flush()
 
-    return rev_doc
+            augmented_observations.append(ob)
+        return augmented_observations
+    return _fetch_text
 
 
-REDIRECT_RE = re.compile("#redirect", re.I)
+def is_article(text):
+    return not (text is None or
+                len(text) < 50 or
+                REDIRECT_RE.match(text))
 
 
-def not_an_article(text):
-    return (text is None or
-            len(text) < 50 or
-            REDIRECT_RE.match(text))
+def chunkify(iterable, size):
+    while True:
+        output = tuple(islice(iterable, size))
+        if output:
+            yield output
+        else:
+            break
