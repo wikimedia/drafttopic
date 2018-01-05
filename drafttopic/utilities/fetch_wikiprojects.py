@@ -251,7 +251,7 @@ class WikiProjectsParser:
                     self.logger.warn("Skipping: {}".
                                      format(wp[name]['url']))
                     pass
-                except:
+                except:  # noqa: E722
                     self.logger.warn("Unexpected error: ",
                                      traceback.format_exc())
                     pass

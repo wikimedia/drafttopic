@@ -66,7 +66,7 @@ def main(argv=None):
     try:
         with open(args['--mid_level_wp']) as fwp:
             mid_level_wp = json.loads(fwp.read())
-    except:
+    except:  # noqa: E722
         logger.error("Failed to load mid-level wikiprojects file, check and run\
                     again")
         pdb.set_trace()
@@ -179,7 +179,7 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
                             page_doc['templates'])
                         for tpl in templates:
                             rev_doc_map[pageid]['templates'].append(tpl)
-                except:
+                except:  # noqa: E722
                     logger.error("error processing templates for\
                                 {0}".format(pageid))
                     logger.error(traceback.format_exc())
@@ -204,7 +204,7 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
                         ob['talk_page_title'] = rev_doc['talk_page_title']
                     ob[mid_level_categories] = rev_doc[mid_level_categories]
                     annotated_observations.append(ob)
-                except:
+                except:  # noqa: E722
                     logger.error("Could not process {0}".format(ob))
                     logger.error(traceback.format_exc())
         return annotated_observations
