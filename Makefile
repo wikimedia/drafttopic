@@ -27,5 +27,5 @@ tuning_reports/enwiki.drafttopic.md: \
 	   	--observations=datasets/enwiki.labeled_wikiprojects.w_cache.json \
 	   	--verbose \
 	   	--multilabel \
-	   	--labels-config=labels-config2.yaml \
+	   	--labels-config=labels-config.yaml \
 	   	--folds=3 > $@
