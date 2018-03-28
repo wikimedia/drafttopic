@@ -1,0 +1,7 @@
+GradientBoosting:
+  class: revscoring.scoring.models.GradientBoosting
+  params:
+    n_estimators: [50, ]
+    max_depth: [3, 4, 5]
+    max_features: ["log2"]
+    learning_rate: [0.01, 0.1]
