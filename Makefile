@@ -22,12 +22,12 @@ models/enwiki.drafttopic.gradient_boosting.model: \
 		drafttopic.feature_lists.wordvectors.drafttopic mid_level_categories \
 		--debug \
 	   	--labels-config=labels-config.yaml \
-	   	-p 'n_estimators=50' \
-		-p 'max_depth=3' \
+	   	-p 'n_estimators=150' \
+		-p 'max_depth=5' \
 	   	-p 'max_features="log2"' \
 	   	-p 'learning_rate=0.1' \
-	   	--folds=3 \
-	   	--model-file=models/enwiki.drafttopic.gb.model \
+	   	--folds=5 \
+	   	--model-file=models/enwiki.drafttopic.gradient_boosting.model \
 		--multilabel > $@
 
 tuning_reports/enwiki.drafttopic.md: \
