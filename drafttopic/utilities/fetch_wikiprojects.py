@@ -33,14 +33,12 @@ Options:
                           [default: <stdout>]
     --debug               Print debug logging
 """
-import datetime
 import mwapi
 import json
 import re
 import logging
 import docopt
 import sys
-import time
 import traceback
 from .wikiprojects_common import wptemplate2directory
 
@@ -89,11 +87,7 @@ def main(argv=None):
     if args['--output'] == "<stdout>":
         output_f = sys.stdout
     else:
-        output_f = args['--output']
-        ts = time.time()
-        curr_time = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
-        output_f = output_f + '_' + curr_time
-        output_f = open(output_f, "w")
+        output_f = open(args['--output'], "w")
 
     run(output_f)
 
