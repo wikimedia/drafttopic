@@ -8,21 +8,21 @@ Usage:
                             [--debug] [--verbose]
 
 Options:
-    -h --help           Show this documentation.
-    --api-host=<url>        The hostname of a Wikipedia (MediaWiki) e.g.
-                        "https://en.wikipedia.org/"
-    --input=<path>      Path to a file contining observations
-                        labels. [default: <stdin>]
-    --output=<path>     Path to a file to write new observations
-                        (with text) out to. [default: <stdout>]
-    --verbose           Prints dots and stuff to stderr
+    -h --help             Show this documentation.
+    --api-host=<url>          The hostname of a Wikipedia (MediaWiki) e.g.
+                          "https://en.wikipedia.org/"
+    --input=<path>        Path to a file contining observations
+                          labels. [default: <stdin>]
+    --mid-level-wp=<path> Mid-level WikiProjects file.
+    --output=<path>       Path to a file to write new observations
+                          (with text) out to. [default: <stdout>]
+    --verbose             Prints dots and stuff to stderr
 """
 
 
 import json
 import logging
 import sys
-import pdb
 import traceback
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
@@ -64,13 +64,12 @@ def main(argv=None):
 
     mid_level_wp = None
     try:
-        with open(args['--mid_level_wp']) as fwp:
+        with open(args['--mid-level-wp']) as fwp:
             mid_level_wp = json.loads(fwp.read())
     except:  # noqa: E722
         logger.error("Failed to load mid-level wikiprojects file, check and run\
                     again")
-        pdb.set_trace()
-        sys.exit()
+        raise
     mid_level_wp = invert_mid_level_projects(mid_level_wp)
 
     verbose = args['--verbose']
