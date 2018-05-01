@@ -6,10 +6,31 @@
 models: \
 		models/enwiki.drafttopic.gradient_boosting.model
 
-datasets/enwiki.labeled_wikiprojects.json:
-	wget https://ndownloader.figshare.com/files/9828517 -qO- > $@
+# Generate machine-readable WikiProjects data.
+datasets/enwiki.wikiprojects.json:
+	./utility fetch_wikiprojects --output $@
 
-labels-config.json: \
+# Generate a mapping of high-level topic categories to list of WikiProjects
+# contained in them.
+datasets/enwiki.midlevel_wikiprojects.json: \
+		datasets/enwiki.wikiprojects.json
+	./utility trim_wikiprojects --wikiprojects $< --output $@
+
+datasets/wikiproject_page_ids.json:
+	# FIXME: Which utility produces this?
+
+# Label a list of page-ids with the wikiprojects and the mid-level categories
+# the page belongs to.
+datasets/enwiki.labeled_wikiprojects.json: \
+		datasets/wikiproject_page_ids.json
+	./utility fetch_page_wikiprojects \
+		--verbose \
+		--api-host=https://en.wikipedia.org/ \
+		--input=$< \
+		--mid-level-wp=datasets/enwiki.midlevel_wikiprojects.json \
+		--output=$@
+
+datasets/enwiki.labels-config.json: \
 		datasets/enwiki.labeled_wikiprojects.json
 	cat $< | \
 	./utility write_labels \
@@ -33,12 +54,12 @@ datasets/enwiki.labeled_wikiprojects.w_cache.json: \
 
 models/enwiki.drafttopic.gradient_boosting.model: \
 		datasets/enwiki.labeled_wikiprojects.w_cache.json \
-		labels-config.json
+		datasets/enwiki.labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
 		drafttopic.feature_lists.wordvectors.drafttopic mid_level_categories \
 		--debug \
-		--labels-config=labels-config.json \
+		--labels-config=datasets/enwiki.labels-config.json \
 		-p 'n_estimators=150' \
 		-p 'max_depth=5' \
 		-p 'max_features="log2"' \
@@ -49,7 +70,7 @@ models/enwiki.drafttopic.gradient_boosting.model: \
 
 tuning_reports/enwiki.drafttopic.md: \
 		datasets/enwiki.labeled_wikiprojects.w_cache.json \
-		labels-config.json
+		datasets/enwiki.labels-config.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
 		drafttopic.feature_lists.wordvectors.drafttopic \
@@ -57,5 +78,5 @@ tuning_reports/enwiki.drafttopic.md: \
 		--debug \
 		--verbose \
 		--multilabel \
-		--labels-config=labels-config.json \
+		--labels-config=datasets/enwiki.labels-config.json \
 		--folds=3 > $@

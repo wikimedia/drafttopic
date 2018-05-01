@@ -52,7 +52,7 @@ def run(output, wikiprojectsfile):
         wikiprojects = json.loads(f.read())
         f.close()
     except IOError as e:
-        logger.warn("Failed to read wikiprojects file")
-        return
+        logger.exception("Failed to read wikiprojects file")
+        raise
     wps = parser.parse_mid_level(wikiprojects)
     output.write(json.dumps(wps, indent=4))
