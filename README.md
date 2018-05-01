@@ -5,17 +5,14 @@ Predicting topics to new drafts based on Wikiprojects on English Wikipedia.
 ## Setting up
 
 Make sure to have a working python3 environment.
-Install requirements using:
+Install this library and its requirements using:
 
 ```
-pip install -r requirements
+pip install -r requirements.txt
+pip install -e .
 ```
 
-Install the library using:
-
-```
-python setup.py install
-```
+Download the word2vec data and move to ~/.word2vec/GoogleNews-vectors-negative300.bin.gz
 
 ## Generating machine-readable WikiProjects data
 
