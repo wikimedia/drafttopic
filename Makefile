@@ -16,18 +16,11 @@ datasets/enwiki.midlevel_wikiprojects.json: \
 		datasets/enwiki.wikiprojects.json
 	./utility trim_wikiprojects --wikiprojects $< --output $@
 
-datasets/wikiproject_page_ids.json:
-	# FIXME: Which utility produces this?
-
-# Label a list of page-ids with the wikiprojects and the mid-level categories
-# the page belongs to.
 datasets/enwiki.labeled_wikiprojects.json: \
-		datasets/wikiproject_page_ids.json
-	./utility fetch_page_wikiprojects \
-		--verbose \
+		datasets/enwiki.midlevel_wikiprojects.json
+	./utility fetch_project_content \
 		--api-host=https://en.wikipedia.org/ \
-		--input=$< \
-		--mid-level-wp=datasets/enwiki.midlevel_wikiprojects.json \
+		--mid-level-wp=$< \
 		--output=$@
 
 datasets/enwiki.labels-config.json: \
