@@ -147,7 +147,8 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
     def _fetch_wikiprojects_info(observations):
         doc = session.get(
             action='query', prop='templates|info', formatversion=2,
-            tlnamespace=10, pageids=[
+            tlnamespace=10, tllimit=500,
+            pageids=[
                 ob['talk_page_id'] for ob in observations],
             continuation=True)
         # The above returns a generator for doc, iterating over which we get
@@ -169,14 +170,10 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
                     if pageid not in rev_doc_map:
                         rev_doc_map[pageid] = \
                             {'talk_page_id': pageid,
-                             'rev_id': page_doc.get('lastrevid', -1),
                              'templates': [],
                              'talk_page_title': page_doc.get('title', '')}
                     # some templates for this pageid were processed in previous
                     # batches, update the list with new one's
-                    if 'lastrevid' in page_doc:
-                        rev_doc_map[pageid]['rev_id'] = \
-                            page_doc['lastrevid']
                     if 'title' in page_doc:
                         rev_doc_map[pageid]['talk_page_title'] = \
                             page_doc['title']
@@ -204,7 +201,6 @@ def build_fetch_wikiprojects_info(session, mid_level_wp):
             else:
                 try:
                     rev_doc = rev_doc_map[ob['talk_page_id']]
-                    ob['rev_id'] = rev_doc['rev_id']
                     ob['templates'] = rev_doc['templates']
                     if 'talk_page_title' not in ob:
                         ob['talk_page_title'] = rev_doc['talk_page_title']
