@@ -77,7 +77,8 @@ def fetch_text(session, labelings, verbose=False):
     _fetch_text = build_fetch_text_extractor(session)
 
     for annotated in executor.map(_fetch_text, labelings):
-        yield annotated
+        if annotated is not None:
+            yield annotated
         if verbose:
             sys.stderr.write(".")
             sys.stderr.flush()
@@ -103,7 +104,7 @@ def build_fetch_text_extractor(session):
             page_documents = result['query']['pages']
         except (KeyError, IndexError):
             logger.warn("No results returned.")
-            return
+            return None
         for page_doc in page_documents:
             try:
                 text = page_doc['revisions'][0]['content']
@@ -122,7 +123,7 @@ def build_fetch_text_extractor(session):
 
             except (KeyError, IndexError):
                 # TODO: warn
-                return
+                return None
 
     return _fetch_text
 
