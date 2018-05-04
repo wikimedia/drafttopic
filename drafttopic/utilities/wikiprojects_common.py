@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-WIKIPROJECT_FETCH_THREADS = 4
+WIKIPROJECT_FETCH_THREADS = 1000
 
 
 def wptemplate2directory(template_name, wikiprojects, directory=[]):
