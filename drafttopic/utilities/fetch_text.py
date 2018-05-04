@@ -73,58 +73,57 @@ def fetch_text(session, labelings, verbose=False):
         included.
     """
 
-    batches = chunkify(labelings, 25)
     executor = ThreadPoolExecutor(max_workers=WIKIPROJECT_FETCH_THREADS)
     _fetch_text = build_fetch_text_extractor(session)
 
-    for annotated_batch in executor.map(_fetch_text, batches):
-        for annotated_item in annotated_batch:
-            yield annotated_item
-            if verbose:
-                sys.stderr.write(".")
-                sys.stderr.flush()
+    for annotated in executor.map(_fetch_text, labelings):
+        yield annotated
+        if verbose:
+            sys.stderr.write(".")
+            sys.stderr.flush()
     if verbose:
         sys.stderr.write("\n")
 
 
 def build_fetch_text_extractor(session):
 
-    def _fetch_text(labelings):
-        docs = session.get(
-            action="query", prop="revisions", rvprop=["content"],
-            redirects=True, titles=[ob['talk_page_title'] for ob in labelings],
-            continuation=True, formatversion=2
+    def _fetch_text(labeling):
+        result = session.get(
+            action="query",
+            prop="revisions",
+            rvprop=["content", "ids"],
+            titles=labeling['talk_page_title'],
+            rvlimit=1,
+            rvdir="newer",
+            formatversion=2
         )
         rev_doc_map = {}
-        for result in docs:
-            page_documents = None
+        page_documents = None
+        try:
+            page_documents = result['query']['pages']
+        except (KeyError, IndexError):
+            logger.warn("No results returned.")
+            return
+        for page_doc in page_documents:
             try:
-                page_documents = result['query']['pages']
+                text = page_doc['revisions'][0]['content']
+                if is_article(text):
+                    title = mwtitle.normalize(page_doc['title'])
+
+                    labeling['text'] = text
+                    labeling['title'] = text
+                    labeling['rev_id'] = page_doc['revisions'][0]['revid']
+
+                    return labeling
+                else:
+                    sys.stderr.write("?")
+                    sys.stderr.write(page_doc['title'])
+                    sys.stderr.flush()
+
             except (KeyError, IndexError):
-                logger.warn("No results returned.")
-                continue
-            for page_doc in page_documents:
-                try:
-                    text = page_doc['revisions'][0]['content']
-                    if is_article(text):
-                        title = mwtitle.normalize(page_doc['title'])
-                        rev_doc_map[title] = text
-                except (KeyError, IndexError):
-                    continue
+                # TODO: warn
+                return
 
-        augmented_observations = []
-        for ob in labelings:
-            title = ob['talk_page_title']
-            ob['text'] = ''
-            if mwtitle.normalize(title) in rev_doc_map:
-                ob['text'] = rev_doc_map[title]
-            else:
-                sys.stderr.write("?")
-                sys.stderr.write(title)
-                sys.stderr.flush()
-
-            augmented_observations.append(ob)
-        return augmented_observations
     return _fetch_text
 
 
