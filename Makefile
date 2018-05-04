@@ -1,3 +1,6 @@
+models: \
+	models/enwiki.drafttopic.gradient_boosting.model
+
 datasets/enwiki.labeled_wikiprojects.json:
 	wget https://ndownloader.figshare.com/files/9828517 -qO- > $@
 
@@ -7,13 +10,21 @@ labels-config.json: \
 		./utility write_labels \
 		mid_level_categories > $@
 
+datasets/enwiki.labeled_wikiprojects.w_text.json: \
+		datasets/enwiki.labeled_wikiprojects.json
+	./utility fetch_text \
+		--api-host=https://en.wikipedia.org \
+		--labelings=$< \
+		--output=$@ \
+		--verbose
+
 datasets/enwiki.labeled_wikiprojects.w_cache.json: \
-	datasets/enwiki.labeled_wikiprojects.json
-	cat $< | \
-	revscoring extract \
-	drafttopic.feature_lists.wordvectors.drafttopic \
-	--host=https://en.wikipedia.org/ \
-	--input=datasets/enwiki.labeled_wikiprojects.json > $@
+		datasets/enwiki.labeled_wikiprojects.w_text.json
+	./utility extract_from_text \
+		drafttopic.feature_lists.word2vec.drafttopic \
+		--input=$< \
+		--output=$@ \
+		--verbose
 
 models/enwiki.drafttopic.gradient_boosting.model: \
 	datasets/enwiki.labeled_wikiprojects.w_cache.json
@@ -21,7 +32,7 @@ models/enwiki.drafttopic.gradient_boosting.model: \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
 		drafttopic.feature_lists.wordvectors.drafttopic mid_level_categories \
 		--debug \
-	   	--labels-config=labels-config.yaml \
+	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
 		-p 'max_depth=5' \
 	   	-p 'max_features="log2"' \
