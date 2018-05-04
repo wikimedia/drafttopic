@@ -98,7 +98,6 @@ def build_fetch_text_extractor(session):
             rvdir="newer",
             formatversion=2
         )
-        rev_doc_map = {}
         page_documents = None
         try:
             page_documents = result['query']['pages']
@@ -107,13 +106,14 @@ def build_fetch_text_extractor(session):
             return None
         for page_doc in page_documents:
             try:
-                text = page_doc['revisions'][0]['content']
+                rev_doc = page_doc['revisions'][0]
+                text = rev_doc['content']
                 if is_article(text):
                     title = mwtitle.normalize(page_doc['title'])
 
                     labeling['text'] = text
-                    labeling['title'] = text
-                    labeling['rev_id'] = page_doc['revisions'][0]['revid']
+                    labeling['title'] = title
+                    labeling['rev_id'] = rev_doc['revid']
 
                     return labeling
                 else:
