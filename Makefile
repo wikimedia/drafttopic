@@ -21,7 +21,7 @@ datasets/enwiki.labeled_wikiprojects.w_text.json: \
 datasets/enwiki.labeled_wikiprojects.w_cache.json: \
 		datasets/enwiki.labeled_wikiprojects.w_text.json
 	./utility extract_from_text \
-		drafttopic.feature_lists.word2vec.drafttopic \
+		drafttopic.feature_lists.wordvectors.drafttopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
