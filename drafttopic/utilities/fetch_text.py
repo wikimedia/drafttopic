@@ -29,6 +29,7 @@ from .wikiprojects_common import WIKIPROJECT_FETCH_THREADS
 
 logger = logging.getLogger(__name__)
 REDIRECT_RE = re.compile("#redirect", re.I)
+DRAFTTOPIC_UA = "Drafttopic fetch_text <ahalfaker@wikimedia.org>"
 
 
 def main(argv=None):
@@ -45,7 +46,7 @@ def main(argv=None):
         output = open(args['--output'], 'w')
 
     session = mwapi.Session(args['--api-host'],
-                            user_agent="Drafttopic fetch_text utility.")
+                            user_agent=DRAFTTOPIC_UA)
 
     verbose = args['--verbose']
 
