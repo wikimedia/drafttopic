@@ -1,3 +1,5 @@
+drafttopic_major_minor = 0.1
+
 models: \
 	models/enwiki.drafttopic.gradient_boosting.model
 
@@ -37,9 +39,12 @@ models/enwiki.drafttopic.gradient_boosting.model: \
 		-p 'max_depth=5' \
 	   	-p 'max_features="log2"' \
 	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor) \
 	   	--folds=5 \
 	   	--model-file=models/enwiki.drafttopic.gradient_boosting.model \
 		--multilabel > $@
+	
+	revscoring model_info $@ > model_info/enwiki.drafttopic.md
 
 tuning_reports/enwiki.drafttopic.md: \
 	datasets/enwiki.labeled_wikiprojects.w_cache.json
