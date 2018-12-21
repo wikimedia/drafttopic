@@ -1,12 +1,12 @@
 Model Information:
 	 - type: GradientBoosting
-	 - version: 0.1.0
-	 - params: {'learning_rate': 0.1, 'min_impurity_split': None, 'max_leaf_nodes': None, 'multilabel': True, 'loss': 'deviance', 'min_weight_fraction_leaf': 0.0, 'min_samples_split': 2, 'criterion': 'friedman_mse', 'max_depth': 5, 'init': None, 'max_features': 'log2', 'center': False, 'random_state': None, 'label_weights': {}, 'population_rates': None, 'n_estimators': 150, 'min_impurity_decrease': 0.0, 'warm_start': False, 'min_samples_leaf': 1, 'scale': False, 'subsample': 1.0, 'verbose': 0, 'presort': 'auto', 'labels': ['STEM.Biology', 'STEM.Space', 'STEM.Information science', 'Geography.Maps', 'Culture.Philosophy and religion', 'Culture.Plastic arts', 'History_And_Society.Politics and government', 'STEM.Engineering', 'Culture.Media', 'Culture.Entertainment', 'Geography.Bodies of water', 'STEM.Physics', 'Assistance.Article improvement and grading', 'STEM.Technology', 'Geography.Oceania', 'Culture.Performing arts', 'STEM.Science', 'STEM.Meteorology', 'Geography.Europe', 'Culture.Crafts and hobbies', 'STEM.Medicine', 'History_And_Society.Business and economics', 'Culture.Internet culture', 'Culture.Arts', 'Assistance.Maintenance', 'STEM.Geosciences', 'Geography.Landforms', 'Culture.Food and drink', 'STEM.Chemistry', 'Culture.Language and literature', 'STEM.Time', 'Geography.Cities', 'History_And_Society.Education', 'Assistance.Contents systems', 'History_And_Society.Transportation', 'Assistance.Files', 'Culture.Visual arts', 'History_And_Society.History and society', 'Geography.Countries', 'History_And_Society.Military and warfare', 'Culture.Sports', 'Culture.Broadcasting', 'STEM.Mathematics']}
+	 - version: 0.1
+	 - params: {'max_leaf_nodes': None, 'population_rates': None, 'min_samples_leaf': 1, 'random_state': None, 'label_weights': {}, 'max_depth': 5, 'loss': 'deviance', 'min_weight_fraction_leaf': 0.0, 'warm_start': False, 'criterion': 'friedman_mse', 'scale': False, 'n_estimators': 150, 'learning_rate': 0.1, 'subsample': 1.0, 'verbose': 0, 'min_impurity_decrease': 0.0, 'presort': 'auto', 'min_impurity_split': None, 'max_features': 'log2', 'init': None, 'center': False, 'multilabel': True, 'min_samples_split': 2, 'labels': ['Geography.Oceania', 'STEM.Mathematics', 'STEM.Science', 'STEM.Meteorology', 'Culture.Sports', 'Culture.Performing arts', 'Culture.Entertainment', 'Assistance.Article improvement and grading', 'Culture.Language and literature', 'Culture.Visual arts', 'STEM.Biology', 'History_And_Society.Business and economics', 'Assistance.Files', 'History_And_Society.History and society', 'STEM.Medicine', 'Culture.Crafts and hobbies', 'STEM.Geosciences', 'Culture.Food and drink', 'History_And_Society.Transportation', 'Geography.Cities', 'Geography.Landforms', 'Assistance.Maintenance', 'STEM.Information science', 'STEM.Time', 'Geography.Europe', 'STEM.Engineering', 'Culture.Media', 'STEM.Technology', 'STEM.Space', 'History_And_Society.Education', 'Geography.Countries', 'History_And_Society.Military and warfare', 'Culture.Plastic arts', 'STEM.Physics', 'History_And_Society.Politics and government', 'STEM.Chemistry', 'Culture.Broadcasting', 'Geography.Maps', 'Culture.Arts', 'Culture.Internet culture', 'Geography.Bodies of water', 'Assistance.Contents systems', 'Culture.Philosophy and religion']}
 	Environment:
-	 - revscoring_version: '2.2.3'
-	 - platform: 'Linux-4.9.0-5-amd64-x86_64-with-debian-9.4'
+	 - revscoring_version: '2.3.0'
+	 - platform: 'Linux-4.9.0-8-amd64-x86_64-with-debian-9.5'
 	 - machine: 'x86_64'
-	 - version: '#1 SMP Debian 4.9.65-3+deb9u2 (2018-01-04)'
+	 - version: '#1 SMP Debian 4.9.110-3+deb9u6 (2018-10-08)'
 	 - system: 'Linux'
 	 - processor: ''
 	 - python_build: ('default', 'Jan 19 2017 14:11:04')
@@ -15,611 +15,611 @@ Model Information:
 	 - python_implementation: 'CPython'
 	 - python_revision: ''
 	 - python_version: '3.5.3'
-	 - release: '4.9.0-5-amd64'
+	 - release: '4.9.0-8-amd64'
 	
 	Statistics:
-	counts (n=84481):
+	counts (n=83530):
 			label                                              n          TP    FP    FN     TN
 			---------------------------------------------  -----  ---  -----  ----  ----  -----
-			'STEM.Biology'                                  3134  -->   1784  1350   276  81071
-			'STEM.Space'                                    2117  -->   1735   382    93  82271
-			'STEM.Information science'                      2037  -->   1174   863   110  82334
-			'Geography.Maps'                                2421  -->   1401  1020    63  81997
-			'Culture.Philosophy and religion'               3840  -->   1689  2151   481  80160
-			'Culture.Plastic arts'                          3717  -->   2121  1596   401  80363
-			'History_And_Society.Politics and government'   4047  -->   1557  2490   530  79904
-			'STEM.Engineering'                              2133  -->    792  1341   236  82112
-			'Culture.Media'                                 2040  -->    599  1441   261  82180
-			'Culture.Entertainment'                         5529  -->   3636  1893   562  78390
-			'Geography.Bodies of water'                     2232  -->   1725   507   154  82095
-			'STEM.Physics'                                  2376  -->   1266  1110   340  81765
-			'Assistance.Article improvement and grading'      67  -->     22    45   107  84307
-			'STEM.Technology'                               3826  -->   1333  2493   580  80075
-			'Geography.Oceania'                             4025  -->   2458  1567   206  80250
-			'Culture.Performing arts'                       4180  -->   3310   870   399  79902
-			'STEM.Science'                                  2133  -->    537  1596   151  82197
-			'STEM.Meteorology'                              1753  -->   1345   408    68  82660
-			'Geography.Europe'                             15349  -->   8931  6418  2556  66576
-			'Culture.Crafts and hobbies'                    1988  -->   1139   849    62  82431
-			'STEM.Medicine'                                 1951  -->   1112   839   255  82275
-			'History_And_Society.Business and economics'    6075  -->   3018  3057   796  77610
-			'Culture.Internet culture'                      1839  -->    929   910   212  82430
-			'Culture.Arts'                                  1999  -->   1451   548    92  82390
-			'Assistance.Maintenance'                        5028  -->   1089  3939   254  79199
-			'STEM.Geosciences'                              1987  -->   1172   815   122  82372
-			'Geography.Landforms'                           2148  -->   1717   431   121  82212
-			'Culture.Food and drink'                        2264  -->   1563   701   160  82057
-			'STEM.Chemistry'                                2083  -->   1307   776   240  82158
-			'Culture.Language and literature'              19588  -->  14221  5367  2454  62439
-			'STEM.Time'                                     2216  -->   1513   703    95  82170
-			'Geography.Cities'                               791  -->    496   295   107  83583
-			'History_And_Society.Education'                 2633  -->   1598  1035   249  81599
-			'Assistance.Contents systems'                   1953  -->    683  1270   154  82374
-			'History_And_Society.Transportation'            3680  -->   2512  1168   328  80473
-			'Assistance.Files'                               350  -->     21   329   137  83994
-			'Culture.Visual arts'                           4563  -->   2557  2006   541  79377
-			'History_And_Society.History and society'       7010  -->   1373  5637   548  76923
-			'Geography.Countries'                          24068  -->  14420  9648  4238  56175
-			'History_And_Society.Military and warfare'      3921  -->   2472  1449   391  80169
-			'Culture.Sports'                                4844  -->   3965   879   385  79252
-			'Culture.Broadcasting'                          2807  -->   1596  1211   424  81250
-			'STEM.Mathematics'                              1454  -->    944   510    86  82941
+			'Geography.Oceania'                             3978  -->   2427  1551   196  79356
+			'STEM.Mathematics'                              1440  -->    925   515   105  81985
+			'STEM.Science'                                  2118  -->    533  1585   154  81258
+			'STEM.Meteorology'                              1728  -->   1335   393    70  81732
+			'Culture.Sports'                                4809  -->   3972   837   370  78351
+			'Culture.Performing arts'                       4154  -->   3262   892   389  78987
+			'Culture.Entertainment'                         5464  -->   3569  1895   573  77493
+			'Assistance.Article improvement and grading'      66  -->     25    41   117  83347
+			'Culture.Language and literature'              19460  -->  14182  5278  2406  61664
+			'Culture.Visual arts'                           4529  -->   2543  1986   540  78461
+			'STEM.Biology'                                  3094  -->   1757  1337   277  80159
+			'History_And_Society.Business and economics'    5999  -->   2989  3010   792  76739
+			'Assistance.Files'                               350  -->     24   326   129  83051
+			'History_And_Society.History and society'       6937  -->   1350  5587   509  76084
+			'STEM.Medicine'                                 1942  -->   1103   839   258  81330
+			'Culture.Crafts and hobbies'                    1950  -->   1102   848    63  81517
+			'STEM.Geosciences'                              1970  -->   1178   792   127  81433
+			'Culture.Food and drink'                        2243  -->   1545   698   153  81134
+			'History_And_Society.Transportation'            3630  -->   2471  1159   336  79564
+			'Geography.Cities'                               786  -->    486   300   140  82604
+			'Geography.Landforms'                           2133  -->   1708   425   128  81269
+			'Assistance.Maintenance'                        4982  -->   1078  3904   241  78307
+			'STEM.Information science'                      2024  -->   1178   846   109  81397
+			'STEM.Time'                                     2208  -->   1522   686   109  81213
+			'Geography.Europe'                             15169  -->   8859  6310  2564  65797
+			'STEM.Engineering'                              2115  -->    729  1386   260  81155
+			'Culture.Media'                                 2021  -->    593  1428   240  81269
+			'STEM.Technology'                               3777  -->   1315  2462   589  79164
+			'STEM.Space'                                    2105  -->   1732   373    95  81330
+			'History_And_Society.Education'                 2605  -->   1610   995   237  80688
+			'Geography.Countries'                          23775  -->  14212  9563  4093  55662
+			'History_And_Society.Military and warfare'      3874  -->   2424  1450   393  79263
+			'Culture.Plastic arts'                          3676  -->   2101  1575   394  79460
+			'STEM.Physics'                                  2365  -->   1274  1091   359  80806
+			'History_And_Society.Politics and government'   3869  -->   1450  2419   483  79178
+			'STEM.Chemistry'                                2074  -->   1275   799   287  81169
+			'Culture.Broadcasting'                          2757  -->   1566  1191   380  80393
+			'Geography.Maps'                                2405  -->   1374  1031    81  81044
+			'Culture.Arts'                                  1984  -->   1466   518    94  81452
+			'Culture.Internet culture'                      1811  -->    926   885   229  81490
+			'Geography.Bodies of water'                     2225  -->   1716   509   154  81151
+			'Assistance.Contents systems'                   1932  -->    666  1266   163  81435
+			'Culture.Philosophy and religion'               3793  -->   1687  2106   456  79281
 	rates:
-		          'STEM.Biology'    'STEM.Space'    'STEM.Information science'    'Geography.Maps'    'Culture.Philosophy and religion'    'Culture.Plastic arts'    'History_And_Society.Politics and government'    'STEM.Engineering'    'Culture.Media'    'Culture.Entertainment'    'Geography.Bodies of water'    'STEM.Physics'    'Assistance.Article improvement and grading'    'STEM.Technology'    'Geography.Oceania'    'Culture.Performing arts'    'STEM.Science'    'STEM.Meteorology'    'Geography.Europe'    'Culture.Crafts and hobbies'    'STEM.Medicine'    'History_And_Society.Business and economics'    'Culture.Internet culture'    'Culture.Arts'    'Assistance.Maintenance'    'STEM.Geosciences'    'Geography.Landforms'    'Culture.Food and drink'    'STEM.Chemistry'    'Culture.Language and literature'    'STEM.Time'    'Geography.Cities'    'History_And_Society.Education'    'Assistance.Contents systems'    'History_And_Society.Transportation'    'Assistance.Files'    'Culture.Visual arts'    'History_And_Society.History and society'    'Geography.Countries'    'History_And_Society.Military and warfare'    'Culture.Sports'    'Culture.Broadcasting'    'STEM.Mathematics'
-		------  ----------------  --------------  ----------------------------  ------------------  -----------------------------------  ------------------------  -----------------------------------------------  --------------------  -----------------  -------------------------  -----------------------------  ----------------  ----------------------------------------------  -------------------  ---------------------  ---------------------------  ----------------  --------------------  --------------------  ------------------------------  -----------------  ----------------------------------------------  ----------------------------  ----------------  --------------------------  --------------------  -----------------------  --------------------------  ------------------  -----------------------------------  -------------  --------------------  ---------------------------------  -------------------------------  --------------------------------------  --------------------  -----------------------  -------------------------------------------  -----------------------  --------------------------------------------  ------------------  ------------------------  --------------------
-		sample             0.037           0.025                         0.024               0.029                                0.045                     0.044                                            0.048                 0.025              0.024                      0.065                          0.026             0.028                                           0.001                0.045                  0.048                        0.049             0.025                 0.021                 0.182                           0.024              0.023                                           0.072                         0.022             0.024                        0.06                 0.024                    0.025                       0.027               0.025                                0.232          0.026                 0.009                              0.031                            0.023                                   0.044                 0.004                    0.054                                        0.083                    0.285                                         0.046               0.057                     0.033                 0.017
+		          'Geography.Oceania'    'STEM.Mathematics'    'STEM.Science'    'STEM.Meteorology'    'Culture.Sports'    'Culture.Performing arts'    'Culture.Entertainment'    'Assistance.Article improvement and grading'    'Culture.Language and literature'    'Culture.Visual arts'    'STEM.Biology'    'History_And_Society.Business and economics'    'Assistance.Files'    'History_And_Society.History and society'    'STEM.Medicine'    'Culture.Crafts and hobbies'    'STEM.Geosciences'    'Culture.Food and drink'    'History_And_Society.Transportation'    'Geography.Cities'    'Geography.Landforms'    'Assistance.Maintenance'    'STEM.Information science'    'STEM.Time'    'Geography.Europe'    'STEM.Engineering'    'Culture.Media'    'STEM.Technology'    'STEM.Space'    'History_And_Society.Education'    'Geography.Countries'    'History_And_Society.Military and warfare'    'Culture.Plastic arts'    'STEM.Physics'    'History_And_Society.Politics and government'    'STEM.Chemistry'    'Culture.Broadcasting'    'Geography.Maps'    'Culture.Arts'    'Culture.Internet culture'    'Geography.Bodies of water'    'Assistance.Contents systems'    'Culture.Philosophy and religion'
+		------  ---------------------  --------------------  ----------------  --------------------  ------------------  ---------------------------  -------------------------  ----------------------------------------------  -----------------------------------  -----------------------  ----------------  ----------------------------------------------  --------------------  -------------------------------------------  -----------------  ------------------------------  --------------------  --------------------------  --------------------------------------  --------------------  -----------------------  --------------------------  ----------------------------  -------------  --------------------  --------------------  -----------------  -------------------  --------------  ---------------------------------  -----------------------  --------------------------------------------  ------------------------  ----------------  -----------------------------------------------  ------------------  ------------------------  ------------------  ----------------  ----------------------------  -----------------------------  -------------------------------  -----------------------------------
+		sample                  0.048                 0.017             0.025                 0.021               0.058                         0.05                      0.065                                           0.001                                0.233                    0.054             0.037                                           0.072                 0.004                                        0.083              0.023                           0.023                 0.024                       0.027                                   0.043                 0.009                    0.026                        0.06                         0.024          0.026                 0.182                 0.025              0.024                0.045           0.025                              0.031                    0.285                                         0.046                     0.044             0.028                                            0.046               0.025                     0.033               0.029             0.024                         0.022                          0.027                            0.023                                0.045
 	match_rate (micro=0.082, macro=0.033):
 		-------------------------------------------  -----
-		Geography.Cities                             0.007
-		History_And_Society.Military and warfare     0.034
-		Culture.Language and literature              0.197
-		Assistance.Maintenance                       0.016
-		Culture.Media                                0.01
-		STEM.Chemistry                               0.018
-		Geography.Maps                               0.017
-		STEM.Meteorology                             0.017
-		History_And_Society.Politics and government  0.025
-		STEM.Time                                    0.019
-		History_And_Society.Transportation           0.034
-		STEM.Engineering                             0.012
-		Geography.Countries                          0.221
+		Culture.Sports                               0.052
 		Culture.Visual arts                          0.037
-		STEM.Information science                     0.015
+		Culture.Food and drink                       0.02
+		Geography.Oceania                            0.031
+		Culture.Media                                0.01
+		STEM.Space                                   0.022
 		Geography.Landforms                          0.022
-		History_And_Society.Education                0.022
 		Culture.Entertainment                        0.05
-		Geography.Oceania                            0.032
-		Culture.Broadcasting                         0.024
-		Culture.Arts                                 0.018
-		STEM.Mathematics                             0.012
+		Assistance.Files                             0.002
+		Culture.Arts                                 0.019
 		Culture.Philosophy and religion              0.026
+		Geography.Bodies of water                    0.022
+		STEM.Chemistry                               0.019
+		Culture.Broadcasting                         0.023
+		STEM.Time                                    0.02
+		STEM.Information science                     0.015
+		History_And_Society.Education                0.022
+		STEM.Engineering                             0.012
+		History_And_Society.Politics and government  0.023
+		STEM.Geosciences                             0.016
+		Geography.Maps                               0.017
+		Geography.Cities                             0.007
+		Culture.Crafts and hobbies                   0.014
+		History_And_Society.Business and economics   0.045
+		STEM.Technology                              0.023
+		STEM.Meteorology                             0.017
+		STEM.Physics                                 0.02
+		Culture.Internet culture                     0.014
+		Assistance.Maintenance                       0.016
+		History_And_Society.Transportation           0.034
+		Geography.Europe                             0.137
+		Assistance.Article improvement and grading   0.002
+		History_And_Society.Military and warfare     0.034
 		Culture.Performing arts                      0.044
 		STEM.Science                                 0.008
-		Geography.Bodies of water                    0.022
-		STEM.Space                                   0.022
-		STEM.Physics                                 0.019
-		History_And_Society.History and society      0.023
-		Assistance.Contents systems                  0.01
-		History_And_Society.Business and economics   0.045
-		STEM.Biology                                 0.024
-		Culture.Food and drink                       0.02
-		STEM.Geosciences                             0.015
+		Geography.Countries                          0.219
 		STEM.Medicine                                0.016
-		Assistance.Files                             0.002
-		Culture.Internet culture                     0.014
-		STEM.Technology                              0.023
-		Assistance.Article improvement and grading   0.002
-		Culture.Sports                               0.051
+		Assistance.Contents systems                  0.01
+		STEM.Biology                                 0.024
 		Culture.Plastic arts                         0.03
-		Geography.Europe                             0.136
-		Culture.Crafts and hobbies                   0.014
+		STEM.Mathematics                             0.012
+		Culture.Language and literature              0.199
+		History_And_Society.History and society      0.022
 		-------------------------------------------  -----
 	filter_rate (micro=0.918, macro=0.967):
 		-------------------------------------------  -----
-		Geography.Cities                             0.993
-		History_And_Society.Military and warfare     0.966
-		Culture.Language and literature              0.803
-		Assistance.Maintenance                       0.984
-		Culture.Media                                0.99
-		STEM.Chemistry                               0.982
-		Geography.Maps                               0.983
-		STEM.Meteorology                             0.983
-		History_And_Society.Politics and government  0.975
-		STEM.Time                                    0.981
-		History_And_Society.Transportation           0.966
-		STEM.Engineering                             0.988
-		Geography.Countries                          0.779
+		Culture.Sports                               0.948
 		Culture.Visual arts                          0.963
-		STEM.Information science                     0.985
+		Culture.Food and drink                       0.98
+		Geography.Oceania                            0.969
+		Culture.Media                                0.99
+		STEM.Space                                   0.978
 		Geography.Landforms                          0.978
-		History_And_Society.Education                0.978
 		Culture.Entertainment                        0.95
-		Geography.Oceania                            0.968
-		Culture.Broadcasting                         0.976
-		Culture.Arts                                 0.982
-		STEM.Mathematics                             0.988
+		Assistance.Files                             0.998
+		Culture.Arts                                 0.981
 		Culture.Philosophy and religion              0.974
+		Geography.Bodies of water                    0.978
+		STEM.Chemistry                               0.981
+		Culture.Broadcasting                         0.977
+		STEM.Time                                    0.98
+		STEM.Information science                     0.985
+		History_And_Society.Education                0.978
+		STEM.Engineering                             0.988
+		History_And_Society.Politics and government  0.977
+		STEM.Geosciences                             0.984
+		Geography.Maps                               0.983
+		Geography.Cities                             0.993
+		Culture.Crafts and hobbies                   0.986
+		History_And_Society.Business and economics   0.955
+		STEM.Technology                              0.977
+		STEM.Meteorology                             0.983
+		STEM.Physics                                 0.98
+		Culture.Internet culture                     0.986
+		Assistance.Maintenance                       0.984
+		History_And_Society.Transportation           0.966
+		Geography.Europe                             0.863
+		Assistance.Article improvement and grading   0.998
+		History_And_Society.Military and warfare     0.966
 		Culture.Performing arts                      0.956
 		STEM.Science                                 0.992
-		Geography.Bodies of water                    0.978
-		STEM.Space                                   0.978
-		STEM.Physics                                 0.981
-		History_And_Society.History and society      0.977
-		Assistance.Contents systems                  0.99
-		History_And_Society.Business and economics   0.955
-		STEM.Biology                                 0.976
-		Culture.Food and drink                       0.98
-		STEM.Geosciences                             0.985
+		Geography.Countries                          0.781
 		STEM.Medicine                                0.984
-		Assistance.Files                             0.998
-		Culture.Internet culture                     0.986
-		STEM.Technology                              0.977
-		Assistance.Article improvement and grading   0.998
-		Culture.Sports                               0.949
+		Assistance.Contents systems                  0.99
+		STEM.Biology                                 0.976
 		Culture.Plastic arts                         0.97
-		Geography.Europe                             0.864
-		Culture.Crafts and hobbies                   0.986
+		STEM.Mathematics                             0.988
+		Culture.Language and literature              0.801
+		History_And_Society.History and society      0.978
 		-------------------------------------------  -----
-	recall (micro=0.576, macro=0.553):
+	recall (micro=0.576, macro=0.554):
 		-------------------------------------------  -----
-		Geography.Cities                             0.627
-		History_And_Society.Military and warfare     0.63
-		Culture.Language and literature              0.726
-		Assistance.Maintenance                       0.217
-		Culture.Media                                0.294
-		STEM.Chemistry                               0.627
-		Geography.Maps                               0.579
-		STEM.Meteorology                             0.767
-		History_And_Society.Politics and government  0.385
-		STEM.Time                                    0.683
-		History_And_Society.Transportation           0.683
-		STEM.Engineering                             0.371
-		Geography.Countries                          0.599
-		Culture.Visual arts                          0.56
-		STEM.Information science                     0.576
-		Geography.Landforms                          0.799
-		History_And_Society.Education                0.607
-		Culture.Entertainment                        0.658
-		Geography.Oceania                            0.611
-		Culture.Broadcasting                         0.569
-		Culture.Arts                                 0.726
-		STEM.Mathematics                             0.649
-		Culture.Philosophy and religion              0.44
-		Culture.Performing arts                      0.792
-		STEM.Science                                 0.252
-		Geography.Bodies of water                    0.773
-		STEM.Space                                   0.82
-		STEM.Physics                                 0.533
-		History_And_Society.History and society      0.196
-		Assistance.Contents systems                  0.35
-		History_And_Society.Business and economics   0.497
-		STEM.Biology                                 0.569
-		Culture.Food and drink                       0.69
-		STEM.Geosciences                             0.59
-		STEM.Medicine                                0.57
-		Assistance.Files                             0.06
-		Culture.Internet culture                     0.505
+		Culture.Sports                               0.826
+		Culture.Visual arts                          0.561
+		Culture.Food and drink                       0.689
+		Geography.Oceania                            0.61
+		Culture.Media                                0.293
+		STEM.Space                                   0.823
+		Geography.Landforms                          0.801
+		Culture.Entertainment                        0.653
+		Assistance.Files                             0.069
+		Culture.Arts                                 0.739
+		Culture.Philosophy and religion              0.445
+		Geography.Bodies of water                    0.771
+		STEM.Chemistry                               0.615
+		Culture.Broadcasting                         0.568
+		STEM.Time                                    0.689
+		STEM.Information science                     0.582
+		History_And_Society.Education                0.618
+		STEM.Engineering                             0.345
+		History_And_Society.Politics and government  0.375
+		STEM.Geosciences                             0.598
+		Geography.Maps                               0.571
+		Geography.Cities                             0.618
+		Culture.Crafts and hobbies                   0.565
+		History_And_Society.Business and economics   0.498
 		STEM.Technology                              0.348
-		Assistance.Article improvement and grading   0.328
-		Culture.Sports                               0.819
-		Culture.Plastic arts                         0.571
-		Geography.Europe                             0.582
-		Culture.Crafts and hobbies                   0.573
+		STEM.Meteorology                             0.773
+		STEM.Physics                                 0.539
+		Culture.Internet culture                     0.511
+		Assistance.Maintenance                       0.216
+		History_And_Society.Transportation           0.681
+		Geography.Europe                             0.584
+		Assistance.Article improvement and grading   0.379
+		History_And_Society.Military and warfare     0.626
+		Culture.Performing arts                      0.785
+		STEM.Science                                 0.252
+		Geography.Countries                          0.598
+		STEM.Medicine                                0.568
+		Assistance.Contents systems                  0.345
+		STEM.Biology                                 0.568
+		Culture.Plastic arts                         0.572
+		STEM.Mathematics                             0.642
+		Culture.Language and literature              0.729
+		History_And_Society.History and society      0.195
 		-------------------------------------------  -----
 	!recall (micro=0.98, macro=0.994):
 		-------------------------------------------  -----
-		Geography.Cities                             0.999
-		History_And_Society.Military and warfare     0.995
-		Culture.Language and literature              0.962
-		Assistance.Maintenance                       0.997
-		Culture.Media                                0.997
-		STEM.Chemistry                               0.997
-		Geography.Maps                               0.999
-		STEM.Meteorology                             0.999
-		History_And_Society.Politics and government  0.993
-		STEM.Time                                    0.999
-		History_And_Society.Transportation           0.996
-		STEM.Engineering                             0.997
-		Geography.Countries                          0.93
+		Culture.Sports                               0.995
 		Culture.Visual arts                          0.993
-		STEM.Information science                     0.999
-		Geography.Landforms                          0.999
-		History_And_Society.Education                0.997
+		Culture.Food and drink                       0.998
+		Geography.Oceania                            0.998
+		Culture.Media                                0.997
+		STEM.Space                                   0.999
+		Geography.Landforms                          0.998
 		Culture.Entertainment                        0.993
-		Geography.Oceania                            0.997
-		Culture.Broadcasting                         0.995
+		Assistance.Files                             0.998
 		Culture.Arts                                 0.999
-		STEM.Mathematics                             0.999
 		Culture.Philosophy and religion              0.994
+		Geography.Bodies of water                    0.998
+		STEM.Chemistry                               0.996
+		Culture.Broadcasting                         0.995
+		STEM.Time                                    0.999
+		STEM.Information science                     0.999
+		History_And_Society.Education                0.997
+		STEM.Engineering                             0.997
+		History_And_Society.Politics and government  0.994
+		STEM.Geosciences                             0.998
+		Geography.Maps                               0.999
+		Geography.Cities                             0.998
+		Culture.Crafts and hobbies                   0.999
+		History_And_Society.Business and economics   0.99
+		STEM.Technology                              0.993
+		STEM.Meteorology                             0.999
+		STEM.Physics                                 0.996
+		Culture.Internet culture                     0.997
+		Assistance.Maintenance                       0.997
+		History_And_Society.Transportation           0.996
+		Geography.Europe                             0.962
+		Assistance.Article improvement and grading   0.999
+		History_And_Society.Military and warfare     0.995
 		Culture.Performing arts                      0.995
 		STEM.Science                                 0.998
-		Geography.Bodies of water                    0.998
-		STEM.Space                                   0.999
-		STEM.Physics                                 0.996
-		History_And_Society.History and society      0.993
-		Assistance.Contents systems                  0.998
-		History_And_Society.Business and economics   0.99
-		STEM.Biology                                 0.997
-		Culture.Food and drink                       0.998
-		STEM.Geosciences                             0.999
+		Geography.Countries                          0.932
 		STEM.Medicine                                0.997
-		Assistance.Files                             0.998
-		Culture.Internet culture                     0.997
-		STEM.Technology                              0.993
-		Assistance.Article improvement and grading   0.999
-		Culture.Sports                               0.995
+		Assistance.Contents systems                  0.998
+		STEM.Biology                                 0.997
 		Culture.Plastic arts                         0.995
-		Geography.Europe                             0.963
-		Culture.Crafts and hobbies                   0.999
+		STEM.Mathematics                             0.999
+		Culture.Language and literature              0.962
+		History_And_Society.History and society      0.993
 		-------------------------------------------  -----
-	precision (micro=0.826, macro=0.816):
+	precision (micro=0.826, macro=0.814):
 		-------------------------------------------  -----
-		Geography.Cities                             0.823
-		History_And_Society.Military and warfare     0.863
-		Culture.Language and literature              0.853
-		Assistance.Maintenance                       0.811
-		Culture.Media                                0.697
-		STEM.Chemistry                               0.845
-		Geography.Maps                               0.957
-		STEM.Meteorology                             0.952
-		History_And_Society.Politics and government  0.746
-		STEM.Time                                    0.941
-		History_And_Society.Transportation           0.885
-		STEM.Engineering                             0.77
-		Geography.Countries                          0.773
+		Culture.Sports                               0.915
 		Culture.Visual arts                          0.825
-		STEM.Information science                     0.914
-		Geography.Landforms                          0.934
-		History_And_Society.Education                0.865
-		Culture.Entertainment                        0.866
-		Geography.Oceania                            0.923
-		Culture.Broadcasting                         0.79
+		Culture.Food and drink                       0.91
+		Geography.Oceania                            0.925
+		Culture.Media                                0.712
+		STEM.Space                                   0.948
+		Geography.Landforms                          0.93
+		Culture.Entertainment                        0.862
+		Assistance.Files                             0.157
 		Culture.Arts                                 0.94
-		STEM.Mathematics                             0.917
-		Culture.Philosophy and religion              0.778
-		Culture.Performing arts                      0.892
-		STEM.Science                                 0.781
+		Culture.Philosophy and religion              0.787
 		Geography.Bodies of water                    0.918
-		STEM.Space                                   0.949
-		STEM.Physics                                 0.788
-		History_And_Society.History and society      0.715
-		Assistance.Contents systems                  0.816
+		STEM.Chemistry                               0.816
+		Culture.Broadcasting                         0.805
+		STEM.Time                                    0.933
+		STEM.Information science                     0.915
+		History_And_Society.Education                0.872
+		STEM.Engineering                             0.737
+		History_And_Society.Politics and government  0.75
+		STEM.Geosciences                             0.903
+		Geography.Maps                               0.944
+		Geography.Cities                             0.776
+		Culture.Crafts and hobbies                   0.946
 		History_And_Society.Business and economics   0.791
-		STEM.Biology                                 0.866
-		Culture.Food and drink                       0.907
-		STEM.Geosciences                             0.906
-		STEM.Medicine                                0.813
-		Assistance.Files                             0.133
-		Culture.Internet culture                     0.814
-		STEM.Technology                              0.697
-		Assistance.Article improvement and grading   0.171
-		Culture.Sports                               0.911
-		Culture.Plastic arts                         0.841
-		Geography.Europe                             0.777
-		Culture.Crafts and hobbies                   0.948
+		STEM.Technology                              0.691
+		STEM.Meteorology                             0.95
+		STEM.Physics                                 0.78
+		Culture.Internet culture                     0.802
+		Assistance.Maintenance                       0.817
+		History_And_Society.Transportation           0.88
+		Geography.Europe                             0.776
+		Assistance.Article improvement and grading   0.176
+		History_And_Society.Military and warfare     0.86
+		Culture.Performing arts                      0.893
+		STEM.Science                                 0.776
+		Geography.Countries                          0.776
+		STEM.Medicine                                0.81
+		Assistance.Contents systems                  0.803
+		STEM.Biology                                 0.864
+		Culture.Plastic arts                         0.842
+		STEM.Mathematics                             0.898
+		Culture.Language and literature              0.855
+		History_And_Society.History and society      0.726
 		-------------------------------------------  -----
 	!precision (micro=0.949, macro=0.978):
 		-------------------------------------------  -----
-		Geography.Cities                             0.996
-		History_And_Society.Military and warfare     0.982
-		Culture.Language and literature              0.921
-		Assistance.Maintenance                       0.953
-		Culture.Media                                0.983
-		STEM.Chemistry                               0.991
-		Geography.Maps                               0.988
-		STEM.Meteorology                             0.995
-		History_And_Society.Politics and government  0.97
-		STEM.Time                                    0.992
-		History_And_Society.Transportation           0.986
-		STEM.Engineering                             0.984
-		Geography.Countries                          0.853
+		Culture.Sports                               0.989
 		Culture.Visual arts                          0.975
-		STEM.Information science                     0.99
-		Geography.Landforms                          0.995
-		History_And_Society.Education                0.987
-		Culture.Entertainment                        0.976
+		Culture.Food and drink                       0.991
 		Geography.Oceania                            0.981
-		Culture.Broadcasting                         0.985
-		Culture.Arts                                 0.993
-		STEM.Mathematics                             0.994
+		Culture.Media                                0.983
+		STEM.Space                                   0.995
+		Geography.Landforms                          0.995
+		Culture.Entertainment                        0.976
+		Assistance.Files                             0.996
+		Culture.Arts                                 0.994
 		Culture.Philosophy and religion              0.974
+		Geography.Bodies of water                    0.994
+		STEM.Chemistry                               0.99
+		Culture.Broadcasting                         0.985
+		STEM.Time                                    0.992
+		STEM.Information science                     0.99
+		History_And_Society.Education                0.988
+		STEM.Engineering                             0.983
+		History_And_Society.Politics and government  0.97
+		STEM.Geosciences                             0.99
+		Geography.Maps                               0.987
+		Geography.Cities                             0.996
+		Culture.Crafts and hobbies                   0.99
+		History_And_Society.Business and economics   0.962
+		STEM.Technology                              0.97
+		STEM.Meteorology                             0.995
+		STEM.Physics                                 0.987
+		Culture.Internet culture                     0.989
+		Assistance.Maintenance                       0.953
+		History_And_Society.Transportation           0.986
+		Geography.Europe                             0.912
+		Assistance.Article improvement and grading   1
+		History_And_Society.Military and warfare     0.982
 		Culture.Performing arts                      0.989
 		STEM.Science                                 0.981
-		Geography.Bodies of water                    0.994
-		STEM.Space                                   0.995
-		STEM.Physics                                 0.987
-		History_And_Society.History and society      0.932
-		Assistance.Contents systems                  0.985
-		History_And_Society.Business and economics   0.962
-		STEM.Biology                                 0.984
-		Culture.Food and drink                       0.992
-		STEM.Geosciences                             0.99
+		Geography.Countries                          0.853
 		STEM.Medicine                                0.99
-		Assistance.Files                             0.996
-		Culture.Internet culture                     0.989
-		STEM.Technology                              0.97
-		Assistance.Article improvement and grading   0.999
-		Culture.Sports                               0.989
+		Assistance.Contents systems                  0.985
+		STEM.Biology                                 0.984
 		Culture.Plastic arts                         0.981
-		Geography.Europe                             0.912
-		Culture.Crafts and hobbies                   0.99
+		STEM.Mathematics                             0.994
+		Culture.Language and literature              0.921
+		History_And_Society.History and society      0.932
 		-------------------------------------------  -----
-	f1 (micro=0.669, macro=0.649):
+	f1 (micro=0.668, macro=0.648):
 		-------------------------------------------  -----
-		Geography.Cities                             0.712
-		History_And_Society.Military and warfare     0.729
-		Culture.Language and literature              0.784
-		Assistance.Maintenance                       0.342
-		Culture.Media                                0.413
-		STEM.Chemistry                               0.72
-		Geography.Maps                               0.721
-		STEM.Meteorology                             0.85
-		History_And_Society.Politics and government  0.508
-		STEM.Time                                    0.791
-		History_And_Society.Transportation           0.771
-		STEM.Engineering                             0.501
-		Geography.Countries                          0.675
+		Culture.Sports                               0.868
 		Culture.Visual arts                          0.668
-		STEM.Information science                     0.707
-		Geography.Landforms                          0.862
-		History_And_Society.Education                0.713
-		Culture.Entertainment                        0.748
-		Geography.Oceania                            0.735
-		Culture.Broadcasting                         0.661
-		Culture.Arts                                 0.819
-		STEM.Mathematics                             0.76
-		Culture.Philosophy and religion              0.562
-		Culture.Performing arts                      0.839
-		STEM.Science                                 0.381
-		Geography.Bodies of water                    0.839
-		STEM.Space                                   0.88
-		STEM.Physics                                 0.636
-		History_And_Society.History and society      0.307
-		Assistance.Contents systems                  0.49
-		History_And_Society.Business and economics   0.61
-		STEM.Biology                                 0.687
 		Culture.Food and drink                       0.784
-		STEM.Geosciences                             0.714
-		STEM.Medicine                                0.67
-		Assistance.Files                             0.083
-		Culture.Internet culture                     0.623
-		STEM.Technology                              0.465
-		Assistance.Article improvement and grading   0.224
-		Culture.Sports                               0.863
-		Culture.Plastic arts                         0.68
+		Geography.Oceania                            0.735
+		Culture.Media                                0.416
+		STEM.Space                                   0.881
+		Geography.Landforms                          0.861
+		Culture.Entertainment                        0.743
+		Assistance.Files                             0.095
+		Culture.Arts                                 0.827
+		Culture.Philosophy and religion              0.568
+		Geography.Bodies of water                    0.838
+		STEM.Chemistry                               0.701
+		Culture.Broadcasting                         0.666
+		STEM.Time                                    0.793
+		STEM.Information science                     0.712
+		History_And_Society.Education                0.723
+		STEM.Engineering                             0.47
+		History_And_Society.Politics and government  0.5
+		STEM.Geosciences                             0.719
+		Geography.Maps                               0.712
+		Geography.Cities                             0.688
+		Culture.Crafts and hobbies                   0.708
+		History_And_Society.Business and economics   0.611
+		STEM.Technology                              0.463
+		STEM.Meteorology                             0.852
+		STEM.Physics                                 0.637
+		Culture.Internet culture                     0.624
+		Assistance.Maintenance                       0.342
+		History_And_Society.Transportation           0.768
 		Geography.Europe                             0.666
-		Culture.Crafts and hobbies                   0.714
+		Assistance.Article improvement and grading   0.24
+		History_And_Society.Military and warfare     0.725
+		Culture.Performing arts                      0.836
+		STEM.Science                                 0.38
+		Geography.Countries                          0.675
+		STEM.Medicine                                0.668
+		Assistance.Contents systems                  0.482
+		STEM.Biology                                 0.685
+		Culture.Plastic arts                         0.681
+		STEM.Mathematics                             0.749
+		Culture.Language and literature              0.787
+		History_And_Society.History and society      0.307
 		-------------------------------------------  -----
 	!f1 (micro=0.964, macro=0.986):
 		-------------------------------------------  -----
-		Geography.Cities                             0.998
-		History_And_Society.Military and warfare     0.989
-		Culture.Language and literature              0.941
-		Assistance.Maintenance                       0.974
-		Culture.Media                                0.99
-		STEM.Chemistry                               0.994
-		Geography.Maps                               0.993
-		STEM.Meteorology                             0.997
-		History_And_Society.Politics and government  0.981
-		STEM.Time                                    0.995
-		History_And_Society.Transportation           0.991
-		STEM.Engineering                             0.99
-		Geography.Countries                          0.89
+		Culture.Sports                               0.992
 		Culture.Visual arts                          0.984
-		STEM.Information science                     0.994
-		Geography.Landforms                          0.997
-		History_And_Society.Education                0.992
-		Culture.Entertainment                        0.985
+		Culture.Food and drink                       0.995
 		Geography.Oceania                            0.989
-		Culture.Broadcasting                         0.99
+		Culture.Media                                0.99
+		STEM.Space                                   0.997
+		Geography.Landforms                          0.997
+		Culture.Entertainment                        0.984
+		Assistance.Files                             0.997
 		Culture.Arts                                 0.996
-		STEM.Mathematics                             0.996
 		Culture.Philosophy and religion              0.984
+		Geography.Bodies of water                    0.996
+		STEM.Chemistry                               0.993
+		Culture.Broadcasting                         0.99
+		STEM.Time                                    0.995
+		STEM.Information science                     0.994
+		History_And_Society.Education                0.992
+		STEM.Engineering                             0.99
+		History_And_Society.Politics and government  0.982
+		STEM.Geosciences                             0.994
+		Geography.Maps                               0.993
+		Geography.Cities                             0.997
+		Culture.Crafts and hobbies                   0.994
+		History_And_Society.Business and economics   0.976
+		STEM.Technology                              0.981
+		STEM.Meteorology                             0.997
+		STEM.Physics                                 0.991
+		Culture.Internet culture                     0.993
+		Assistance.Maintenance                       0.974
+		History_And_Society.Transportation           0.991
+		Geography.Europe                             0.937
+		Assistance.Article improvement and grading   0.999
+		History_And_Society.Military and warfare     0.989
 		Culture.Performing arts                      0.992
 		STEM.Science                                 0.989
-		Geography.Bodies of water                    0.996
-		STEM.Space                                   0.997
-		STEM.Physics                                 0.991
-		History_And_Society.History and society      0.961
-		Assistance.Contents systems                  0.991
-		History_And_Society.Business and economics   0.976
-		STEM.Biology                                 0.99
-		Culture.Food and drink                       0.995
-		STEM.Geosciences                             0.994
+		Geography.Countries                          0.891
 		STEM.Medicine                                0.993
-		Assistance.Files                             0.997
-		Culture.Internet culture                     0.993
-		STEM.Technology                              0.981
-		Assistance.Article improvement and grading   0.999
-		Culture.Sports                               0.992
+		Assistance.Contents systems                  0.991
+		STEM.Biology                                 0.99
 		Culture.Plastic arts                         0.988
-		Geography.Europe                             0.937
-		Culture.Crafts and hobbies                   0.995
+		STEM.Mathematics                             0.996
+		Culture.Language and literature              0.941
+		History_And_Society.History and society      0.961
 		-------------------------------------------  -----
 	accuracy (micro=0.941, macro=0.974):
 		-------------------------------------------  -----
-		Geography.Cities                             0.995
-		History_And_Society.Military and warfare     0.978
-		Culture.Language and literature              0.907
-		Assistance.Maintenance                       0.95
-		Culture.Media                                0.98
-		STEM.Chemistry                               0.988
-		Geography.Maps                               0.987
-		STEM.Meteorology                             0.994
-		History_And_Society.Politics and government  0.964
-		STEM.Time                                    0.991
-		History_And_Society.Transportation           0.982
-		STEM.Engineering                             0.981
-		Geography.Countries                          0.836
+		Culture.Sports                               0.986
 		Culture.Visual arts                          0.97
-		STEM.Information science                     0.988
-		Geography.Landforms                          0.993
-		History_And_Society.Education                0.985
-		Culture.Entertainment                        0.971
+		Culture.Food and drink                       0.99
 		Geography.Oceania                            0.979
-		Culture.Broadcasting                         0.981
-		Culture.Arts                                 0.992
-		STEM.Mathematics                             0.993
+		Culture.Media                                0.98
+		STEM.Space                                   0.994
+		Geography.Landforms                          0.993
+		Culture.Entertainment                        0.97
+		Assistance.Files                             0.995
+		Culture.Arts                                 0.993
 		Culture.Philosophy and religion              0.969
+		Geography.Bodies of water                    0.992
+		STEM.Chemistry                               0.987
+		Culture.Broadcasting                         0.981
+		STEM.Time                                    0.99
+		STEM.Information science                     0.989
+		History_And_Society.Education                0.985
+		STEM.Engineering                             0.98
+		History_And_Society.Politics and government  0.965
+		STEM.Geosciences                             0.989
+		Geography.Maps                               0.987
+		Geography.Cities                             0.995
+		Culture.Crafts and hobbies                   0.989
+		History_And_Society.Business and economics   0.954
+		STEM.Technology                              0.963
+		STEM.Meteorology                             0.994
+		STEM.Physics                                 0.983
+		Culture.Internet culture                     0.987
+		Assistance.Maintenance                       0.95
+		History_And_Society.Transportation           0.982
+		Geography.Europe                             0.894
+		Assistance.Article improvement and grading   0.998
+		History_And_Society.Military and warfare     0.978
 		Culture.Performing arts                      0.985
 		STEM.Science                                 0.979
-		Geography.Bodies of water                    0.992
-		STEM.Space                                   0.994
-		STEM.Physics                                 0.983
-		History_And_Society.History and society      0.927
-		Assistance.Contents systems                  0.983
-		History_And_Society.Business and economics   0.954
-		STEM.Biology                                 0.981
-		Culture.Food and drink                       0.99
-		STEM.Geosciences                             0.989
+		Geography.Countries                          0.837
 		STEM.Medicine                                0.987
-		Assistance.Files                             0.994
-		Culture.Internet culture                     0.987
-		STEM.Technology                              0.964
-		Assistance.Article improvement and grading   0.998
-		Culture.Sports                               0.985
+		Assistance.Contents systems                  0.983
+		STEM.Biology                                 0.981
 		Culture.Plastic arts                         0.976
-		Geography.Europe                             0.894
-		Culture.Crafts and hobbies                   0.989
+		STEM.Mathematics                             0.993
+		Culture.Language and literature              0.908
+		History_And_Society.History and society      0.927
 		-------------------------------------------  -----
 	fpr (micro=0.02, macro=0.006):
 		-------------------------------------------  -----
-		Geography.Cities                             0.001
-		History_And_Society.Military and warfare     0.005
-		Culture.Language and literature              0.038
-		Assistance.Maintenance                       0.003
-		Culture.Media                                0.003
-		STEM.Chemistry                               0.003
-		Geography.Maps                               0.001
-		STEM.Meteorology                             0.001
-		History_And_Society.Politics and government  0.007
-		STEM.Time                                    0.001
-		History_And_Society.Transportation           0.004
-		STEM.Engineering                             0.003
-		Geography.Countries                          0.07
+		Culture.Sports                               0.005
 		Culture.Visual arts                          0.007
-		STEM.Information science                     0.001
-		Geography.Landforms                          0.001
-		History_And_Society.Education                0.003
+		Culture.Food and drink                       0.002
+		Geography.Oceania                            0.002
+		Culture.Media                                0.003
+		STEM.Space                                   0.001
+		Geography.Landforms                          0.002
 		Culture.Entertainment                        0.007
-		Geography.Oceania                            0.003
-		Culture.Broadcasting                         0.005
+		Assistance.Files                             0.002
 		Culture.Arts                                 0.001
-		STEM.Mathematics                             0.001
 		Culture.Philosophy and religion              0.006
+		Geography.Bodies of water                    0.002
+		STEM.Chemistry                               0.004
+		Culture.Broadcasting                         0.005
+		STEM.Time                                    0.001
+		STEM.Information science                     0.001
+		History_And_Society.Education                0.003
+		STEM.Engineering                             0.003
+		History_And_Society.Politics and government  0.006
+		STEM.Geosciences                             0.002
+		Geography.Maps                               0.001
+		Geography.Cities                             0.002
+		Culture.Crafts and hobbies                   0.001
+		History_And_Society.Business and economics   0.01
+		STEM.Technology                              0.007
+		STEM.Meteorology                             0.001
+		STEM.Physics                                 0.004
+		Culture.Internet culture                     0.003
+		Assistance.Maintenance                       0.003
+		History_And_Society.Transportation           0.004
+		Geography.Europe                             0.038
+		Assistance.Article improvement and grading   0.001
+		History_And_Society.Military and warfare     0.005
 		Culture.Performing arts                      0.005
 		STEM.Science                                 0.002
-		Geography.Bodies of water                    0.002
-		STEM.Space                                   0.001
-		STEM.Physics                                 0.004
-		History_And_Society.History and society      0.007
-		Assistance.Contents systems                  0.002
-		History_And_Society.Business and economics   0.01
-		STEM.Biology                                 0.003
-		Culture.Food and drink                       0.002
-		STEM.Geosciences                             0.001
+		Geography.Countries                          0.068
 		STEM.Medicine                                0.003
-		Assistance.Files                             0.002
-		Culture.Internet culture                     0.003
-		STEM.Technology                              0.007
-		Assistance.Article improvement and grading   0.001
-		Culture.Sports                               0.005
+		Assistance.Contents systems                  0.002
+		STEM.Biology                                 0.003
 		Culture.Plastic arts                         0.005
-		Geography.Europe                             0.037
-		Culture.Crafts and hobbies                   0.001
+		STEM.Mathematics                             0.001
+		Culture.Language and literature              0.038
+		History_And_Society.History and society      0.007
 		-------------------------------------------  -----
 	roc_auc (micro=0.942, macro=0.949):
 		-------------------------------------------  -----
-		Geography.Cities                             0.973
-		History_And_Society.Military and warfare     0.968
-		Culture.Language and literature              0.95
-		Assistance.Maintenance                       0.835
+		Culture.Sports                               0.976
+		Culture.Visual arts                          0.969
+		Culture.Food and drink                       0.975
+		Geography.Oceania                            0.967
 		Culture.Media                                0.949
-		STEM.Chemistry                               0.98
-		Geography.Maps                               0.969
-		STEM.Meteorology                             0.987
-		History_And_Society.Politics and government  0.941
-		STEM.Time                                    0.971
-		History_And_Society.Transportation           0.976
-		STEM.Engineering                             0.956
-		Geography.Countries                          0.893
-		Culture.Visual arts                          0.968
-		STEM.Information science                     0.969
-		Geography.Landforms                          0.987
-		History_And_Society.Education                0.968
+		STEM.Space                                   0.987
+		Geography.Landforms                          0.988
 		Culture.Entertainment                        0.971
-		Geography.Oceania                            0.964
-		Culture.Broadcasting                         0.971
+		Assistance.Files                             0.765
 		Culture.Arts                                 0.985
-		STEM.Mathematics                             0.981
-		Culture.Philosophy and religion              0.936
+		Culture.Philosophy and religion              0.935
+		Geography.Bodies of water                    0.986
+		STEM.Chemistry                               0.98
+		Culture.Broadcasting                         0.971
+		STEM.Time                                    0.971
+		STEM.Information science                     0.97
+		History_And_Society.Education                0.968
+		STEM.Engineering                             0.954
+		History_And_Society.Politics and government  0.941
+		STEM.Geosciences                             0.971
+		Geography.Maps                               0.969
+		Geography.Cities                             0.968
+		Culture.Crafts and hobbies                   0.963
+		History_And_Society.Business and economics   0.948
+		STEM.Technology                              0.942
+		STEM.Meteorology                             0.986
+		STEM.Physics                                 0.976
+		Culture.Internet culture                     0.97
+		Assistance.Maintenance                       0.835
+		History_And_Society.Transportation           0.975
+		Geography.Europe                             0.929
+		Assistance.Article improvement and grading   0.754
+		History_And_Society.Military and warfare     0.967
 		Culture.Performing arts                      0.983
 		STEM.Science                                 0.934
-		Geography.Bodies of water                    0.986
-		STEM.Space                                   0.987
-		STEM.Physics                                 0.975
-		History_And_Society.History and society      0.868
-		Assistance.Contents systems                  0.949
-		History_And_Society.Business and economics   0.949
+		Geography.Countries                          0.892
+		STEM.Medicine                                0.974
+		Assistance.Contents systems                  0.948
 		STEM.Biology                                 0.958
-		Culture.Food and drink                       0.976
-		STEM.Geosciences                             0.972
-		STEM.Medicine                                0.972
-		Assistance.Files                             0.768
-		Culture.Internet culture                     0.97
-		STEM.Technology                              0.941
-		Assistance.Article improvement and grading   0.735
-		Culture.Sports                               0.976
 		Culture.Plastic arts                         0.966
-		Geography.Europe                             0.929
-		Culture.Crafts and hobbies                   0.961
+		STEM.Mathematics                             0.98
+		Culture.Language and literature              0.95
+		History_And_Society.History and society      0.87
 		-------------------------------------------  -----
-	pr_auc (micro=0.761, macro=0.727):
+	pr_auc (micro=0.761, macro=0.726):
 		-------------------------------------------  -----
-		Geography.Cities                             0.746
-		History_And_Society.Military and warfare     0.813
-		Culture.Language and literature              0.87
-		Assistance.Maintenance                       0.444
-		Culture.Media                                0.492
-		STEM.Chemistry                               0.796
-		Geography.Maps                               0.834
-		STEM.Meteorology                             0.922
-		History_And_Society.Politics and government  0.61
-		STEM.Time                                    0.867
-		History_And_Society.Transportation           0.863
-		STEM.Engineering                             0.589
-		Geography.Countries                          0.775
-		Culture.Visual arts                          0.772
-		STEM.Information science                     0.794
-		Geography.Landforms                          0.928
-		History_And_Society.Education                0.774
-		Culture.Entertainment                        0.845
-		Geography.Oceania                            0.838
-		Culture.Broadcasting                         0.743
-		Culture.Arts                                 0.906
-		STEM.Mathematics                             0.851
-		Culture.Philosophy and religion              0.623
-		Culture.Performing arts                      0.921
-		STEM.Science                                 0.507
-		Geography.Bodies of water                    0.914
-		STEM.Space                                   0.936
-		STEM.Physics                                 0.717
-		History_And_Society.History and society      0.482
-		Assistance.Contents systems                  0.598
-		History_And_Society.Business and economics   0.712
-		STEM.Biology                                 0.742
-		Culture.Food and drink                       0.854
-		STEM.Geosciences                             0.801
-		STEM.Medicine                                0.742
-		Assistance.Files                             0.035
-		Culture.Internet culture                     0.689
-		STEM.Technology                              0.547
-		Assistance.Article improvement and grading   0.097
-		Culture.Sports                               0.914
-		Culture.Plastic arts                         0.785
-		Geography.Europe                             0.768
-		Culture.Crafts and hobbies                   0.807
+		Culture.Sports                               0.902
+		Culture.Visual arts                          0.773
+		Culture.Food and drink                       0.853
+		Geography.Oceania                            0.841
+		Culture.Media                                0.504
+		STEM.Space                                   0.938
+		Geography.Landforms                          0.926
+		Culture.Entertainment                        0.843
+		Assistance.Files                             0.036
+		Culture.Arts                                 0.908
+		Culture.Philosophy and religion              0.621
+		Geography.Bodies of water                    0.915
+		STEM.Chemistry                               0.791
+		Culture.Broadcasting                         0.729
+		STEM.Time                                    0.855
+		STEM.Information science                     0.797
+		History_And_Society.Education                0.782
+		STEM.Engineering                             0.585
+		History_And_Society.Politics and government  0.607
+		STEM.Geosciences                             0.797
+		Geography.Maps                               0.832
+		Geography.Cities                             0.728
+		Culture.Crafts and hobbies                   0.809
+		History_And_Society.Business and economics   0.708
+		STEM.Technology                              0.548
+		STEM.Meteorology                             0.92
+		STEM.Physics                                 0.718
+		Culture.Internet culture                     0.695
+		Assistance.Maintenance                       0.46
+		History_And_Society.Transportation           0.86
+		Geography.Europe                             0.769
+		Assistance.Article improvement and grading   0.095
+		History_And_Society.Military and warfare     0.809
+		Culture.Performing arts                      0.912
+		STEM.Science                                 0.5
+		Geography.Countries                          0.776
+		STEM.Medicine                                0.755
+		Assistance.Contents systems                  0.58
+		STEM.Biology                                 0.757
+		Culture.Plastic arts                         0.784
+		STEM.Mathematics                             0.843
+		Culture.Language and literature              0.874
+		History_And_Society.History and society      0.484
 		-------------------------------------------  -----
 	
-	 - score_schema: {'type': 'object', 'properties': {'probability': {'type': 'object', 'properties': {'Culture.Performing arts': 'number', 'Geography.Cities': 'number', 'History_And_Society.Military and warfare': 'number', 'Culture.Language and literature': 'number', 'Assistance.Maintenance': 'number', 'Culture.Media': 'number', 'STEM.Chemistry': 'number', 'Geography.Maps': 'number', 'STEM.Meteorology': 'number', 'History_And_Society.Politics and government': 'number', 'STEM.Time': 'number', 'History_And_Society.Transportation': 'number', 'STEM.Engineering': 'number', 'STEM.Geosciences': 'number', 'Culture.Visual arts': 'number', 'STEM.Information science': 'number', 'Geography.Landforms': 'number', 'History_And_Society.Education': 'number', 'Culture.Entertainment': 'number', 'Geography.Oceania': 'number', 'Culture.Broadcasting': 'number', 'Culture.Arts': 'number', 'STEM.Mathematics': 'number', 'Culture.Philosophy and religion': 'number', 'Geography.Countries': 'number', 'STEM.Science': 'number', 'Geography.Bodies of water': 'number', 'STEM.Space': 'number', 'STEM.Physics': 'number', 'Assistance.Contents systems': 'number', 'History_And_Society.Business and economics': 'number', 'STEM.Biology': 'number', 'Culture.Food and drink': 'number', 'History_And_Society.History and society': 'number', 'STEM.Medicine': 'number', 'Assistance.Files': 'number', 'Culture.Internet culture': 'number', 'STEM.Technology': 'number', 'Assistance.Article improvement and grading': 'number', 'Culture.Sports': 'number', 'Culture.Plastic arts': 'number', 'Geography.Europe': 'number', 'Culture.Crafts and hobbies': 'number'}, 'description': 'A mapping of probabilities onto each of the potential output labels'}, 'prediction': {'type': 'string', 'description': 'The most likely label predicted by the estimator'}}, 'title': 'Scikit learn-based classifier score with probability'}
+	 - score_schema: {'properties': {'probability': {'properties': {'Culture.Sports': {'type': 'number'}, 'Culture.Food and drink': {'type': 'number'}, 'Geography.Oceania': {'type': 'number'}, 'Culture.Media': {'type': 'number'}, 'STEM.Space': {'type': 'number'}, 'Geography.Landforms': {'type': 'number'}, 'STEM.Time': {'type': 'number'}, 'Culture.Arts': {'type': 'number'}, 'Culture.Philosophy and religion': {'type': 'number'}, 'Geography.Bodies of water': {'type': 'number'}, 'STEM.Chemistry': {'type': 'number'}, 'Culture.Broadcasting': {'type': 'number'}, 'STEM.Engineering': {'type': 'number'}, 'STEM.Technology': {'type': 'number'}, 'STEM.Information science': {'type': 'number'}, 'History_And_Society.Education': {'type': 'number'}, 'Culture.Entertainment': {'type': 'number'}, 'History_And_Society.Politics and government': {'type': 'number'}, 'Assistance.Files': {'type': 'number'}, 'STEM.Geosciences': {'type': 'number'}, 'Geography.Maps': {'type': 'number'}, 'Geography.Cities': {'type': 'number'}, 'Culture.Crafts and hobbies': {'type': 'number'}, 'History_And_Society.Business and economics': {'type': 'number'}, 'Culture.Visual arts': {'type': 'number'}, 'STEM.Physics': {'type': 'number'}, 'Culture.Internet culture': {'type': 'number'}, 'Culture.Plastic arts': {'type': 'number'}, 'Assistance.Maintenance': {'type': 'number'}, 'History_And_Society.Transportation': {'type': 'number'}, 'Geography.Europe': {'type': 'number'}, 'Assistance.Article improvement and grading': {'type': 'number'}, 'History_And_Society.Military and warfare': {'type': 'number'}, 'Culture.Performing arts': {'type': 'number'}, 'STEM.Science': {'type': 'number'}, 'Geography.Countries': {'type': 'number'}, 'STEM.Medicine': {'type': 'number'}, 'Assistance.Contents systems': {'type': 'number'}, 'STEM.Meteorology': {'type': 'number'}, 'STEM.Biology': {'type': 'number'}, 'STEM.Mathematics': {'type': 'number'}, 'Culture.Language and literature': {'type': 'number'}, 'History_And_Society.History and society': {'type': 'number'}}, 'description': 'A mapping of probabilities onto each of the potential output labels', 'type': 'object'}, 'prediction': {'items': {'type': 'string'}, 'description': 'The most likely labels predicted by the estimator', 'type': 'array'}}, 'title': 'Scikit learn-based classifier score with probability', 'type': 'object'}
 

@@ -1,4 +1,4 @@
-drafttopic_major_minor = 0.1
+drafttopic_major_minor = 0.2
 
 models: \
 	models/enwiki.drafttopic.gradient_boosting.model
@@ -20,8 +20,12 @@ datasets/enwiki.labeled_wikiprojects.w_text.json: \
 		--output=$@ \
 		--verbose
 
+word2vec/GoogleNews-vectors-negative300.bin.gz:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/assets/GoogleNews-vectors-negative300.bin.gz -qO- > $@
+
 datasets/enwiki.labeled_wikiprojects.w_cache.json: \
-		datasets/enwiki.labeled_wikiprojects.w_text.json
+		datasets/enwiki.labeled_wikiprojects.w_text.json \
+		word2vec/GoogleNews-vectors-negative300.bin.gz
 	./utility extract_from_text \
 		drafttopic.feature_lists.wordvectors.drafttopic \
 		--input=$< \
@@ -29,7 +33,8 @@ datasets/enwiki.labeled_wikiprojects.w_cache.json: \
 		--verbose
 
 models/enwiki.drafttopic.gradient_boosting.model: \
-	datasets/enwiki.labeled_wikiprojects.w_cache.json
+		datasets/enwiki.labeled_wikiprojects.w_cache.json \
+		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
 		drafttopic.feature_lists.wordvectors.drafttopic mid_level_categories \
