@@ -47,3 +47,8 @@ Additionally also pass the mid-level wikiprojects json for the script to
 generate wikiprojects to mid-level categories mapping. The script augments the
 given list with the mentioned fields, writing them to a new file specified by
 **"output"**
+
+## Generating predictions for a set of page-ids on Wikipedia
+
+For generating topic predictions for a set of revision-ids, download the relevant model and use revscoring's [score](https://github.com/wikimedia/revscoring/blob/master/revscoring/utilities/score.py) API
+to generate predictions. Note that the revision-ids need to be in a file with a format specified by the API. Use the revision ID of the most recent revision for a page to get a good prediction.
