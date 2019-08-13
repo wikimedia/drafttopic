@@ -8,10 +8,11 @@ addons:
     - enchant
 
 # command to install dependencies
-install: 
+install:
   - pip install -r requirements.txt
   - python setup.py install
   - pip install codecov
+  - pip install twine
   - pip install flake8
 
 script:
@@ -21,3 +22,9 @@ script:
 after_success:
   - coverage report
   - codecov
+
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  on:
+    branch: master
