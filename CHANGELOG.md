@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.2.0]
 ### Added
 - Added `extract_from_text` utility.
 - Added `fetch_text` script to text for a list of page titles.
