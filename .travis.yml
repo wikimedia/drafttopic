@@ -10,6 +10,7 @@ addons:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - pip install -r docs/requirements.txt
   - python setup.py install
   - pip install codecov
   - pip install twine
@@ -18,6 +19,8 @@ install:
 script:
   - flake8 . --ignore=E722
   - coverage run --source drafttopic -m pytest -m "not nottravis"
+  - sphinx-build -b html docs dist/docs
+  - sphinx-build -b linkcheck docs dist/docs
 
 after_success:
   - coverage report
