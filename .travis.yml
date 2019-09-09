@@ -19,7 +19,7 @@ install:
 script:
   - flake8 . --ignore=E722
   - coverage run --source drafttopic -m pytest -m "not nottravis"
-  - sphinx-build -b html docs dist/docs
+  - sphinx-build -anW -b html docs dist/docs
   - sphinx-build -b linkcheck docs dist/docs
 
 after_success:
