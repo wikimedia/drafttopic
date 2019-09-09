@@ -1,49 +1,55 @@
 """
-Generates a machine readable WikiProjects directory as:
-{
-'culture': {
-    'name': 'Culture',
-    'url':
-        'https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Council/Directory/Culture',
-    'root_url': <root_url>
-    'index': <index>
-    'topics': {
-        'arts': {'name':..., 'url': culture_url+'#arts',
-            topics:{
-                'Architecture': {'name':
-                    'Wikipedia:WikiProject_Architecture','url':...}
+``$ drafttopic fetch_wikiprojects -h``
+::
+
+    Generates a machine readable WikiProjects directory as:
+
+    Example output:
+
+        'culture': {
+            'name': 'Culture',
+            'url':
+                'https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Council/Directory/Culture',
+            'root_url': <root_url>
+            'index': <index>
+            'topics': {
+                'arts': {'name':..., 'url': culture_url+'#arts',
+                    topics:{
+                        'Architecture': {'name':
+                            'Wikipedia:WikiProject_Architecture','url':...}
+                    }
+                }
             }
         }
-    }
-}
-}
-Here:
-* root_url: Url of page from which this entry was parsed
-* index: sections index to which this entry belongs to
-* name: name of entry
-All the above mentioned fields will be absent from the base entry
-which contain actual WikiProjects name and has only three fields:
-    name, shortname, active
 
-Usage:
-    fetch_wikiprojects [--output=<path>] [--debug]
+    * root_url: Url of page from which this entry was parsed
+    * index: sections index to which this entry belongs to
+    * name: name of entry
 
-Options:
-    --output=<path>       Path to an file to write output to
-                          [default: <stdout>]
-    --debug               Print debug logging
+    All the above mentioned fields will be absent from the base entry
+    which contain actual WikiProjects name and has only three fields:
+        name, shortname, active
+
+    Usage:
+        fetch_wikiprojects [--output=<path>] [--debug]
+
+    Options:
+        --output=<path>       Path to an file to write output to
+                              [default: <stdout>]
+        --debug               Print debug logging
 """
 import datetime
-import mwapi
 import json
-import re
 import logging
-import docopt
+import re
 import sys
 import time
 import traceback
-from .wikiprojects_common import wptemplate2directory
 
+import docopt
+import mwapi
+
+from .wikiprojects_common import wptemplate2directory
 
 wpd_page = 'Wikipedia:WikiProject_Council/Directory'
 wp_main_heading_regex =\

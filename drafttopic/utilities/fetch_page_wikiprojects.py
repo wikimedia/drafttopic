@@ -1,39 +1,42 @@
 """
+``$ drafttopic fetch_page_wikiprojects -h``
+::
 
-Annotates talk_page_ids with all wikiproject templates
-Usage:
-    fetch_page_wikiprojects --api-host=<url>
-                            --mid_level_wp=<wp>
-                            [--input=<path>] [--output=<path>]
-                            [--debug] [--verbose]
+    Annotates talk_page_ids with all wikiproject templates
 
-Options:
-    -h --help           Show this documentation.
-    --api-host=<url>        The hostname of a Wikipedia (MediaWiki) e.g.
-                        "https://en.wikipedia.org/"
-    --input=<path>      Path to a file contining observations
-                        labels. [default: <stdin>]
-    --output=<path>     Path to a file to write new observations
-                        (with text) out to. [default: <stdout>]
-    --verbose           Prints dots and stuff to stderr
+    Usage:
+        fetch_page_wikiprojects --api-host=<url>
+                                --mid_level_wp=<wp>
+                                [--input=<path>] [--output=<path>]
+                                [--debug] [--verbose]
+
+    Options:
+        -h --help           Show this documentation.
+        --api-host=<url>        The hostname of a Wikipedia (MediaWiki) e.g.
+                            "https://en.wikipedia.org/"
+        --input=<path>      Path to a file contining observations
+                            labels. [default: <stdin>]
+        --output=<path>     Path to a file to write new observations
+                            (with text) out to. [default: <stdout>]
+        --verbose           Prints dots and stuff to stderr
 """
 
 
 import json
 import logging
-import sys
 import pdb
+import sys
 import traceback
-from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 from itertools import islice
 
 import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
-from .wikiprojects_common import invert_mid_level_projects,\
-    WIKIPROJECT_FETCH_THREADS
 
+from .wikiprojects_common import (WIKIPROJECT_FETCH_THREADS,
+                                  invert_mid_level_projects)
 
 logger = logging.getLogger(__name__)
 
@@ -94,6 +97,7 @@ def fetch_page_wikiprojects(session, observations, mid_level_wp,
                             verbose=False):
     """
     Fetches wikiproject templates associated with a page
+
     :Parameters:
         session : :class:`mwapi.Session`
             An API session to use for querying
@@ -102,6 +106,7 @@ def fetch_page_wikiprojects(session, observations, mid_level_wp,
             mappings
         verbose : `bool`
             Print dots and stuff
+
     :Returns:
         An `iterator` of observations augmented with the fields: templates,
         mid_level_categories containing the requested information.

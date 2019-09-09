@@ -1,6 +1,7 @@
-import os
 import json
 import logging
+import os
+
 logger = logging.getLogger(__name__)
 
 
@@ -13,14 +14,15 @@ def wptemplate2directory(template_name, wikiprojects, directory=[]):
     WikiProject Directory hierarchy.
 
     :Parameters:
-    template_name : str
-      The name of a template (or redirected template) used to tag an article
-    wikiprojects : dict
-      The wikiprojects directory tree
+        template_name : `str`
+            The name of a template (or redirected template) used to tag an
+            article
+        wikiprojects : `dict`
+            The wikiprojects directory tree
 
     :Returns:
-    A directory path as a list of strings ordered from top to bottom.
-    E.g. "maths rating" returns ["stem", "mathematics"]
+        A directory path as a list of strings ordered from top to bottom.
+        E.g. "maths rating" returns ["stem", "mathematics"]
     """
     for key in wikiprojects:
         val = wikiprojects[key]

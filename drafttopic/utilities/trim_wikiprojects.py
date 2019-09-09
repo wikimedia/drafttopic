@@ -1,31 +1,37 @@
 """
-Generates a mapping of mid-level wikiprojects to list of wikiproject names
-contained in them
-{
-    'Music': ['Wikipedia: WikiProject Composer', 'Wikipedia: WikiProject Music
-    Theory'...]
-    .
-    .
-    .
-}
+``$ drafttopic trim_wikiprojects -h``
+::
 
-Usage:
-    trim_wikiprojects --wikiprojects <wp> [--output=<path>] [--debug]
-    [--ignore-inactive]
+    Generates a mapping of mid-level wikiprojects to list of wikiproject names
+    contained in them
+    {
+        'Music': ['Wikipedia: WikiProject Composer',
+                  'Wikipedia: WikiProject Music Theory'...]
+        .
+        .
+        .
+    }
 
-Options:
-    --wikiprojects        Path to wikiprojects json file
-    --output=<path>       Path to an file to write output to
-                          [default: <stdout>]
-    --debug               Print debug logging
-    --ignore-inactive     Ignore list of inactive WikiProjects
+    Usage:
+        trim_wikiprojects --wikiprojects <wp>
+            [--output=<path>] [--debug]
+            [--ignore-inactive]
+
+    Options:
+        --wikiprojects        Path to wikiprojects json file
+        --output=<path>       Path to an file to write output to
+                              [default: <stdout>]
+        --debug               Print debug logging
+        --ignore-inactive     Ignore list of inactive WikiProjects
 """
 
 import json
 import logging
-import docopt
 import sys
-from .fetch_wikiprojects import wpd_page, WikiProjectsParser
+
+import docopt
+
+from .fetch_wikiprojects import WikiProjectsParser, wpd_page
 
 
 def main(argv=None):

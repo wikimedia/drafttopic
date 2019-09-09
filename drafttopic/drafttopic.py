@@ -1,12 +1,27 @@
 """
-This script provides access to a set of utilities for extracting features and
-building draft topic predictors.
-Usage:
-    drafttopic (-h | --help)
-    drafttopic <utility> [-h | --help]
-Options:
-    -h | --help  Prints this documentation
-    <utility>    The name of the utility to run
+``$ drafttopic -h``
+::
+
+    This script provides access to a set of utilities for extracting features
+    and building draft topic predictors.
+
+    * extract_from_text -- Extracts feature from raw text
+    * fetch_page_wikiprojects -- Annotates talk_page_ids with all wikiproject
+                                 templates
+    * fetch_text -- Gathers text for each labeling observation from a MediaWiki
+                    API
+    * fetch_wikiprojects -- Generates a machine readable WikiProjects directory
+    * trim_wikiprojects -- Generates a mapping of mid-level wikiprojects to
+                           list of wikiproject names contained in them
+    * write_labels -- Extracts all labels from a wikiprojects labeled dataset
+                      and writes them out to config
+
+    Usage:
+        drafttopic (-h | --help)
+        drafttopic <utility> [-h | --help]
+    Options:
+        -h | --help  Prints this documentation
+        <utility>    The name of the utility to run
 """
 import sys
 import traceback

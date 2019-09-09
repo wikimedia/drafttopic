@@ -1,18 +1,21 @@
 """
+``$ drafttopic write_labels -h``
+::
 
-Extracts all labels from a wikiprojects labeled dataset and writes them out to
-config.
-Usage:
-    write_labels <label> [--input=<path>] [--output=<path>]
-                [--debug]
+    Extracts all labels from a wikiprojects labeled dataset and writes them
+    out to config.
 
-Options:
-    <label>             Name of the field containing targets
-    -h --help           Show this documentation.
-    --input=<path>      Path to a file contining observations
-                        labels. [default: <stdin>]
-    --output=<path>     Path to a file to write labels to.
-                        [default: <stdout>]
+    Usage:
+        write_labels <label> [--input=<path>] [--output=<path>]
+                    [--debug]
+
+    Options:
+        <label>             Name of the field containing targets
+        -h --help           Show this documentation.
+        --input=<path>      Path to a file contining observations
+                            labels. [default: <stdin>]
+        --output=<path>     Path to a file to write labels to.
+                            [default: <stdout>]
 """
 
 
@@ -23,7 +26,6 @@ from itertools import chain
 
 from docopt import docopt
 from revscoring.utilities.util import read_observations
-
 
 logger = logging.getLogger(__name__)
 
@@ -55,11 +57,13 @@ def main(argv=None):
 def process_labels(observations, label_name):
     """
     Processes a list of observations given a key and returns a labels-config
+
     :Parameters:
         observations : `iterable`(`dict`)
             A list of dictionaries containing labels as one of its keys
         label_name : `str`
             The name of the key containing label of interest
+
     :Returns:
         `dict` : A config dictionary containing a labels key which contains a
         list of labels as required by revscoring
