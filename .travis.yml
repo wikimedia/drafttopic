@@ -16,6 +16,7 @@ install:
   - pip install twine
   - pip install flake8
   - python -m nltk.downloader stopwords
+  - make word2vec/GoogleNews-vectors-negative300.bin.gz
 
 script:
   - flake8 . --ignore=E722
