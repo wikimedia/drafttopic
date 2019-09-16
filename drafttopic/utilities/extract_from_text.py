@@ -1,11 +1,12 @@
 """
-``$ drafttopic extract_from_text -h``
-::
+``drafttopic extract_from_text -h``::
+
     Extracts dependents from a labeling doc containing text label and
     writes a new set of labeling docs that is compatible as observations
-    for `revscoring`'s cv_train and tune utilities.
-    Input: { ... "mid-level-categories": ...,"text": ..., ... }
-    Output: { ... "mid-level-categories": ..., "cache": ..., ... }
+    for revscoring's cv_train and tune utilities.
+    Input: ``{ ... "mid-level-categories": ...,"text": ..., ... }``
+    Output: ``{ ... "mid-level-categories": ..., "cache": ..., ... }``
+
     Usage:
         extract_from_text <dependent>...
                           [--input=<path>]
@@ -124,6 +125,7 @@ def extract_from_text(dependents, text, cache=None, context=None):
     """
     Extracts a set of values from a text an returns a cache containing just
     those values.
+
     :Parameters:
         dependents : `list`( :class:`revscoring.Dependent` )
             A list of dependents to extract values for

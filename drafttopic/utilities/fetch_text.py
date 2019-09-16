@@ -1,5 +1,9 @@
 """
+``$ drafttopic fetch_text -h``
+::
+
     Fetches text for labelings using a MediaWiki API.
+
     Usage:
         fetch_text --api-host=<url> [--labelings=<path>] [--output=<path>]
                                     [--verbose]
@@ -17,15 +21,15 @@
 import logging
 import re
 import sys
-from itertools import islice
 from concurrent.futures import ThreadPoolExecutor
+from itertools import islice
 
 import mwapi
-from mw.lib import title as mwtitle
 from docopt import docopt
+from mw.lib import title as mwtitle
 from revscoring.utilities.util import dump_observation, read_observations
-from .wikiprojects_common import WIKIPROJECT_FETCH_THREADS
 
+from .wikiprojects_common import WIKIPROJECT_FETCH_THREADS
 
 logger = logging.getLogger(__name__)
 REDIRECT_RE = re.compile("#redirect", re.I)
@@ -61,6 +65,7 @@ def run(labelings, output, session, verbose):
 def fetch_text(session, labelings, verbose=False):
     """
     Fetches article text for labelings from a MediaWiki API.
+
     :Parameters:
         session : :class:`mwapi.Session`
             An API session to use for querying
@@ -68,6 +73,7 @@ def fetch_text(session, labelings, verbose=False):
             A collection of labeling events to add text to
         verbose : `bool`
             Print dots and stuff
+
     :Returns:
         An `iterator` of labelings augmented with 'text'.  Note that labelings
         of articles that aren't found will not be
