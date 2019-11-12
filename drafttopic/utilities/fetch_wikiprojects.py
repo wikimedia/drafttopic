@@ -61,12 +61,12 @@ wp_section_nextheading_regex = r'(.+)[=]{2,}'
 
 wp_section_regex =\
     r'{{Wikipedia:WikiProject Council/Directory/WikiProject\n'\
-    '\|project = ([a-zA-Z_: -]+)\n'\
-    '\|shortname = ([a-zA-Z\(\) -]+)\n'\
-    '\|active = (yes|no)\n([^}]*)}}'
+    '[ \t]*\|project[ \t]*=[ \t]*([^\n/#]*)\n'\
+    '[ \t]*\|shortname[ \t]*=[ \t]*([^\n]*)\n'\
+    '[ \t]*\|active[ \t]*=[ \t]*(yes|no)\n([^}]*)}}'
 # To check listing in other wikiprojects
 wp_section_regex_listed =\
-    r'listed-in = ([A-Za-z#/:_ ]+)'
+    r'listed-in[ \t]*=[ \t]*([^\s][^n]*)'
 
 wp_main_links_regex1 =\
     r'\[\[Wikipedia:WikiProject Council/Directory/([A-Za-z_ ]+)/([A-Za-z_ ]+)\|([A-Za-z ]+)\]\]'  # noqa: E501

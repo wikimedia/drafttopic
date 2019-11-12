@@ -103,6 +103,7 @@ def build_fetch_text_extractor(session):
             titles=labeling['talk_page_title'],
             rvlimit=1,
             rvdir="newer",
+            rvslots="main",
             formatversion=2
         )
         page_documents = None
@@ -114,7 +115,7 @@ def build_fetch_text_extractor(session):
         for page_doc in page_documents:
             try:
                 rev_doc = page_doc['revisions'][0]
-                text = rev_doc['content']
+                text = rev_doc['slots']['main']['content']
                 if is_article(text):
                     title = mwtitle.normalize(page_doc['title'])
 
