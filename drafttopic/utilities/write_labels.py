@@ -2,27 +2,27 @@
 ``$ drafttopic write_labels -h``
 ::
 
-    Extracts all labels from a wikiprojects labeled dataset and writes them
-    out to config.
+    Extracts all potential labels from a taxonomy.
 
     Usage:
+        write_labels (-h | --help)
         write_labels <label> [--input=<path>] [--output=<path>]
                     [--debug]
 
     Options:
-        <label>             Name of the field containing targets
-        -h --help           Show this documentation.
-        --input=<path>      Path to a file contining observations
-                            labels. [default: <stdin>]
-        --output=<path>     Path to a file to write labels to.
-                            [default: <stdout>]
+        -h --help        Show this documentation.
+        <label>          The target label field name
+        --input=<path>   Observation containing the target labels.
+        --output=<path>  Path to a file to write labels to.
+                         [default: <stdout>]
+        --debug          Print debug logs.
 """
 
 
 import json
 import logging
 import sys
-from itertools import chain
+from collections import defaultdict
 
 from docopt import docopt
 from revscoring.utilities.util import read_observations
@@ -37,6 +37,7 @@ def main(argv=None):
         level=logging.INFO if not args['--debug'] else logging.DEBUG,
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
+    label_field = args['<label>']
 
     if args['--input'] == '<stdin>':
         observations = read_observations(sys.stdin)
@@ -47,33 +48,24 @@ def main(argv=None):
         output = sys.stdout
     else:
         output = open(args['--output'], 'w')
-    label_name = args['<label>']
 
-    config = process_labels(observations, label_name)
-    output.write(json.dumps(config, indent=4))
+    write_labels(observations, label_field, output)
+
+
+def write_labels(observations, label_field, output):
+    label_counts = defaultdict(int)
+    total_labels = 0
+    for ob in observations:
+        labels = ob[label_field]
+        for label in labels:
+            label_counts[label] += 1
+            total_labels += 1
+
+    labels_config = {"name": label_field, "labels": []}
+    for label, count in label_counts.items():
+        labels_config['labels'].append({
+            'value': label,
+            'population_rate': count/total_labels})
+
+    json.dumps(labels_config, output)
     output.close()
-
-
-def process_labels(observations, label_name):
-    """
-    Processes a list of observations given a key and returns a labels-config
-
-    :Parameters:
-        observations : `iterable`(`dict`)
-            A list of dictionaries containing labels as one of its keys
-        label_name : `str`
-            The name of the key containing label of interest
-
-    :Returns:
-        `dict` : A config dictionary containing a labels key which contains a
-        list of labels as required by revscoring
-    """
-    try:
-        labels = [ob[label_name] for ob in observations]
-        unique_labels = set(chain(*(l for l in labels)))
-        labels = [{"value": label} for label in unique_labels]
-        config = {'name': 'drafttopic', 'labels': labels}
-        return config
-    except KeyError:
-        logger.error("Atleast one observation does not contain the label key")
-        return None
