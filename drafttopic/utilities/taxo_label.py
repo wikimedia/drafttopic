@@ -75,7 +75,7 @@ def taxo_label(observations, wp_taxonomy, wp_templates):
             wikiproject_name = template_to_wp.get(template_name.lower())
             label.extend(wp_to_labels.get(wikiproject_name, []))
 
-        ob['label'] = label
+        ob['taxo_labels'] = label
         yield ob
 
 
