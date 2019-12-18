@@ -7,7 +7,7 @@
     Usage:
         fetch_draft_text --api-host=<url>
                          [--input=<path>] [--output=<path>]
-                         [--thread=<num>] [--debug]
+                         [--threads=<num>] [--debug]
 
     Options:
         -h --help           Show this documentation.
@@ -92,3 +92,4 @@ def build_get_recent_revision(session):
             rvdir="older",
             formatversion=2
         )
+    return get_recent_revision

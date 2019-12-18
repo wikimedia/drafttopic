@@ -1,5 +1,5 @@
 """
-``$ drafttopic fetch_text -h``
+``$ drafttopic fetch_draft_text -h``
 ::
 
     Fetches initial draft text for observations using a MediaWiki API.
@@ -7,7 +7,7 @@
     Usage:
         fetch_draft_text --api-host=<url>
                          [--input=<path>] [--output=<path>]
-                         [--thread=<num>] [--debug]
+                         [--threads=<num>] [--debug]
 
     Options:
         -h --help           Show this documentation.
@@ -41,6 +41,7 @@ def main(argv=None):
     logging.basicConfig(
         level=logging.INFO if not args['--debug'] else logging.DEBUG,
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s')
+    logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
 
     if args['--input'] == '<stdin>':
         observations = read_observations(sys.stdin)
@@ -60,7 +61,7 @@ def main(argv=None):
     run(observations, session, threads, output)
 
 
-def run(observations, session, threads, output, verbose):
+def run(observations, session, threads, output):
     for obs in fetch_draft_texts(observations, session, threads):
         dump_observation(obs, output)
 
@@ -93,7 +94,7 @@ def build_fetch_text(get_first_revision):
         for page_doc in page_documents:
             try:
                 rev_doc = page_doc['revisions'][0]
-                text = rev_doc['content']
+                text = rev_doc['slots']['main']['content']
                 if is_article(text):
 
                     obs['text'] = text
@@ -129,19 +130,7 @@ def build_get_first_revision(session):
             redirects=True,
             rvlimit=1,
             rvdir="newer",
-            formatversion=2
+            formatversion=2,
+            rvslots=["main"]
         )
-
-
-def build_get_recent_revision(session):
-    def get_recent_revision(title):
-        return session.get(
-            action="query",
-            prop="revisions",
-            rvprop=["content", "ids"],
-            titles=title,
-            redirects=True,
-            rvlimit=1,
-            rvdir="older",
-            formatversion=2
-        )
+    return get_first_revision
