@@ -11,7 +11,8 @@ Options:
     -h --help  Prints this documentation
     <lang>     Language code to target
     -n=<num>   The number of labels per class to target [default: 1000]
-    --input=<path>   Observation containing the target labels. [default: <stdin>]
+    --input=<path>   Observation containing the target labels.
+                     [default: <stdin>]
     --output=<path>  Path to a file to write labels to.
                      [default: <stdout>]
     --debug    Print debug logging
