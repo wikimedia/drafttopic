@@ -97,10 +97,22 @@ def generate_wp_to_labels(wp_taxonomy):
 
 
 def _invert_wp_taxonomy(wp_taxonomy, path=None):
+    catch_all = None
+    catch_all_wikiprojects = []
     for key, value in wp_taxonomy.items():
         path_keys = (path or []) + [key]
-        if isinstance(value, list):
+        if key[-1] == "*":
+            # this is a catch-all
+            catch_all = path_keys
+            catch_all_wikiprojects.extend(value)
+            continue
+        elif isinstance(value, list):
+            catch_all_wikiprojects.extend(value)
             for wikiproject_name in value:
                 yield wikiproject_name, ".".join(path_keys)
         else:
             yield from _invert_wp_taxonomy(value, path=path_keys)
+
+    if catch_all is not None:
+        for wikiproject_name in catch_all_wikiprojects:
+            yield wikiproject_name, ".".join(catch_all)
