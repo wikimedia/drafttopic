@@ -5,6 +5,7 @@ __pycache__
 
 # Datasets
 datasets/*.json
+datasets/*.json.bz2
 word2vec/*.gz
 
 # C extensions
