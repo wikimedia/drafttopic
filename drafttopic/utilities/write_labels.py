@@ -13,6 +13,7 @@
         -h --help        Show this documentation.
         <label>          The target label field name
         --input=<path>   Observation containing the target labels.
+                         [default: <stdin>]
         --output=<path>  Path to a file to write labels to.
                          [default: <stdout>]
         --debug          Print debug logs.
@@ -62,10 +63,11 @@ def write_labels(observations, label_field, output):
             total_labels += 1
 
     labels_config = {"name": label_field, "labels": []}
-    for label, count in label_counts.items():
+    for label in sorted(label_counts.keys()):
+        count = label_counts[label]
         labels_config['labels'].append({
             'value': label,
             'population_rate': count/total_labels})
 
-    json.dumps(labels_config, output)
+    json.dump(labels_config, output)
     output.close()
