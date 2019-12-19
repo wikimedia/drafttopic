@@ -23,3 +23,4 @@ w2v = aggregators.mean(
 )
 
 drafttopic = [w2v]
+articletopic = drafttopic
