@@ -4,7 +4,8 @@ from revscoring.languages import english
 
 
 google_news_kvs = vectorizers.word2vec.load_kv(
-    filename="GoogleNews-vectors-negative300.bin.gz", limit=150000)
+    filename="GoogleNews-vectors-negative300.bin.gz",
+    binary=True, limit=150000)
 
 
 def vectorize_words(words):
@@ -23,3 +24,4 @@ w2v = aggregators.mean(
 )
 
 drafttopic = [w2v]
+articletopic = drafttopic

@@ -40,6 +40,7 @@ def main(argv=None):
     logging.basicConfig(
         level=logging.INFO if not args['--debug'] else logging.DEBUG,
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s')
+    logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
 
     if args['--input'] == '<stdin>':
         observations = read_observations(sys.stdin)
@@ -59,7 +60,7 @@ def main(argv=None):
     run(observations, session, threads, output)
 
 
-def run(observations, session, threads, output, verbose):
+def run(observations, session, threads, output):
     for obs in fetch_article_texts(observations, session, threads):
         dump_observation(obs, output)
 
@@ -90,6 +91,7 @@ def build_get_recent_revision(session):
             redirects=True,
             rvlimit=1,
             rvdir="older",
-            formatversion=2
+            formatversion=2,
+            rvslots=["main"]
         )
     return get_recent_revision
