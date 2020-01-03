@@ -70,7 +70,11 @@ datasets/enwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/enwiki.balanced_article_sample.w_article_text.json \
 		word2vec/GoogleNews-vectors-negative300.bin.gz
 	./utility extract_from_text \
-		drafttopic.feature_lists.wordvectors.articletopic \
+		drafttopic.feature_lists.gnews.articletopic \
+		drafttopic.feature_lists.enwiki_skipgram_50.articletopic \
+		drafttopic.feature_lists.enwiki_skipgram_100.articletopic \
+		drafttopic.feature_lists.enwiki_skipgram_200.articletopic \
+		drafttopic.feature_lists.enwiki_cbow_50.articletopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
@@ -98,7 +102,7 @@ models/enwiki.articletopic.gradient_boosting.model: \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.wordvectors.articletopic taxo_labels \
+		drafttopic.feature_lists.gnews.articletopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
@@ -111,6 +115,77 @@ models/enwiki.articletopic.gradient_boosting.model: \
 	
 	revscoring model_info $@ > model_info/enwiki.articletopic.md
 
+models/enwiki.articletopic.gradient_boosting.enwiki_skipgram_50.model: \
+		datasets/enwiki.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.enwiki_skipgram_50.articletopic taxo_labels \
+		--debug \
+	   	--labels-config=labels-config.json \
+	   	-p 'n_estimators=500' \
+		-p 'max_depth=13' \
+	   	-p 'max_features="log2"' \
+	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor) \
+	   	--folds=5 \
+		--multilabel > $@
+	
+	revscoring model_info $@ > model_info/enwiki.articletopic.enwiki_skipgram_50.md
+
+models/enwiki.articletopic.gradient_boosting.enwiki_skipgram_100.model: \
+		datasets/enwiki.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.enwiki_skipgram_100.articletopic taxo_labels \
+		--debug \
+	   	--labels-config=labels-config.json \
+	   	-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+	   	-p 'max_features="log2"' \
+	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor) \
+	   	--folds=5 \
+		--multilabel > $@
+	
+	revscoring model_info $@ > model_info/enwiki.articletopic.enwiki_skipgram_100.md
+
+models/enwiki.articletopic.gradient_boosting.enwiki_cbow_50.model: \
+		datasets/enwiki.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.enwiki_cbow_50.articletopic taxo_labels \
+		--debug \
+	   	--labels-config=labels-config.json \
+	   	-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+	   	-p 'max_features="log2"' \
+	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor) \
+	   	--folds=5 \
+		--multilabel > $@
+	
+	revscoring model_info $@ > model_info/enwiki.articletopic.enwiki_cbow_50.md
+
+models/enwiki.articletopic.gradient_boosting.enwiki_skipgram_200.model: \
+		datasets/enwiki.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.enwiki_skipgram_200.articletopic taxo_labels \
+		--debug \
+	   	--labels-config=labels-config.json \
+	   	-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+	   	-p 'max_features="log2"' \
+	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor) \
+	   	--folds=5 \
+		--multilabel > $@
+	
+	revscoring model_info $@ > model_info/enwiki.articletopic.enwiki_skipgram_200.md
 
 tuning_reports/enwiki.drafttopic.md: \
 		datasets/enwiki.balanced_article_sample.w_draft_cache.json
@@ -121,7 +196,7 @@ tuning_reports/enwiki.drafttopic.md: \
 	   	--debug \
 	   	--verbose \
 	   	--multilabel \
-	   	--labels-config=labels-config.yaml \
+	   	--labels-config=labels-config.json \
 	   	--folds=3 > $@
 
 tuning_reports/enwiki.articletopic.md: \
@@ -133,5 +208,17 @@ tuning_reports/enwiki.articletopic.md: \
 	   	--debug \
 	   	--verbose \
 	   	--multilabel \
-	   	--labels-config=labels-config.yaml \
+	   	--labels-config=labels-config.json \
+	   	--folds=3 > $@
+
+tuning_reports/enwiki.articletopic.skipgram_50.md: \
+		datasets/enwiki.balanced_article_sample.w_article_cache.json
+	cat $< | \
+	revscoring tune config/gradient_boosting.params.yaml \
+		drafttopic.feature_lists.enwiki_skipgram_50.articletopic \
+	   	taxo_labels pr_auc.macro \
+	   	--debug \
+	   	--verbose \
+	   	--multilabel \
+	   	--labels-config=labels-config.json \
 	   	--folds=3 > $@

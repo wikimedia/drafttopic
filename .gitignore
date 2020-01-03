@@ -7,7 +7,7 @@ __pycache__
 datasets/*.json
 datasets/*.json.bz2
 datasets/*.yaml
-word2vec/*.gz
+word2vec/
 labels-config.json
 
 # C extensions
