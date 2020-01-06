@@ -54,6 +54,12 @@ def main(argv=None):
 
 
 def write_labels(observations, label_field, output):
+    labels_config = process_labels(observations, label_field)
+    json.dump(labels_config, output)
+    output.close()
+
+
+def process_labels(observations, label_field):
     label_counts = defaultdict(int)
     total_labels = 0
     for ob in observations:
@@ -67,7 +73,6 @@ def write_labels(observations, label_field, output):
         count = label_counts[label]
         labels_config['labels'].append({
             'value': label,
-            'population_rate': count/total_labels})
+            'population_rate': count / total_labels})
 
-    json.dump(labels_config, output)
-    output.close()
+    return labels_config
