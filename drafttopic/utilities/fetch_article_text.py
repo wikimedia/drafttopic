@@ -1,13 +1,13 @@
 """
-``$ drafttopic fetch_text -h``
+``$ drafttopic fetch_article_text -h``
 ::
 
-    Fetches initial draft text for observations using a MediaWiki API.
+    Fetches most recent text for observations using a MediaWiki API.
 
     Usage:
-        fetch_draft_text --api-host=<url>
-                         [--input=<path>] [--output=<path>]
-                         [--threads=<num>] [--debug]
+        fetch_article_text --api-host=<url>
+                           [--input=<path>] [--output=<path>]
+                           [--threads=<num>] [--debug]
 
     Options:
         -h --help           Show this documentation.
