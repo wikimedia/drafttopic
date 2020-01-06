@@ -5,7 +5,10 @@ __pycache__
 
 # Datasets
 datasets/*.json
+datasets/*.json.bz2
+datasets/*.yaml
 word2vec/*.gz
+labels-config.json
 
 # C extensions
 *.so

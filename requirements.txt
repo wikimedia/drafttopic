@@ -1,4 +1,4 @@
 docopt==0.6.2
 mediawiki-utilities==0.4.18
 mwapi >= 0.5.1, < 0.5.999
-revscoring >= 2.6.1, < 2.6.999
+revscoring >= 2.6.3, < 2.6.999

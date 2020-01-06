@@ -20,9 +20,13 @@ fetch\_page\_wikiprojects
 -------------------------
 .. automodule:: drafttopic.utilities.fetch_page_wikiprojects
 
-fetch\_text
------------
-.. automodule:: drafttopic.utilities.fetch_text
+fetch\_draft\_text
+------------------
+.. automodule:: drafttopic.utilities.fetch_draft_text
+
+fetch\_article\_text
+--------------------
+.. automodule:: drafttopic.utilities.fetch_article_text
 
 fetch\_wikiprojects
 -------------------
