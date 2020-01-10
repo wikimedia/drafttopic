@@ -32,10 +32,10 @@ female_pronouns_count = aggregators.len(female_pronouns)
 male_pronouns_count = aggregators.len(male_pronouns)
 
 pronoun_features = [
-  female_pronouns_count,
-  male_pronouns_count,
-  female_pronouns_count + male_pronouns_count,
-  female_pronouns_count / (female_pronouns_count + male_pronouns_count)
+    female_pronouns_count,
+    male_pronouns_count,
+    female_pronouns_count + male_pronouns_count,
+    female_pronouns_count / (female_pronouns_count + male_pronouns_count)
 ]
 
 drafttopic = [w2v] + pronoun_features
