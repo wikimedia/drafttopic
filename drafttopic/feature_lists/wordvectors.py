@@ -36,7 +36,6 @@ pronoun_features = [
     female_pronouns_count,
     male_pronouns_count,
     female_pronouns_count + male_pronouns_count,
-    female_pronouns_count / (female_pronouns_count + male_pronouns_count),
     female_pronouns_count / modifiers.max(
         female_pronouns_count + male_pronouns_count, 1)
 ]
