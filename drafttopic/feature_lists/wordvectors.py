@@ -1,4 +1,5 @@
 from revscoring.datasources.meta import vectorizers
+from revscoring.features import modifiers
 from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 from revscoring.languages import english
@@ -35,7 +36,9 @@ pronoun_features = [
     female_pronouns_count,
     male_pronouns_count,
     female_pronouns_count + male_pronouns_count,
-    female_pronouns_count / (female_pronouns_count + male_pronouns_count)
+    female_pronouns_count / (female_pronouns_count + male_pronouns_count),
+    female_pronouns_count / modifiers.max(
+        female_pronouns_count + male_pronouns_count, 1)
 ]
 
 drafttopic = [w2v] + pronoun_features
