@@ -1,4 +1,6 @@
 from revscoring.datasources.meta import vectorizers
+from revscoring.features import modifiers
+from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 from revscoring.languages import english
 
@@ -23,5 +25,20 @@ w2v = aggregators.mean(
     name="revision.text.google_news_vector_mean"
 )
 
-drafttopic = [w2v]
+female_pronouns = wikitext.revision.datasources.tokens_matching(
+    r"\b(she|her|hers)\b")
+male_pronouns = wikitext.revision.datasources.tokens_matching(
+    r"\b(he|him|his)\b")
+female_pronouns_count = aggregators.len(female_pronouns)
+male_pronouns_count = aggregators.len(male_pronouns)
+
+pronoun_features = [
+    female_pronouns_count,
+    male_pronouns_count,
+    female_pronouns_count + male_pronouns_count,
+    female_pronouns_count / modifiers.max(
+        female_pronouns_count + male_pronouns_count, 1)
+]
+
+drafttopic = [w2v] + pronoun_features
 articletopic = drafttopic
