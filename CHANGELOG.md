@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]
+
+### Added
+* Adds feature lists for arwiki, cswiki, enwiki, kowiki, and viwiki
+* Adds `fetch_draft_text`, `fetch_article_text`, and `taxo_label` utilities
+
+### Changed
+* Use fasttext 100 cell vectors for enwiki
+
 ## [0.2.0]
 ### Added
 - Added `extract_from_text` utility.
