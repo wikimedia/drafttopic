@@ -1,6 +1,6 @@
 .DELETE_ON_ERROR:
 
-drafttopic_major_minor = 1.0
+drafttopic_major_minor = 1.1
 
 models: \
 	models/enwiki.drafttopic.gradient_boosting.model \
@@ -55,40 +55,41 @@ datasets/enwiki.balanced_article_sample.w_article_text.json: \
 	  --debug
 
 
-word2vec/GoogleNews-vectors-negative300.bin.gz:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/assets/GoogleNews-vectors-negative300.bin.gz -qO- > $@
+word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2 -qO- > $@
 
 datasets/enwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/enwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/GoogleNews-vectors-negative300.bin.gz
+		word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
 	./utility extract_from_text \
-		drafttopic.feature_lists.wordvectors.drafttopic \
+		drafttopic.feature_lists.enwiki.drafttopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
 
 datasets/enwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/enwiki.balanced_article_sample.w_article_text.json \
-		word2vec/GoogleNews-vectors-negative300.bin.gz
+		word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
 	./utility extract_from_text \
-		drafttopic.feature_lists.wordvectors.articletopic \
+		drafttopic.feature_lists.enwiki.articletopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
+
 
 models/enwiki.drafttopic.gradient_boosting.model: \
 		datasets/enwiki.balanced_article_sample.w_draft_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.wordvectors.drafttopic taxo_labels \
+		drafttopic.feature_lists.enwiki.drafttopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
 		-p 'max_depth=5' \
 	   	-p 'max_features="log2"' \
 	   	-p 'learning_rate=0.1' \
-		--version=$(drafttopic_major_minor) \
+		--version=$(drafttopic_major_minor).0 \
 	   	--folds=5 \
 		--multilabel > $@
 	
@@ -99,14 +100,14 @@ models/enwiki.articletopic.gradient_boosting.model: \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.wordvectors.articletopic taxo_labels \
+		drafttopic.feature_lists.enwiki.articletopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
 		-p 'max_depth=5' \
 	   	-p 'max_features="log2"' \
 	   	-p 'learning_rate=0.1' \
-		--version=$(drafttopic_major_minor) \
+		--version=$(drafttopic_major_minor).0 \
 	   	--folds=5 \
 		--multilabel > $@
 	
