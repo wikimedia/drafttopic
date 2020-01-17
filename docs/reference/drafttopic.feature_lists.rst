@@ -4,10 +4,10 @@ drafttopic.feature\_lists package
 Submodules
 ----------
 
-drafttopic.feature\_lists.wordvectors module
---------------------------------------------
+drafttopic.feature\_lists.enwiki module
+---------------------------------------
 
-.. automodule:: drafttopic.feature_lists.wordvectors
+.. automodule:: drafttopic.feature_lists.enwiki
    :members:
    :undoc-members:
    :show-inheritance:
