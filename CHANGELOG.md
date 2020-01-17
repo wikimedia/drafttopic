@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]
+
+### Changed
+* Use fasttext 100 cell vectors for enwiki
+
+
 ## [0.2.0]
 ### Added
 - Added `extract_from_text` utility.
