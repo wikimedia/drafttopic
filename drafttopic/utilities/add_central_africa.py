@@ -1,13 +1,14 @@
 """
-Adds "Geography.Regions.Africa.Central Africa" to the labels manually.  This is
-necessary to deal with a gap in the WikiProject page matching logic.   For various
-reasons, very few pages get tagged as being topical to Central Africa.  This
-script ensures that at least *some* articles get tagged as topically relevant.
+Adds "Geography.Regions.Africa.Central Africa" to the labels manually.
+This is necessary to deal with a gap in the WikiProject page matching
+logic.   For various reasons, very few pages get tagged as being
+topical to Central Africa.  This script ensures that at least *some*
+articles get tagged as topically relevant.
 
 Usage:
     add_central_africa (-h --help)
     add_central_africa [--input=<path>] [--output=<path>]
-		       [--titles=<path>]
+                       [--titles=<path>]
                        [--verbose] [--debug]
 
 Options:
@@ -16,18 +17,16 @@ Options:
     --output=<path>  Path to a file to write observations
                      (with taxo "label" field) out to. [default: <stdout>]
     --titles=<path>  The path to a file containing a set of enwiki titles that
-		     should be categorized under Central Africa.
-		     [default: datasets/enwiki.central_africa_titles.txt]
+                     should be categorized under Central Africa.
+                     [default: datasets/enwiki.central_africa_titles.txt]
     --verbose  Print progress log
     --debug    Print debug logging
 """
 import json
 import logging
 import sys
-from collections import defaultdict
 
 import docopt
-import yaml
 
 
 def main(argv=None):
@@ -61,7 +60,8 @@ def read_json_lines(f):
 
 def run(observations, titles, output, verbose=False):
     for ob in observations:
-        if isinstance(ob['sitelinks'], dict) and ob['sitelinks'].get('en') in titles:
+        if isinstance(ob['sitelinks'], dict) and \
+           ob['sitelinks'].get('en') in titles:
             ob['taxo_labels'].append('Geography.Regions.Africa.Central Africa')
             if verbose:
                 sys.stderr.write(".")
