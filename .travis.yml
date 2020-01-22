@@ -16,7 +16,11 @@ install:
   - pip install twine
   - pip install flake8
   - python -m nltk.downloader stopwords
-  - make word2vec/GoogleNews-vectors-negative300.bin.gz
+  - make word2vec/arwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+  - make word2vec/cswiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+  - make word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+  - make word2vec/kowiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+  - make word2vec/viwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
 
 script:
   - flake8 . --ignore=E722
