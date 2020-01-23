@@ -9,6 +9,7 @@ datasets/*.json.bz2
 datasets/*.yaml
 word2vec/*.vec*
 word2vec/*.bin*
+word2vec/*.kv*
 labels-config.json
 
 # C extensions

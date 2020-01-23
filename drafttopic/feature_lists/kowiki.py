@@ -3,8 +3,8 @@ from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 
 
-kowiki_kvs = vectorizers.word2vec.load_kv(
-    filename="kowiki-20191201-learned_vectors.100_cell.300k.vec.bz2")
+kowiki_kvs = vectorizers.word2vec.load_gensim_kv(
+    filename="kowiki-20191201-learned_vectors.50_cell.100k.kv", mmap='r')
 
 
 def vectorize_words(words):
