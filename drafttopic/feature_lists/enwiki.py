@@ -4,8 +4,8 @@ from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 
 
-enwiki_kvs = vectorizers.word2vec.load_kv(
-    filename="enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2")
+enwiki_kvs = vectorizers.word2vec.load_gensim_kv(
+    filename="enwiki-20191201-learned_vectors.50_cell.100k.kv", mmap="r")
 
 
 def vectorize_words(words):

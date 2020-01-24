@@ -75,8 +75,8 @@ datasets/arwiki.balanced_article_sample.w_article_text.json: \
 	  --debug
 
 
-word2vec/arwiki-20191201-learned_vectors.100_cell.300k.vec.bz2:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/arwiki-20191201-learned_vectors.100_cell.300k.vec.bz2 -qO- > $@
+word2vec/arwiki-20191201-learned_vectors.50_cell.100k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/arwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
 
 datasets/arwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/arwiki.balanced_article_sample.w_draft_text.json \
@@ -181,8 +181,8 @@ datasets/cswiki.balanced_article_sample.w_article_text.json: \
 	  --debug
 
 
-word2vec/cswiki-20191201-learned_vectors.100_cell.300k.vec.bz2:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/cswiki-20191201-learned_vectors.100_cell.300k.vec.bz2 -qO- > $@
+word2vec/cswiki-20191201-learned_vectors.50_cell.100k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/cswiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
 
 datasets/cswiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/cswiki.balanced_article_sample.w_draft_text.json \
@@ -285,8 +285,8 @@ datasets/enwiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2 -qO- > $@
+word2vec/enwiki-20191201-learned_vectors.50_cell.100k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/enwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
 
 datasets/enwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/enwiki.balanced_article_sample.w_draft_text.json \
@@ -390,8 +390,8 @@ datasets/kowiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/kowiki-20191201-learned_vectors.100_cell.300k.vec.bz2:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20191201-learned_vectors.100_cell.300k.vec.bz2 -qO- > $@
+word2vec/kowiki-20191201-learned_vectors.50_cell.100k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
 
 datasets/kowiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/kowiki.balanced_article_sample.w_draft_text.json \
@@ -496,8 +496,8 @@ datasets/viwiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/viwiki-20191201-learned_vectors.100_cell.300k.vec.bz2:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/viwiki-20191201-learned_vectors.100_cell.300k.vec.bz2 -qO- > $@
+word2vec/viwiki-20191201-learned_vectors.50_cell.100k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/viwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
 
 datasets/viwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/viwiki.balanced_article_sample.w_draft_text.json \
