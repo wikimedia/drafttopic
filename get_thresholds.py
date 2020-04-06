@@ -45,8 +45,9 @@ def get_labels(wiki, model):
             'model_info': "params|statistics.rates"
         }
     ).json()
-    labels = doc[wiki]['models'][model]['params']['labels']
-    pop_rates = doc[wiki]['models'][model]['statistics']['rates']['population']
+    model_doc = doc[wiki]['models'][model]
+    labels = model_doc['params']['labels']
+    pop_rates = model_doc['statistics']['rates']['population']
     return [(l, pop_rates[l]) for l in labels]
 
 
@@ -55,7 +56,8 @@ def get_threshold(wiki, model, label, target):
         ORES_HOST + PATH + "/" + wiki + "/",
         params={
             'models': model,
-            'model_info': "statistics.thresholds.{0}.'maximum recall @ precision >= {1}'".format(repr(label), target)
+            'model_info': "statistics.thresholds.{0}".format(repr(label)) +
+                          ".'maximum recall @ precision >= {0}'".format(target)
         }
     ).json()
 
