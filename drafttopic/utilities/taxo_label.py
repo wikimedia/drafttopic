@@ -1,24 +1,28 @@
 """
-Labels a set of observations based on their WikiProject templates
-(expects wp_templates field) using a taxonomy and WikiProject to template name
-mapping.
+``$ drafttopic taxo_label -h``
+::
 
-Usage:
-    taxo_label (-h --help)
-    taxo_label <wp-taxonomy> <wp-templates>
-               [--input=<path>] [--output=<path>]
-               [--verbose] [--debug]
+    Labels a set of observations based on their WikiProject templates
+    (expects wp_templates field) using a taxonomy and WikiProject to template
+    name mapping.
 
-Options:
-    -h --help  Prints this documentation
-    <wp-taxonomy>  A yaml file mapping a taxonomy to WikiProjects
-    <wp-templates>  A yaml file containing a map of WikiProject name to
-                    all possible templates used for tagging.
-    --input=<path>   Path to a file containing observations [default: <stdin>]
-    --output=<path>  Path to a file to write observations
-                     (with taxo "label" field) out to. [default: <stdout>]
-    --verbose  Print progress log
-    --debug    Print debug logging
+    Usage:
+        taxo_label (-h --help)
+        taxo_label <wp-taxonomy> <wp-templates>
+                   [--input=<path>] [--output=<path>]
+                   [--verbose] [--debug]
+
+    Options:
+        -h --help  Prints this documentation
+        <wp-taxonomy>  A yaml file mapping a taxonomy to WikiProjects
+        <wp-templates>  A yaml file containing a map of WikiProject name to
+                        all possible templates used for tagging.
+        --input=<path>   Path to a file containing observations
+                         [default: <stdin>]
+        --output=<path>  Path to a file to write observations
+                         (with taxo "label" field) out to. [default: <stdout>]
+        --verbose  Print progress log
+        --debug    Print debug logging
 """
 import json
 import logging
