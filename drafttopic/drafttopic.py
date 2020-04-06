@@ -5,14 +5,17 @@
     This script provides access to a set of utilities for extracting features
     and building draft topic predictors.
 
-    * extract_from_text -- Extracts feature from raw text
-    * fetch_page_wikiprojects -- Annotates talk_page_ids with all wikiproject
-                                 templates
-    * fetch_text -- Gathers text for each labeling observation from a MediaWiki
-                    API
-    * fetch_wikiprojects -- Generates a machine readable WikiProjects directory
-    * trim_wikiprojects -- Generates a mapping of mid-level wikiprojects to
-                           list of wikiproject names contained in them
+    * add_central_africa -- Adds "Geography.Regions.Africa.Central Africa" to
+                            the labels manually.
+    * balance_sample -- Generates an approximately balances sample of each
+                        label
+    * extract_from_text -- Extracts features from raw text
+    * fetch_article_text -- Gathers current article text for each labeling
+                            observation from a MediaWiki API
+    * fetch_draft_text -- Gathers first revision article text for each labeling
+                          observation from a MediaWiki API
+    * taxo_label -- Labels a set of observations based on their
+                    WikiProject templates
     * write_labels -- Extracts all labels from a wikiprojects labeled dataset
                       and writes them out to config
 
