@@ -42,9 +42,15 @@ datasets/enwiki.labeled_article_items.wo_central_africa.json.bz2: \
 	  datasets/wikiproject_to_template.halfak_20191202.yaml | \
 	bzip2 -c > $@
 
+
+# From https://quarry.wmflabs.org/query/45568
+datasets/enwiki.central_africa_titles.tsv:
+	wget https://quarry.wmflabs.org/run/472375/output/0/tsv -qO- | \
+	tail -n+2 > $@
+
 datasets/enwiki.labeled_article_items.json.bz2: \
 		datasets/enwiki.labeled_article_items.wo_central_africa.json.bz2 \
-		datasets/enwiki.central_africa_titles.txt
+		datasets/enwiki.central_africa_titles.tsv
 	bzcat $< | ./utility add_central_africa --verbose | bzip2 -c > $@
 
 labels-config.json: \
