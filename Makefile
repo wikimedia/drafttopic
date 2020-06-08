@@ -75,12 +75,12 @@ datasets/arwiki.balanced_article_sample.w_article_text.json: \
 	  --debug
 
 
-word2vec/arwiki-20191201-learned_vectors.50_cell.100k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/arwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
+word2vec/arwiki-20191201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/arwiki-20191201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/arwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/arwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/arwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/arwiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.arwiki.drafttopic \
 		--input=$< \
@@ -89,7 +89,7 @@ datasets/arwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/arwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/arwiki.balanced_article_sample.w_article_text.json \
-		word2vec/arwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/arwiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.arwiki.articletopic \
 		--input=$< \
@@ -181,12 +181,12 @@ datasets/cswiki.balanced_article_sample.w_article_text.json: \
 	  --debug
 
 
-word2vec/cswiki-20191201-learned_vectors.50_cell.100k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/cswiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
+word2vec/cswiki-20191201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/cswiki-20191201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/cswiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/cswiki.balanced_article_sample.w_draft_text.json \
-		word2vec/cswiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/cswiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.cswiki.drafttopic \
 		--input=$< \
@@ -195,7 +195,7 @@ datasets/cswiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/cswiki.balanced_article_sample.w_article_cache.json: \
 		datasets/cswiki.balanced_article_sample.w_article_text.json \
-		word2vec/cswiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/cswiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.cswiki.articletopic \
 		--input=$< \
@@ -285,12 +285,12 @@ datasets/enwiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/enwiki-20191201-learned_vectors.50_cell.100k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/enwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
+word2vec/enwiki-20191201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/enwiki-20191201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/enwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/enwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/enwiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.enwiki.drafttopic \
 		--input=$< \
@@ -299,7 +299,7 @@ datasets/enwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/enwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/enwiki.balanced_article_sample.w_article_text.json \
-		word2vec/enwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/enwiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.enwiki.articletopic \
 		--input=$< \
@@ -390,12 +390,12 @@ datasets/kowiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/kowiki-20191201-learned_vectors.50_cell.100k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
+word2vec/kowiki-20191201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20191201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/kowiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/kowiki.balanced_article_sample.w_draft_text.json \
-		word2vec/kowiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/kowiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.kowiki.drafttopic \
 		--input=$< \
@@ -404,7 +404,7 @@ datasets/kowiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/kowiki.balanced_article_sample.w_article_cache.json: \
 		datasets/kowiki.balanced_article_sample.w_article_text.json \
-		word2vec/kowiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/kowiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.kowiki.articletopic \
 		--input=$< \
@@ -496,12 +496,12 @@ datasets/viwiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/viwiki-20191201-learned_vectors.50_cell.100k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/viwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
+word2vec/viwiki-20191201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/viwiki-20191201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/viwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/viwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/viwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/viwiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.viwiki.drafttopic \
 		--input=$< \
@@ -510,7 +510,7 @@ datasets/viwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/viwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/viwiki.balanced_article_sample.w_article_text.json \
-		word2vec/viwiki-20191201-learned_vectors.100_cell.300k.vec.bz2
+		word2vec/viwiki-20191201-learned_vectors.50_cell.10k.v
 	./utility extract_from_text \
 		drafttopic.feature_lists.viwiki.articletopic \
 		--input=$< \
