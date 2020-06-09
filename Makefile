@@ -1,6 +1,6 @@
 .DELETE_ON_ERROR:
 
-drafttopic_major_minor = 1.1
+drafttopic_major_minor = 1.2
 
 models: \
 	articletopic_models \
@@ -41,6 +41,12 @@ datasets/enwiki.labeled_article_items.wo_central_africa.json.bz2: \
 	  datasets/wikiproject_taxonomy.halfak_20191202.yaml \
 	  datasets/wikiproject_to_template.halfak_20191202.yaml | \
 	bzip2 -c > $@
+
+
+# From https://quarry.wmflabs.org/query/45568
+datasets/enwiki.central_africa_titles.txt:
+	wget https://quarry.wmflabs.org/run/472620/output/0/tsv -qO- | \
+	tail -n+2 | sed 's/_/ /g' > $@
 
 datasets/enwiki.labeled_article_items.json.bz2: \
 		datasets/enwiki.labeled_article_items.wo_central_africa.json.bz2 \
