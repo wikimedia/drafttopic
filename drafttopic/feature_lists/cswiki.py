@@ -3,7 +3,7 @@ from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 
 cswiki_kvs = vectorizers.word2vec.load_gensim_kv(
-    filename="cswiki-20191201-learned_vectors.50_cell.100k.kv", mmap='r')
+    filename="cswiki-20200501-learned_vectors.50_cell.10k.kv", mmap='r')
 
 
 def vectorize_words(words):
