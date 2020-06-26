@@ -1,6 +1,6 @@
 .DELETE_ON_ERROR:
 
-drafttopic_major_minor = 1.2
+drafttopic_major_minor = 1.3
 
 models: \
 	articletopic_models \
