@@ -23,7 +23,7 @@ install:
   - make word2vec/viwiki-20200501-learned_vectors.50_cell.10k.kv
 
 script:
-  - flake8 . --ignore=E722
+  - flake8 .
   - coverage run --source drafttopic -m pytest -m "not nottravis"
   - sphinx-build -anW -b html docs dist/docs
   - sphinx-build -b linkcheck docs dist/docs
