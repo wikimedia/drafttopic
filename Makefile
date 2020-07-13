@@ -1,8 +1,7 @@
+
 .DELETE_ON_ERROR:
 
-
-drafttopic_major_minor = 1.3
-
+drafttopic_major_minor = 1.2
 
 models: \
 	articletopic_models \
@@ -15,7 +14,7 @@ articletopic_models: \
 	models/viwiki.articletopic.gradient_boosting.model
 
 datasets/viwiki.balanced_article_sample.json: \
-		../python-mwtext/datasets/enwiki.labeled_article_items.json.bz2
+		datasets/enwiki.labeled_article_items.json.bz2
 	bzcat $< | ./utility balance_sample vi -n 1000 > $@
 
 datasets/viwiki.balanced_article_sample.w_draft_text.json: \
@@ -34,9 +33,12 @@ datasets/viwiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
+word2vec/viwiki-20191201-learned_vectors.50_cell.100k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/viwiki-20191201-learned_vectors.50_cell.100k.kv -qO- > $@
+
 datasets/viwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/viwiki.balanced_article_sample.w_draft_text.json \
-		../python-mwtext/datasets/viwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/viwiki-20191201-learned_vectors.50_cell.100k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.viwiki.drafttopic \
 		--input=$< \
@@ -45,7 +47,7 @@ datasets/viwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/viwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/viwiki.balanced_article_sample.w_article_text.json \
-		../python-mwtext/datasets/viwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/viwiki-20191201-learned_vectors.50_cell.100k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.viwiki.articletopic \
 		--input=$< \
