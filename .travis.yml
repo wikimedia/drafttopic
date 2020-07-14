@@ -16,14 +16,14 @@ install:
   - pip install twine
   - pip install flake8
   - python -m nltk.downloader stopwords
-  - make word2vec/arwiki-20191201-learned_vectors.50_cell.100k.kv
-  - make word2vec/cswiki-20191201-learned_vectors.50_cell.100k.kv
-  - make word2vec/enwiki-20191201-learned_vectors.50_cell.100k.kv
-  - make word2vec/kowiki-20191201-learned_vectors.50_cell.100k.kv
-  - make word2vec/viwiki-20191201-learned_vectors.50_cell.100k.kv
+  - make word2vec/arwiki-20200501-learned_vectors.50_cell.10k.kv
+  - make word2vec/cswiki-20200501-learned_vectors.50_cell.10k.kv
+  - make word2vec/enwiki-20200501-learned_vectors.50_cell.10k.kv
+  - make word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
+  - make word2vec/viwiki-20200501-learned_vectors.50_cell.10k.kv
 
 script:
-  - flake8 . --ignore=E722
+  - flake8 .
   - coverage run --source drafttopic -m pytest -m "not nottravis"
   - sphinx-build -anW -b html docs dist/docs
   - sphinx-build -b linkcheck docs dist/docs

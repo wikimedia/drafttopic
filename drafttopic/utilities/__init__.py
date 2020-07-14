@@ -12,23 +12,23 @@ drafttopic
 Sub-utilities
 =============
 
-extract\_from\_text
--------------------
+extract_from_text
+-----------------
 .. automodule:: drafttopic.utilities.extract_from_text
 
-fetch\_draft\_text
-------------------
+fetch_draft_text
+----------------
 .. automodule:: drafttopic.utilities.fetch_draft_text
 
-fetch\_article\_text
---------------------
+fetch_article_text
+------------------
 .. automodule:: drafttopic.utilities.fetch_article_text
 
 taxo_label
 ----------
 .. automodule:: drafttopic.utilities.taxo_label
 
-write\_labels
--------------
+write_labels
+------------
 .. automodule:: drafttopic.utilities.write_labels
 """
