@@ -7,9 +7,17 @@ models: \
 	drafttopic_models
 
 drafttopic_models: \
+	models/arwiki.drafttopic.gradient_boosting.model \
+	models/cswiki.drafttopic.gradient_boosting.model \
+	models/enwiki.drafttopic.gradient_boosting.model \
+	models/kowiki.drafttopic.gradient_boosting.model \
 	models/viwiki.drafttopic.gradient_boosting.model
 
 articletopic_models: \
+	models/arwiki.articletopic.gradient_boosting.model \
+	models/cswiki.articletopic.gradient_boosting.model \
+	models/enwiki.articletopic.gradient_boosting.model \
+	models/kowiki.articletopic.gradient_boosting.model \
 	models/viwiki.articletopic.gradient_boosting.model
 
 
