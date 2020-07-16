@@ -1,5 +1,4 @@
-from revscoring.datasources.meta import vectorizers, mappers
-from revscoring.features import modifiers
+from revscoring.datasources.meta import vectorizers
 from revscoring.features import wikibase
 from revscoring.features.meta import aggregators
 
