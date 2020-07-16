@@ -72,8 +72,13 @@ def group_labeled_obs(observations, lang_code):
     for ob in observations:
         if lang_code in ob['sitelinks']:
             labeled_ob = {
-                'title': ob['sitelinks'][lang_code],
-                'taxo_labels': ob['taxo_labels']}
+                'title' : ob['sitelinks'][lang_code]}
+        elif lang_code == 'wikidata':
+            labeled_ob = {
+                'title': ob['qid']}
+
+        if lang_code == 'wikidata' or lang_code in ob['sitelinks']:
+            labeled_ob['taxo_labels'] = ob['taxo_labels']
             for taxo_label in ob['taxo_labels']:
                 label_obs[taxo_label].append(labeled_ob)
     return label_obs

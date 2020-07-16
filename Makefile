@@ -18,7 +18,8 @@ articletopic_models: \
 	models/cswiki.articletopic.gradient_boosting.model \
 	models/enwiki.articletopic.gradient_boosting.model \
 	models/kowiki.articletopic.gradient_boosting.model \
-	models/viwiki.articletopic.gradient_boosting.model
+	models/viwiki.articletopic.gradient_boosting.model \
+	models/wikidata.articletopic.gradient_boosting.model
 
 
 # Johnson, Isaac; Halfaker, Aaron (2019):
@@ -584,3 +585,62 @@ tuning_reports/viwiki.articletopic.md: \
 	   	--multilabel \
 	   	--labels-config=labels-config.yaml \
 	   	--folds=3 > $@
+
+
+###################### Wikidata #########################
+
+datasets/wikidata.balanced_article_sample.json: \
+		datasets/enwiki.labeled_article_items.json.bz2
+	bzcat $< | ./utility balance_sample wikidata -n 1000 > $@
+
+datasets/wikidata.balanced_article_sample.w_article_text.json: \
+		datasets/wikidata.balanced_article_sample.json
+	./utility fetch_article_text \
+	  --api-host=https://www.wikidata.org \
+	  --input=$< \
+	  --output=$@ \
+	  --debug
+
+word2vec/wikidata-20200501-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/wikidata-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+
+datasets/wikidata.balanced_article_sample.w_article_cache.json: \
+		datasets/wikidata.balanced_article_sample.w_article_text.json \
+		word2vec/wikidata-20200501-learned_vectors.50_cell.10k.kv
+	./utility extract_from_text \
+		drafttopic.feature_lists.wikidata.articletopic \
+		--input=$< \
+		--output=$@ \
+		--verbose
+
+
+models/wikidata.articletopic.gradient_boosting.model: \
+		datasets/wikidata.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.wikidata.articletopic taxo_labels \
+		--debug \
+		--labels-config=labels-config.json \
+		-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+		-p 'max_features="log2"' \
+		-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor).0 \
+		--folds=5 \
+		--multilabel > $@
+
+	revscoring model_info $@ > model_info/wikidata.articletopic.md
+
+
+tuning_reports/wikidata.articletopic.md: \
+		datasets/wikidata.balanced_article_sample.w_article_cache.json
+	cat $< | \
+	revscoring tune config/gradient_boosting.params.yaml \
+		drafttopic.feature_lists.wikidata.articletopic \
+		taxo_labels pr_auc.macro \
+		--debug \
+		--verbose \
+		--multilabel \
+		--labels-config=labels-config.yaml \
+		--folds=3 > $@
