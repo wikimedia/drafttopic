@@ -72,7 +72,7 @@ def group_labeled_obs(observations, lang_code):
     for ob in observations:
         if lang_code in ob['sitelinks']:
             labeled_ob = {
-                'title' : ob['sitelinks'][lang_code]}
+                'title': ob['sitelinks'][lang_code]}
         elif lang_code == 'wikidata':
             labeled_ob = {
                 'title': ob['qid']}
