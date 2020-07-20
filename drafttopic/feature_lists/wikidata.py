@@ -21,3 +21,5 @@ w2v = aggregators.mean(
     vector=True,
     name="revision.text.wikidata_vectors_mean"
 )
+
+articletopic = [w2v]
