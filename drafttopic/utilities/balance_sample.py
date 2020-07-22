@@ -70,15 +70,17 @@ def balance_sample(observations, lang_code, max_n, output):
 def group_labeled_obs(observations, lang_code):
     label_obs = defaultdict(list)
     for ob in observations:
-        if lang_code in ob['sitelinks']:
-            labeled_ob = {
-                'title': ob['sitelinks'][lang_code]}
-        elif lang_code == 'wikidata':
-            labeled_ob = {
-                'title': ob['qid']}
+        if lang_code == 'wikidata':
+            if ob['qid'] is None:
+                continue
+            labeled_ob = {'title': ob['qid']}
+        else:
+            if lang_code not in ob['sitelinks']:
+                continue
+            labeled_ob = {'title': ob['sitelinks'][lang_code]}
 
-        if lang_code == 'wikidata' or lang_code in ob['sitelinks']:
-            labeled_ob['taxo_labels'] = ob['taxo_labels']
-            for taxo_label in ob['taxo_labels']:
-                label_obs[taxo_label].append(labeled_ob)
+        labeled_ob['taxo_labels'] = ob['taxo_labels']
+        for taxo_label in ob['taxo_labels']:
+            label_obs[taxo_label].append(labeled_ob)
+
     return label_obs
