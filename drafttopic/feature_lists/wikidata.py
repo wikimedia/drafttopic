@@ -11,6 +11,7 @@ QID_RE = re.compile('Q[0-9]+')
 wikidata_kvs = vectorizers.word2vec.load_gensim_kv(
     filename="wikidata-20200501-learned_vectors.50_cell.10k.kv", mmap="r")
 
+
 def process_claims_to_words(claims):
     words = []
     for pid, value in claims:
@@ -18,6 +19,7 @@ def process_claims_to_words(claims):
         if QID_RE.match(value) is not None:
             words.append(value)
     return words
+
 
 def vectorize_words(words):
     return vectorizers.word2vec.vectorize_words(wikidata_kvs, words)
