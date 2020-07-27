@@ -47,12 +47,12 @@ labels-config.json: \
 
 datasets/ukwiki.balanced_article_sample.json: \
 		datasets/enwiki.labeled_article_items.json.bz2
-	bzcat $< | ./utility balance_sample vi -n 1000 > $@
+	bzcat $< | ./utility balance_sample uk -n 1000 > $@
 
 datasets/ukwiki.balanced_article_sample.w_draft_text.json: \
 		datasets/ukwiki.balanced_article_sample.json
 	./utility fetch_draft_text \
-	  --api-host=https://vi.wikipedia.org \
+	  --api-host=https://uk.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
@@ -60,7 +60,7 @@ datasets/ukwiki.balanced_article_sample.w_draft_text.json: \
 datasets/ukwiki.balanced_article_sample.w_article_text.json: \
 		datasets/ukwiki.balanced_article_sample.json
 	./utility fetch_article_text \
-	  --api-host=https://vi.wikipedia.org \
+	  --api-host=https://uk.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
