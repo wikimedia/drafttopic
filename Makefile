@@ -7,10 +7,14 @@ models: \
 	drafttopic_models
 
 drafttopic_models: \
-	models/ukwiki.drafttopic.gradient_boosting.model
+	models/hywiki.drafttopic.gradient_boosting.model
 
 articletopic_models: \
-	models/ukwiki.articletopic.gradient_boosting.model
+	models/hywiki.articletopic.gradient_boosting.model
+
+tuning_models: \
+	tuning_reports/hywiki.articletopic.md \
+	tuning_reports/hywiki.drafttopic.md
 
 datasets/enwiki.article_items_with_wikiproject_templates.20191201.json.bz2:
 	wget https://ndownloader.figshare.com/files/20183063 -qO- > $@
@@ -45,54 +49,54 @@ labels-config.json: \
 		datasets/enwiki.labeled_article_items.json.bz2
 	bzcat $< | ./utility write_labels taxo_labels > $@
 
-datasets/ukwiki.balanced_article_sample.json: \
+datasets/hywiki.balanced_article_sample.json: \
 		datasets/enwiki.labeled_article_items.json.bz2
-	bzcat $< | ./utility balance_sample uk -n 1000 > $@
+	bzcat $< | ./utility balance_sample hy -n 1000 > $@
 
-datasets/ukwiki.balanced_article_sample.w_draft_text.json: \
-		datasets/ukwiki.balanced_article_sample.json
+datasets/hywiki.balanced_article_sample.w_draft_text.json: \
+		datasets/hywiki.balanced_article_sample.json
 	./utility fetch_draft_text \
-	  --api-host=https://uk.wikipedia.org \
+	  --api-host=https://hy.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
 
-datasets/ukwiki.balanced_article_sample.w_article_text.json: \
-		datasets/ukwiki.balanced_article_sample.json
+datasets/hywiki.balanced_article_sample.w_article_text.json: \
+		datasets/hywiki.balanced_article_sample.json
 	./utility fetch_article_text \
-	  --api-host=https://uk.wikipedia.org \
+	  --api-host=https://hy.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
 
-#word2vec/ukwiki-20200501-learned_vectors.50_cell.10k.kv:
-#	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/ukwiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+#word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv:
+#	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/hywiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
 
-datasets/ukwiki.balanced_article_sample.w_draft_cache.json: \
-		datasets/ukwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/ukwiki-20200501-learned_vectors.50_cell.10k.kv
+datasets/hywiki.balanced_article_sample.w_draft_cache.json: \
+		datasets/hywiki.balanced_article_sample.w_draft_text.json \
+		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
-		drafttopic.feature_lists.ukwiki.drafttopic \
+		drafttopic.feature_lists.hywiki.drafttopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
 
-datasets/ukwiki.balanced_article_sample.w_article_cache.json: \
-		datasets/ukwiki.balanced_article_sample.w_article_text.json \
-		word2vec/ukwiki-20200501-learned_vectors.50_cell.10k.kv
+datasets/hywiki.balanced_article_sample.w_article_cache.json: \
+		datasets/hywiki.balanced_article_sample.w_article_text.json \
+		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
-		drafttopic.feature_lists.ukwiki.articletopic \
+		drafttopic.feature_lists.hywiki.articletopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
 
 
-models/ukwiki.drafttopic.gradient_boosting.model: \
-		datasets/ukwiki.balanced_article_sample.w_draft_cache.json \
+models/hywiki.drafttopic.gradient_boosting.model: \
+		datasets/hywiki.balanced_article_sample.w_draft_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.ukwiki.drafttopic taxo_labels \
+		drafttopic.feature_lists.hywiki.drafttopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
@@ -103,14 +107,14 @@ models/ukwiki.drafttopic.gradient_boosting.model: \
 	   	--folds=5 \
 		--multilabel > $@
 
-	revscoring model_info $@ > model_info/ukwiki.drafttopic.md
+	revscoring model_info $@ > model_info/hywiki.drafttopic.md
 
-models/ukwiki.articletopic.gradient_boosting.model: \
-		datasets/ukwiki.balanced_article_sample.w_article_cache.json \
+models/hywiki.articletopic.gradient_boosting.model: \
+		datasets/hywiki.balanced_article_sample.w_article_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.ukwiki.articletopic taxo_labels \
+		drafttopic.feature_lists.hywiki.articletopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
@@ -121,29 +125,29 @@ models/ukwiki.articletopic.gradient_boosting.model: \
 	   	--folds=5 \
 		--multilabel > $@
 
-	revscoring model_info $@ > model_info/ukwiki.articletopic.md
+	revscoring model_info $@ > model_info/hywiki.articletopic.md
 
 
-tuning_reports/ukwiki.drafttopic.md: \
-		datasets/ukwiki.balanced_article_sample.w_draft_cache.json
+tuning_reports/hywiki.drafttopic.md: \
+		datasets/hywiki.balanced_article_sample.w_draft_cache.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
-		drafttopic.feature_lists.ukwiki.drafttopic \
+		drafttopic.feature_lists.hywiki.drafttopic \
 	   	taxo_labels pr_auc.macro \
 	   	--debug \
 	   	--verbose \
 	   	--multilabel \
-	   	--labels-config=labels-config.yaml \
+	   	--labels-config=labels-config.json \
 	   	--folds=3 > $@
 
-tuning_reports/ukwiki.articletopic.md: \
-		datasets/ukwiki.balanced_article_sample.w_article_cache.json
+tuning_reports/hywiki.articletopic.md: \
+		datasets/hywiki.balanced_article_sample.w_article_cache.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
-		drafttopic.feature_lists.ukwiki.articletopic \
+		drafttopic.feature_lists.hywiki.articletopic \
 	   	taxo_labels pr_auc.macro \
 	   	--debug \
 	   	--verbose \
 	   	--multilabel \
-	   	--labels-config=labels-config.yaml \
+	   	--labels-config=labels-config.json \
 	   	--folds=3 > $@
