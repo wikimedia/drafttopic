@@ -44,6 +44,14 @@ drafttopic.feature\_lists.viwiki module
    :undoc-members:
    :show-inheritance:
 
+drafttopic.feature\_lists.wikidata module
+---------------------------------------
+
+.. automodule:: drafttopic.feature_lists.wikidata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------
