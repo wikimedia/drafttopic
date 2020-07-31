@@ -45,7 +45,7 @@ drafttopic.feature\_lists.viwiki module
    :show-inheritance:
 
 drafttopic.feature\_lists.wikidata module
----------------------------------------
+-----------------------------------------
 
 .. automodule:: drafttopic.feature_lists.wikidata
    :members:
