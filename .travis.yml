@@ -21,7 +21,7 @@ install:
   - make word2vec/enwiki-20200501-learned_vectors.50_cell.10k.kv
   - make word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
   - make word2vec/viwiki-20200501-learned_vectors.50_cell.10k.kv
-
+  - make word2vec/wikidata-20200501-learned_vectors.50_cell.10k.kv
 script:
   - flake8 .
   - coverage run --source drafttopic -m pytest -m "not nottravis"
