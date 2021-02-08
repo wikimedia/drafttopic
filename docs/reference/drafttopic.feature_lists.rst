@@ -36,6 +36,14 @@ drafttopic.feature\_lists.kowiki module
    :undoc-members:
    :show-inheritance:
 
+drafttopic.feature\_lists.ukwiki module
+---------------------------------------
+
+.. automodule:: drafttopic.feature_lists.ukwiki
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 drafttopic.feature\_lists.viwiki module
 ---------------------------------------
 
