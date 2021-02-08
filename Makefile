@@ -75,8 +75,8 @@ datasets/hywiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-#word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv:
-#	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/hywiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/hywiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/hywiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/hywiki.balanced_article_sample.w_draft_text.json \
