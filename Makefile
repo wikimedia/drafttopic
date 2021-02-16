@@ -273,6 +273,7 @@ datasets/kowiki.balanced_article_sample.w_draft_text.json: \
 		datasets/kowiki.balanced_article_sample.json
 	./utility fetch_draft_text \
 	  --api-host=https://ko.wikipedia.org \
+	  --tok_strategy=CJK \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
@@ -281,6 +282,7 @@ datasets/kowiki.balanced_article_sample.w_article_text.json: \
 		datasets/kowiki.balanced_article_sample.json
 	./utility fetch_article_text \
 	  --api-host=https://ko.wikipedia.org \
+	  --tok_strategy=CJK \ 
 	  --input=$< \
 	  --output=$@ \
 	  --debug
