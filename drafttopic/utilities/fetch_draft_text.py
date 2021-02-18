@@ -7,7 +7,7 @@
     Usage:
         fetch_draft_text --api-host=<url>
                          [--input=<path>] [--output=<path>]
-                         [--threads=<num>] [--debug]
+                         [--threads=<num>] [--tok_strategy=<str>] [--debug]
 
     Options:
         -h --help           Show this documentation.
@@ -19,22 +19,23 @@
                             (with text) out to. [default: <stdout>]
         --threads=<num>     The number of parallel query threads to run
                             [default: 4]
+        --tok_strategy=<str>Tokenization strategy supported by python-mwtext, 
+                            None is default
         --debug             Print debug logging
 """
 import logging
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
+import jpype
 
 import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
 
-# I took this whole part from python-mwtext tests
 from mwtext.content_transformers import Wikitext2Words
 forbidden_link_prefixes = [
     'category', 'image', 'file']
-#################################################
 
 logger = logging.getLogger(__name__)
 REDIRECT_RE = re.compile("#redirect", re.I)
@@ -60,28 +61,27 @@ def main(argv=None):
         output = open(args['--output'], 'w')
 
     threads = int(args['--threads'])
-
-    # follow the parameter strategy None if not set
     tok_strategy = None if not args['--tok_strategy'] else str(args['--tok_strategy'])
+    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
 
     session = mwapi.Session(args['--api-host'],
                             user_agent=DRAFTTOPIC_UA)
 
-    run(observations, session, threads, output)
+    run(observations, session, threads, output, wtpp)
 
 
-def run(observations, session, threads, output, tok_strategy):
-    for obs in fetch_draft_texts(observations, session, threads):
+def run(observations, session, threads, output, wtpp):
+    for obs in fetch_draft_texts(observations, session, threads, wtpp):
         dump_observation(obs, output)
 
 
-def fetch_draft_texts(observations, session, threads, tok_strategy):
+def fetch_draft_texts(observations, session, threads, wtpp):
     """
     Fetches draft (first revision) text for observations from a MediaWiki API.
     """
 
     executor = ThreadPoolExecutor(max_workers=threads)
-    _fetch_draft_text = build_fetch_text(build_get_first_revision(session), tok_strategy)
+    _fetch_draft_text = build_fetch_text(build_get_first_revision(session), wtpp)
 
     for obs in executor.map(_fetch_draft_text, observations):
         if obs is not None:
@@ -90,8 +90,7 @@ def fetch_draft_texts(observations, session, threads, tok_strategy):
                          .format(obs['title'], len(obs['text'])))
 
 
-def build_fetch_text(get_first_revision, tok_strategy):
-    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
+def build_fetch_text(get_first_revision, wtpp):
 
     def _fetch_text(obs):
         result = get_first_revision(obs['title'])
@@ -106,12 +105,7 @@ def build_fetch_text(get_first_revision, tok_strategy):
                 rev_doc = page_doc['revisions'][0]
                 text = rev_doc['slots']['main']['content']
                 if is_article(text):
-
-                    # this would normaly output list of tokens, 
-                    # this way it outputs text separated by spaces
-                    # (hanziconv, ie trad->simplified chinese is already
-                    # included in python-mwtext Wikitext2Words)
-                    obs['text'] = wtpp.transform(text).join(' ')
+                    obs['text'] = ' '.join(wtpp.transform(text))
                     obs['title'] = page_doc['title']
                     obs['rev_id'] = rev_doc['revid']
 

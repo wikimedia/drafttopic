@@ -7,7 +7,7 @@
     Usage:
         fetch_article_text --api-host=<url>
                            [--input=<path>] [--output=<path>]
-                           [--threads=<num>] [--debug]
+                           [--threads=<num>] [--tok_strategy=<str>] [--debug]
 
     Options:
         -h --help           Show this documentation.
@@ -19,6 +19,8 @@
                             (with text) out to. [default: <stdout>]
         --threads=<num>     The number of parallel query threads to run
                             [default: 4]
+        --tok_strategy=<str>Tokenization strategy supported by python-mwtext,
+                            None is default
         --debug             Print debug logging
 """
 import logging
@@ -28,6 +30,10 @@ from concurrent.futures import ThreadPoolExecutor
 import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
+
+from mwtext.content_transformers import Wikitext2Words
+forbidden_link_prefixes = [
+    'category', 'image', 'file']
 
 from .fetch_draft_text import DRAFTTOPIC_UA, build_fetch_text
 
@@ -54,25 +60,28 @@ def main(argv=None):
 
     threads = int(args['--threads'])
 
+    tok_strategy = None if not args['--tok_strategy'] else str(args['--tok_strategy'])
+    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
+
     session = mwapi.Session(args['--api-host'],
                             user_agent=DRAFTTOPIC_UA)
 
-    run(observations, session, threads, output)
+    run(observations, session, threads, output, wtpp)
 
 
-def run(observations, session, threads, output):
-    for obs in fetch_article_texts(observations, session, threads):
+def run(observations, session, threads, output, wtpp):
+    for obs in fetch_article_texts(observations, session, threads, wtpp):
         dump_observation(obs, output)
 
 
-def fetch_article_texts(observations, session, threads):
+def fetch_article_texts(observations, session, threads, wtpp):
     """
     Fetches article (recent revision) text for observations from a
     MediaWiki API.
     """
 
     executor = ThreadPoolExecutor(max_workers=threads)
-    _fetch_article_text = build_fetch_text(build_get_recent_revision(session))
+    _fetch_article_text = build_fetch_text(build_get_recent_revision(session), wtpp)
 
     for obs in executor.map(_fetch_article_text, observations):
         if obs is not None:
