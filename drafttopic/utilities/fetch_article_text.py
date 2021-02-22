@@ -29,10 +29,6 @@ import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
 
-#from mwtext.content_transformers import Wikitext2Words
-#forbidden_link_prefixes = [
-#    'category', 'image', 'file']
-
 from .fetch_draft_text import DRAFTTOPIC_UA, build_fetch_text
 
 logger = logging.getLogger(__name__)

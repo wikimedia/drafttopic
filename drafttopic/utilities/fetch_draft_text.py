@@ -30,11 +30,6 @@ import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
 
-#from hanziconv import HanziConv
-from mwtext.content_transformers import Wikitext2Words
-forbidden_link_prefixes = [
-    'category', 'image', 'file']
-
 logger = logging.getLogger(__name__)
 REDIRECT_RE = re.compile("#redirect", re.I)
 DRAFTTOPIC_UA = "Drafttopic fetch_text <ahalfaker@wikimedia.org>"
@@ -59,26 +54,25 @@ def main(argv=None):
         output = open(args['--output'], 'w')
 
     threads = int(args['--threads'])
-    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=None)
 
     session = mwapi.Session(args['--api-host'],
                             user_agent=DRAFTTOPIC_UA)
 
-    run(observations, session, threads, output, wtpp)
+    run(observations, session, threads, output)
 
 
-def run(observations, session, threads, output, wtpp):
-    for obs in fetch_draft_texts(observations, session, threads, wtpp):
+def run(observations, session, threads, output):
+    for obs in fetch_draft_texts(observations, session, threads):
         dump_observation(obs, output)
 
 
-def fetch_draft_texts(observations, session, threads, wtpp):
+def fetch_draft_texts(observations, session, threads):
     """
     Fetches draft (first revision) text for observations from a MediaWiki API.
     """
 
     executor = ThreadPoolExecutor(max_workers=threads)
-    _fetch_draft_text = build_fetch_text(build_get_first_revision(session), wtpp)
+    _fetch_draft_text = build_fetch_text(build_get_first_revision(session))
 
     for obs in executor.map(_fetch_draft_text, observations):
         if obs is not None:
@@ -87,7 +81,7 @@ def fetch_draft_texts(observations, session, threads, wtpp):
                          .format(obs['title'], len(obs['text'])))
 
 
-def build_fetch_text(get_first_revision, wtpp):
+def build_fetch_text(get_first_revision):
 
     def _fetch_text(obs):
         result = get_first_revision(obs['title'])
@@ -102,7 +96,7 @@ def build_fetch_text(get_first_revision, wtpp):
                 rev_doc = page_doc['revisions'][0]
                 text = rev_doc['slots']['main']['content']
                 if is_article(text):
-                    obs['text'] = ' '.join(wtpp.transform(text))
+                    obs['text'] = text
                     obs['title'] = page_doc['title']
                     obs['rev_id'] = rev_doc['revid']
 
