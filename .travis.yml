@@ -19,8 +19,12 @@ install:
   - make word2vec/arwiki-20200501-learned_vectors.50_cell.10k.kv
   - make word2vec/cswiki-20200501-learned_vectors.50_cell.10k.kv
   - make word2vec/enwiki-20200501-learned_vectors.50_cell.10k.kv
-  - make word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
+  - make word2vec/euwiki-20201201-learned_vectors.50_cell.10k.kv
+  - make word2vec/huwiki-20201201-learned_vectors.50_cell.10k.kv
+  - make word2vec/hywiki-20201201-learned_vectors.50_cell.10k.kv
   - make word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
+  - make word2vec/srwiki-20201201-learned_vectors.50_cell.10k.kv
+  - make word2vec/ukwiki-20201201-learned_vectors.50_cell.10k.kv
   - make word2vec/viwiki-20200501-learned_vectors.50_cell.10k.kv
   - make word2vec/wikidata-20200501-learned_vectors.50_cell.10k.kv
 
