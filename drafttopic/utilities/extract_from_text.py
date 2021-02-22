@@ -79,10 +79,10 @@ def main(argv=None):
     verbose = args['--verbose']
     tok_strategy = str(args['--tok_strategy']) if args['--tok_strategy'] is not None else None
     wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
-    run(observations, dependents, output, extractors, verbose, wtpp)
+    run(observations, dependents, output, extractors, wtpp, verbose)
 
 
-def run(labelings, dependents, output, extractors, verbose=False, wtpp):
+def run(labelings, dependents, output, extractors, wtpp, verbose=False):
     extractor_pool = Pool(processes=extractors)
 
     extractor = LabelingDependentExtractor(dependents, wtpp)

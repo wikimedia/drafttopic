@@ -195,6 +195,7 @@ datasets/jawiki.balanced_article_sample.w_draft_cache.json: \
 		drafttopic.feature_lists.jawiki.drafttopic \
 		--input=$< \
 		--output=$@ \
+		--tok_strategy=CJK \
 		--verbose
 
 datasets/jawiki.balanced_article_sample.w_article_cache.json: \
@@ -204,6 +205,7 @@ datasets/jawiki.balanced_article_sample.w_article_cache.json: \
 		drafttopic.feature_lists.jawiki.articletopic \
 		--input=$< \
 		--output=$@ \
+		--tok_strategy=CJK \
 		--verbose
 
 
