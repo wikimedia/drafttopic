@@ -68,20 +68,16 @@ datasets/zhwiki.balanced_article_sample.w_draft_text.json: \
 		datasets/zhwiki.balanced_article_sample.json
 	./utility fetch_draft_text \
 	  --api-host=https://zh.wikipedia.org \
-	  --tok_strategy=CJK \
 	  --input=$< \
 	  --output=$@ \
-	  --threads=1 \
 	  --debug
 
 datasets/zhwiki.balanced_article_sample.w_article_text.json: \
 		datasets/zhwiki.balanced_article_sample.json
 	./utility fetch_article_text \
 	  --api-host=https://zh.wikipedia.org \
-          --tok_strategy=CJK \
           --input=$< \
           --output=$@ \
-          --threads=1 \
           --debug
 
 word2vec/zhwiki-20200501-learned_vectors.50_cell.10k.kv:
@@ -177,28 +173,24 @@ datasets/jawiki.balanced_article_sample.w_draft_text.json: \
 		datasets/jawiki.balanced_article_sample.json
 	./utility fetch_draft_text \
 	  --api-host=https://ja.wikipedia.org \
-	  --tok_strategy=CJK \
 	  --input=$< \
 	  --output=$@ \
-	  --threads=1 \
 	  --debug
 
 datasets/jawiki.balanced_article_sample.w_article_text.json: \
 		datasets/jawiki.balanced_article_sample.json
 	./utility fetch_article_text \
           --api-host=https://ja.wikipedia.org \
-          --tok_strategy=CJK \
           --input=$< \
           --output=$@ \
-          --threads=1 \
           --debug
 
-word2vec/jawiki-20200501-learned_vectors.50_cell.10k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/jawiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+word2vec/jawiki-20201201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/jawiki-20201201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/jawiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/jawiki.balanced_article_sample.w_draft_text.json \
-		word2vec/jawiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/jawiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.jawiki.drafttopic \
 		--input=$< \
@@ -207,7 +199,7 @@ datasets/jawiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/jawiki.balanced_article_sample.w_article_cache.json: \
 		datasets/jawiki.balanced_article_sample.w_article_text.json \
-		word2vec/jawiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/jawiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.jawiki.articletopic \
 		--input=$< \
@@ -287,20 +279,16 @@ datasets/kowiki.balanced_article_sample.w_draft_text.json: \
 		datasets/kowiki.balanced_article_sample.json
 	./utility fetch_draft_text \
 	  --api-host=https://ko.wikipedia.org \
-	  --tok_strategy=CJK \
 	  --input=$< \
 	  --output=$@ \
-	  --threads=1 \
 	  --debug
 
 datasets/kowiki.balanced_article_sample.w_article_text.json: \
 		datasets/kowiki.balanced_article_sample.json
 	./utility fetch_article_text \
 	  --api-host=https://ko.wikipedia.org \
-	  --tok_strategy=CJK \
 	  --input=$< \
 	  --output=$@ \
-	  --threads=1 \
 	  --debug
 
 word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv:

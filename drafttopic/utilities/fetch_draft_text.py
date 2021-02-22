@@ -7,7 +7,7 @@
     Usage:
         fetch_draft_text --api-host=<url>
                          [--input=<path>] [--output=<path>]
-                         [--threads=<num>] [--tok_strategy=<str>] [--debug]
+                         [--threads=<num>] [--debug]
 
     Options:
         -h --help           Show this documentation.
@@ -19,20 +19,18 @@
                             (with text) out to. [default: <stdout>]
         --threads=<num>     The number of parallel query threads to run
                             [default: 4]
-        --tok_strategy=<str>Tokenization strategy supported by python-mwtext, 
-                            None is default
         --debug             Print debug logging
 """
 import logging
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
-import jpype
 
 import mwapi
 from docopt import docopt
 from revscoring.utilities.util import dump_observation, read_observations
 
+#from hanziconv import HanziConv
 from mwtext.content_transformers import Wikitext2Words
 forbidden_link_prefixes = [
     'category', 'image', 'file']
@@ -61,8 +59,7 @@ def main(argv=None):
         output = open(args['--output'], 'w')
 
     threads = int(args['--threads'])
-    tok_strategy = None if not args['--tok_strategy'] else str(args['--tok_strategy'])
-    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
+    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=None)
 
     session = mwapi.Session(args['--api-host'],
                             user_agent=DRAFTTOPIC_UA)
