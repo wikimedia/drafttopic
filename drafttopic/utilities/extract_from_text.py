@@ -79,6 +79,8 @@ def main(argv=None):
     verbose = args['--verbose']
     tok_strategy = str(args['--tok_strategy']) if args['--tok_strategy'] is not None else None
     wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
+    sys.stderr.write("tokenization strategy is: " + tok_strategy)
+    sys.stderr.write("\nnumber of processes: " + str(extractors) + "\n")
     run(observations, dependents, output, extractors, wtpp, verbose)
 
 

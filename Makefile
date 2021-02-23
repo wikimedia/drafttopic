@@ -80,25 +80,27 @@ datasets/zhwiki.balanced_article_sample.w_article_text.json: \
           --output=$@ \
           --debug
 
-word2vec/zhwiki-20200501-learned_vectors.50_cell.10k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/zhwiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+word2vec/zhwiki-20201201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/zhwiki-20201201-learned_vectors.50_cell.10k.kv -qO- > $@
 
 datasets/zhwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/zhwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/zhwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/zhwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.zhwiki.drafttopic \
 		--input=$< \
 		--output=$@ \
+                --tok_strategy=CJK \
 		--verbose
 
 datasets/zhwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/zhwiki.balanced_article_sample.w_article_text.json \
-		word2vec/zhwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/zhwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.zhwiki.articletopic \
 		--input=$< \
 		--output=$@ \
+                --tok_strategy=CJK \
 		--verbose
 
 
@@ -293,24 +295,27 @@ datasets/kowiki.balanced_article_sample.w_article_text.json: \
 	  --output=$@ \
 	  --debug
 
-word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+word2vec/kowiki-20201201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20201201-learned_vectors.50_cell.10k.kv -qO- > $@
+
 datasets/kowiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/kowiki.balanced_article_sample.w_draft_text.json \
-		word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/kowiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.kowiki.drafttopic \
 		--input=$< \
 		--output=$@ \
+                --tok_strategy=CJK \
 		--verbose
 
 datasets/kowiki.balanced_article_sample.w_article_cache.json: \
 		datasets/kowiki.balanced_article_sample.w_article_text.json \
-		word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/kowiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.kowiki.articletopic \
 		--input=$< \
 		--output=$@ \
+                --tok_strategy=CJK \
 		--verbose
 
 
