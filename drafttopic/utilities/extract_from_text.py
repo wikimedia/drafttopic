@@ -12,6 +12,7 @@
                           [--input=<path>]
                           [--output=<path>]
                           [--extractors=<num>]
+                          [--tok_strategy=<str>]
                           [--verbose]
                           [--debug]
 
@@ -25,6 +26,7 @@
                                 [default: <stdout>]
         --extractors=<num>      The number of parallel extractors to
                                 start [default: <cpu count>]
+        --tok_strategy=<str>    tokenization strategy
         --verbose               Print dots and stuff to stderr
         --debug                 Print debug logs
 """
@@ -39,6 +41,9 @@ from revscoring.datasources import revision_oriented
 from revscoring.dependencies import solve
 from revscoring.utilities.util import dump_observation, read_observations
 
+from mwtext.content_transformers import Wikitext2Words
+forbidden_link_prefixes = [
+    'category', 'image', 'file']
 
 def main(argv=None):
     args = docopt.docopt(__doc__, argv=argv)
@@ -72,14 +77,17 @@ def main(argv=None):
         extractors = int(args['--extractors'])
 
     verbose = args['--verbose']
+    tok_strategy = str(args['--tok_strategy']) if args['--tok_strategy'] is not None else None
+    wtpp = Wikitext2Words(forbidden_link_prefixes, tok_strategy=tok_strategy)
+    sys.stderr.write("tokenization strategy is: " + tok_strategy)
+    sys.stderr.write("\nnumber of processes: " + str(extractors) + "\n")
+    run(observations, dependents, output, extractors, wtpp, verbose)
 
-    run(observations, dependents, output, extractors, verbose)
 
-
-def run(labelings, dependents, output, extractors, verbose=False):
+def run(labelings, dependents, output, extractors, wtpp, verbose=False):
     extractor_pool = Pool(processes=extractors)
 
-    extractor = LabelingDependentExtractor(dependents)
+    extractor = LabelingDependentExtractor(dependents, wtpp)
 
     for observation in extractor_pool.imap(
             extractor.extract_and_cache, labelings):
@@ -100,15 +108,16 @@ def run(labelings, dependents, output, extractors, verbose=False):
 
 class LabelingDependentExtractor:
 
-    def __init__(self, dependents):
+    def __init__(self, dependents, wtpp):
         self.dependents = dependents
+        self.wtpp = wtpp
 
     def extract_and_cache(self, observation):
         if observation['text'] is None:
             return None
 
         values = extract_from_text(
-            self.dependents, observation['text'],
+            self.dependents, self.wtpp, observation['text'],
             cache=observation.get('cache'))
         dependent_cache = {str(d): val
                            for d, val in zip(self.dependents, values)}
@@ -121,7 +130,7 @@ class LabelingDependentExtractor:
         return observation
 
 
-def extract_from_text(dependents, text, cache=None, context=None):
+def extract_from_text(dependents, wtpp, text, cache=None, context=None):
     """
     Extracts a set of values from a text an returns a cache containing just
     those values.
@@ -135,6 +144,6 @@ def extract_from_text(dependents, text, cache=None, context=None):
         A list of extracted feature values
     """
     cache = cache if cache is not None else {}
-    cache[revision_oriented.revision.text] = text
+    cache[revision_oriented.revision.text] = ' '.join(wtpp.transform(text))
 
     return list(solve(dependents, cache=cache, context=context))

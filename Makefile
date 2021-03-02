@@ -7,7 +7,16 @@ models: \
 	drafttopic_models
 
 drafttopic_models: \
-	models/hywiki.drafttopic.gradient_boosting.model
+        models/arwiki.drafttopic.gradient_boosting.model \
+        models/cswiki.drafttopic.gradient_boosting.model \
+        models/enwiki.drafttopic.gradient_boosting.model \
+        models/kowiki.drafttopic.gradient_boosting.model \
+        models/viwiki.drafttopic.gradient_boosting.model \
+        models/wikidata.drafttopic.gradient_boosting.model \
+        models/hywiki.drafttopic.gradient_boosting.model \
+        models/zhwiki.drafttopic.gradient_boosting.model \
+        models/jawiki.drafttopic.gradient_boosting.model \
+        models/kowiki.drafttopic.gradient_boosting.model
 
 articletopic_models: \
 	models/arwiki.articletopic.gradient_boosting.model \
@@ -16,11 +25,37 @@ articletopic_models: \
 	models/kowiki.articletopic.gradient_boosting.model \
 	models/viwiki.articletopic.gradient_boosting.model \
 	models/wikidata.articletopic.gradient_boosting.model \
-	models/hywiki.articletopic.gradient_boosting.model
+	models/hywiki.articletopic.gradient_boosting.model \
+        models/zhwiki.articletopic.gradient_boosting.model \
+        models/jawiki.articletopic.gradient_boosting.model \
+        models/kowiki.articletopic.gradient_boosting.model
 
-tuning_models: \
-	tuning_reports/hywiki.articletopic.md \
-	tuning_reports/hywiki.drafttopic.md
+tuning_drafttopic_models: \
+        tuning_reports/arwiki.drafttopic.md \
+        tuning_reports/cswiki.drafttopic.md \
+        tuning_reports/enwiki.drafttopic.md \
+        tuning_reports/kowiki.drafttopic.md \
+        tuning_reports/viwiki.drafttopic.md \
+        tuning_reports/wikidata.drafttopic.md \
+        tuning_reports/hywiki.drafttopic.md \
+        tuning_reports/zhwiki.drafttopic.md \
+        tuning_reports/jawiki.drafttopic.md \
+        tuning_reports/kowiki.drafttopic.md
+
+tuning_articletopic_models: \
+        tuning_reports/arwiki.articletopic.md \
+        tuning_reports/cswiki.articletopic.md \
+        tuning_reports/enwiki.articletopic.md \
+        tuning_reports/kowiki.articletopic.md \
+        tuning_reports/viwiki.articletopic.md \
+        tuning_reports/wikidata.articletopic.md \
+        tuning_reports/hywiki.articletopic.md \
+        tuning_reports/zhwiki.articletopic.md \
+        tuning_reports/jawiki.articletopic.md \
+        tuning_reports/kowiki.articletopic.md
+
+
+################## Common datasets #################################
 
 datasets/enwiki.article_items_with_wikiproject_templates.20191201.json.bz2:
 	wget https://ndownloader.figshare.com/files/20183063 -qO- > $@
@@ -55,54 +90,165 @@ labels-config.json: \
 		datasets/enwiki.labeled_article_items.json.bz2
 	bzcat $< | ./utility write_labels taxo_labels > $@
 
-datasets/hywiki.balanced_article_sample.json: \
+################## Chinese Wikipedia #################################
+
+datasets/zhwiki.balanced_article_sample.json: \
 		datasets/enwiki.labeled_article_items.json.bz2
-	bzcat $< | ./utility balance_sample hy -n 1000 > $@
+	bzcat $< | ./utility balance_sample zh -n 1000 > $@
 
-datasets/hywiki.balanced_article_sample.w_draft_text.json: \
-		datasets/hywiki.balanced_article_sample.json
+datasets/zhwiki.balanced_article_sample.w_draft_text.json: \
+		datasets/zhwiki.balanced_article_sample.json
 	./utility fetch_draft_text \
-	  --api-host=https://hy.wikipedia.org \
+	  --api-host=https://zh.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
 
-datasets/hywiki.balanced_article_sample.w_article_text.json: \
-		datasets/hywiki.balanced_article_sample.json
+datasets/zhwiki.balanced_article_sample.w_article_text.json: \
+		datasets/zhwiki.balanced_article_sample.json
 	./utility fetch_article_text \
-	  --api-host=https://hy.wikipedia.org \
+	  --api-host=https://zh.wikipedia.org \
+          --input=$< \
+          --output=$@ \
+          --debug
+
+word2vec/zhwiki-20201201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/zhwiki-20201201-learned_vectors.50_cell.10k.kv -qO- > $@
+
+datasets/zhwiki.balanced_article_sample.w_draft_cache.json: \
+		datasets/zhwiki.balanced_article_sample.w_draft_text.json \
+		word2vec/zhwiki-20201201-learned_vectors.50_cell.10k.kv
+	./utility extract_from_text \
+		drafttopic.feature_lists.zhwiki.drafttopic \
+		--input=$< \
+		--output=$@ \
+                --tok_strategy=CJK \
+		--verbose
+
+datasets/zhwiki.balanced_article_sample.w_article_cache.json: \
+		datasets/zhwiki.balanced_article_sample.w_article_text.json \
+		word2vec/zhwiki-20201201-learned_vectors.50_cell.10k.kv
+	./utility extract_from_text \
+		drafttopic.feature_lists.zhwiki.articletopic \
+		--input=$< \
+		--output=$@ \
+                --tok_strategy=CJK \
+		--verbose
+
+
+models/zhwiki.drafttopic.gradient_boosting.model: \
+		datasets/zhwiki.balanced_article_sample.w_draft_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.zhwiki.drafttopic taxo_labels \
+		--debug \
+	   	--labels-config=labels-config.json \
+	   	-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+	   	-p 'max_features="log2"' \
+	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor).0 \
+	   	--folds=5 \
+		--multilabel > $@
+
+	revscoring model_info $@ > model_info/zhwiki.drafttopic.md
+
+models/zhwiki.articletopic.gradient_boosting.model: \
+		datasets/zhwiki.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.zhwiki.articletopic taxo_labels \
+		--debug \
+	   	--labels-config=labels-config.json \
+	 	-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+	   	-p 'max_features="log2"' \
+	   	-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor).0 \
+	   	--folds=5 \
+		--multilabel > $@
+
+	revscoring model_info $@ > model_info/zhwiki.articletopic.md
+
+
+tuning_reports/zhwiki.drafttopic.md: \
+		datasets/zhwiki.balanced_article_sample.w_draft_cache.json
+	cat $< | \
+	revscoring tune config/gradient_boosting.params.yaml \
+		drafttopic.feature_lists.zhwiki.drafttopic \
+	   	taxo_labels pr_auc.macro \
+	   	--debug \
+	   	--verbose \
+	   	--multilabel \
+	   	--labels-config=labels-config.json \
+	   	--folds=3 > $@
+
+tuning_reports/zhwiki.articletopic.md: \
+		datasets/zhwiki.balanced_article_sample.w_article_cache.json
+	cat $< | \
+	revscoring tune config/gradient_boosting.params.yaml \
+		drafttopic.feature_lists.zhwiki.articletopic \
+	   	taxo_labels pr_auc.macro \
+	   	--debug \
+	   	--verbose \
+	   	--multilabel \
+	   	--labels-config=labels-config.json \
+	   	--folds=3 > $@
+
+################## Japanese Wikipedia #################################
+
+datasets/jawiki.balanced_article_sample.json: \
+		datasets/enwiki.labeled_article_items.json.bz2
+	bzcat $< | ./utility balance_sample ja -n 1000 > $@
+
+datasets/jawiki.balanced_article_sample.w_draft_text.json: \
+		datasets/jawiki.balanced_article_sample.json
+	./utility fetch_draft_text \
+	  --api-host=https://ja.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
 
-word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/hywiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+datasets/jawiki.balanced_article_sample.w_article_text.json: \
+		datasets/jawiki.balanced_article_sample.json
+	./utility fetch_article_text \
+          --api-host=https://ja.wikipedia.org \
+          --input=$< \
+          --output=$@ \
+          --debug
 
-datasets/hywiki.balanced_article_sample.w_draft_cache.json: \
-		datasets/hywiki.balanced_article_sample.w_draft_text.json \
-		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
+word2vec/jawiki-20201201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/jawiki-20201201-learned_vectors.50_cell.10k.kv -qO- > $@
+
+datasets/jawiki.balanced_article_sample.w_draft_cache.json: \
+		datasets/jawiki.balanced_article_sample.w_draft_text.json \
+		word2vec/jawiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
-		drafttopic.feature_lists.hywiki.drafttopic \
+		drafttopic.feature_lists.jawiki.drafttopic \
 		--input=$< \
 		--output=$@ \
+		--tok_strategy=CJK \
 		--verbose
 
-datasets/hywiki.balanced_article_sample.w_article_cache.json: \
-		datasets/hywiki.balanced_article_sample.w_article_text.json \
-		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
+datasets/jawiki.balanced_article_sample.w_article_cache.json: \
+		datasets/jawiki.balanced_article_sample.w_article_text.json \
+		word2vec/jawiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
-		drafttopic.feature_lists.hywiki.articletopic \
+		drafttopic.feature_lists.jawiki.articletopic \
 		--input=$< \
 		--output=$@ \
+		--tok_strategy=CJK \
 		--verbose
 
 
-models/hywiki.drafttopic.gradient_boosting.model: \
-		datasets/hywiki.balanced_article_sample.w_draft_cache.json \
+models/jawiki.drafttopic.gradient_boosting.model: \
+		datasets/jawiki.balanced_article_sample.w_draft_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.hywiki.drafttopic taxo_labels \
+		drafttopic.feature_lists.jawiki.drafttopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
 	   	-p 'n_estimators=150' \
@@ -113,17 +259,17 @@ models/hywiki.drafttopic.gradient_boosting.model: \
 	   	--folds=5 \
 		--multilabel > $@
 
-	revscoring model_info $@ > model_info/hywiki.drafttopic.md
+	revscoring model_info $@ > model_info/jawiki.drafttopic.md
 
-models/hywiki.articletopic.gradient_boosting.model: \
-		datasets/hywiki.balanced_article_sample.w_article_cache.json \
+models/jawiki.articletopic.gradient_boosting.model: \
+		datasets/jawiki.balanced_article_sample.w_article_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.hywiki.articletopic taxo_labels \
+		drafttopic.feature_lists.jawiki.articletopic taxo_labels \
 		--debug \
 	   	--labels-config=labels-config.json \
-	   	-p 'n_estimators=150' \
+	 	-p 'n_estimators=150' \
 		-p 'max_depth=5' \
 	   	-p 'max_features="log2"' \
 	   	-p 'learning_rate=0.1' \
@@ -131,14 +277,14 @@ models/hywiki.articletopic.gradient_boosting.model: \
 	   	--folds=5 \
 		--multilabel > $@
 
-	revscoring model_info $@ > model_info/hywiki.articletopic.md
+	revscoring model_info $@ > model_info/jawiki.articletopic.md
 
 
-tuning_reports/hywiki.drafttopic.md: \
-		datasets/hywiki.balanced_article_sample.w_draft_cache.json
+tuning_reports/jawiki.drafttopic.md: \
+		datasets/jawiki.balanced_article_sample.w_draft_cache.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
-		drafttopic.feature_lists.hywiki.drafttopic \
+		drafttopic.feature_lists.jawiki.drafttopic \
 	   	taxo_labels pr_auc.macro \
 	   	--debug \
 	   	--verbose \
@@ -146,17 +292,125 @@ tuning_reports/hywiki.drafttopic.md: \
 	   	--labels-config=labels-config.json \
 	   	--folds=3 > $@
 
-tuning_reports/hywiki.articletopic.md: \
-		datasets/hywiki.balanced_article_sample.w_article_cache.json
+tuning_reports/jawiki.articletopic.md: \
+		datasets/jawiki.balanced_article_sample.w_article_cache.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
-		drafttopic.feature_lists.hywiki.articletopic \
+		drafttopic.feature_lists.jawiki.articletopic \
 	   	taxo_labels pr_auc.macro \
 	   	--debug \
 	   	--verbose \
 	   	--multilabel \
 	   	--labels-config=labels-config.json \
 	   	--folds=3 > $@
+
+
+################## Korean Wikipedia #################################
+
+datasets/kowiki.balanced_article_sample.json: \
+		datasets/enwiki.labeled_article_items.json.bz2
+	bzcat $< | ./utility balance_sample ko -n 1000 > $@
+
+datasets/kowiki.balanced_article_sample.w_draft_text.json: \
+		datasets/kowiki.balanced_article_sample.json
+	./utility fetch_draft_text \
+	  --api-host=https://ko.wikipedia.org \
+	  --input=$< \
+	  --output=$@ \
+	  --debug
+
+datasets/kowiki.balanced_article_sample.w_article_text.json: \
+		datasets/kowiki.balanced_article_sample.json
+	./utility fetch_article_text \
+	  --api-host=https://ko.wikipedia.org \
+	  --input=$< \
+	  --output=$@ \
+	  --debug
+
+word2vec/kowiki-20201201-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20201201-learned_vectors.50_cell.10k.kv -qO- > $@
+
+datasets/kowiki.balanced_article_sample.w_draft_cache.json: \
+		datasets/kowiki.balanced_article_sample.w_draft_text.json \
+		word2vec/kowiki-20201201-learned_vectors.50_cell.10k.kv
+	./utility extract_from_text \
+		drafttopic.feature_lists.kowiki.drafttopic \
+		--input=$< \
+		--output=$@ \
+                --tok_strategy=CJK \
+		--verbose
+
+datasets/kowiki.balanced_article_sample.w_article_cache.json: \
+		datasets/kowiki.balanced_article_sample.w_article_text.json \
+		word2vec/kowiki-20201201-learned_vectors.50_cell.10k.kv
+	./utility extract_from_text \
+		drafttopic.feature_lists.kowiki.articletopic \
+		--input=$< \
+		--output=$@ \
+                --tok_strategy=CJK \
+		--verbose
+
+
+models/kowiki.drafttopic.gradient_boosting.model: \
+		datasets/kowiki.balanced_article_sample.w_draft_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.kowiki.drafttopic taxo_labels \
+		--debug \
+		--labels-config=labels-config.json \
+		-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+		-p 'max_features="log2"' \
+		-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor).0 \
+		--folds=5 \
+		--multilabel > $@
+
+	revscoring model_info $@ > model_info/kowiki.drafttopic.md
+
+models/kowiki.articletopic.gradient_boosting.model: \
+		datasets/kowiki.balanced_article_sample.w_article_cache.json \
+		labels-config.json
+	cat $< | \
+	revscoring cv_train revscoring.scoring.models.GradientBoosting \
+		drafttopic.feature_lists.kowiki.articletopic taxo_labels \
+		--debug \
+		--labels-config=labels-config.json \
+		-p 'n_estimators=150' \
+		-p 'max_depth=5' \
+		-p 'max_features="log2"' \
+		-p 'learning_rate=0.1' \
+		--version=$(drafttopic_major_minor).0 \
+		--folds=5 \
+		--multilabel > $@
+
+	revscoring model_info $@ > model_info/kowiki.articletopic.md
+
+
+tuning_reports/kowiki.drafttopic.md: \
+		datasets/kowiki.balanced_article_sample.w_draft_cache.json
+	cat $< | \
+	revscoring tune config/gradient_boosting.params.yaml \
+		drafttopic.feature_lists.kowiki.drafttopic \
+		taxo_labels pr_auc.macro \
+		--debug \
+		--verbose \
+		--multilabel \
+		--labels-config=labels-config.json \
+		--folds=3 > $@
+
+tuning_reports/kowiki.articletopic.md: \
+		datasets/kowiki.balanced_article_sample.w_article_cache.json
+	cat $< | \
+	revscoring tune config/gradient_boosting.params.yaml \
+		drafttopic.feature_lists.kowiki.articletopic \
+		taxo_labels pr_auc.macro \
+		--debug \
+		--verbose \
+		--multilabel \
+		--labels-config=labels-config.json \
+		--folds=3 > $@
 
 #####################  English Wikipedia #############################
 
@@ -263,110 +517,110 @@ tuning_reports/enwiki.articletopic.md: \
 	   	--labels-config=labels-config.yaml \
 	   	--folds=3 > $@
 
-################## Korean Wikipedia #################################
+################## Armenian Wikipedia #################################
 
-datasets/kowiki.balanced_article_sample.json: \
+datasets/hywiki.balanced_article_sample.json: \
 		datasets/enwiki.labeled_article_items.json.bz2
-	bzcat $< | ./utility balance_sample ko -n 1000 > $@
+	bzcat $< | ./utility balance_sample hy -n 1000 > $@
 
-datasets/kowiki.balanced_article_sample.w_draft_text.json: \
-		datasets/kowiki.balanced_article_sample.json
+datasets/hywiki.balanced_article_sample.w_draft_text.json: \
+		datasets/hywiki.balanced_article_sample.json
 	./utility fetch_draft_text \
-	  --api-host=https://ko.wikipedia.org \
+	  --api-host=https://hy.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
 
-datasets/kowiki.balanced_article_sample.w_article_text.json: \
-		datasets/kowiki.balanced_article_sample.json
+datasets/hywiki.balanced_article_sample.w_article_text.json: \
+		datasets/hywiki.balanced_article_sample.json
 	./utility fetch_article_text \
-	  --api-host=https://ko.wikipedia.org \
+	  --api-host=https://hy.wikipedia.org \
 	  --input=$< \
 	  --output=$@ \
 	  --debug
 
-word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv:
-	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/kowiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
+word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv:
+	wget https://analytics.wikimedia.org/datasets/archive/public-datasets/all/ores/topic/vectors/hywiki-20200501-learned_vectors.50_cell.10k.kv -qO- > $@
 
-datasets/kowiki.balanced_article_sample.w_draft_cache.json: \
-		datasets/kowiki.balanced_article_sample.w_draft_text.json \
-		word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
+datasets/hywiki.balanced_article_sample.w_draft_cache.json: \
+		datasets/hywiki.balanced_article_sample.w_draft_text.json \
+		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
-		drafttopic.feature_lists.kowiki.drafttopic \
+		drafttopic.feature_lists.hywiki.drafttopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
 
-datasets/kowiki.balanced_article_sample.w_article_cache.json: \
-		datasets/kowiki.balanced_article_sample.w_article_text.json \
-		word2vec/kowiki-20200501-learned_vectors.50_cell.10k.kv
+datasets/hywiki.balanced_article_sample.w_article_cache.json: \
+		datasets/hywiki.balanced_article_sample.w_article_text.json \
+		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
-		drafttopic.feature_lists.kowiki.articletopic \
+		drafttopic.feature_lists.hywiki.articletopic \
 		--input=$< \
 		--output=$@ \
 		--verbose
 
 
-models/kowiki.drafttopic.gradient_boosting.model: \
-		datasets/kowiki.balanced_article_sample.w_draft_cache.json \
+models/hywiki.drafttopic.gradient_boosting.model: \
+		datasets/hywiki.balanced_article_sample.w_draft_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.kowiki.drafttopic taxo_labels \
+		drafttopic.feature_lists.hywiki.drafttopic taxo_labels \
 		--debug \
-	   	--labels-config=labels-config.json \
-	   	-p 'n_estimators=150' \
+		--labels-config=labels-config.json \
+		-p 'n_estimators=150' \
 		-p 'max_depth=5' \
-	   	-p 'max_features="log2"' \
-	   	-p 'learning_rate=0.1' \
+		-p 'max_features="log2"' \
+		-p 'learning_rate=0.1' \
 		--version=$(drafttopic_major_minor).0 \
-	   	--folds=5 \
+		--folds=5 \
 		--multilabel > $@
 
-	revscoring model_info $@ > model_info/kowiki.drafttopic.md
+	revscoring model_info $@ > model_info/hywiki.drafttopic.md
 
-models/kowiki.articletopic.gradient_boosting.model: \
-		datasets/kowiki.balanced_article_sample.w_article_cache.json \
+models/hywiki.articletopic.gradient_boosting.model: \
+		datasets/hywiki.balanced_article_sample.w_article_cache.json \
 		labels-config.json
 	cat $< | \
 	revscoring cv_train revscoring.scoring.models.GradientBoosting \
-		drafttopic.feature_lists.kowiki.articletopic taxo_labels \
+		drafttopic.feature_lists.hywiki.articletopic taxo_labels \
 		--debug \
-	   	--labels-config=labels-config.json \
-	 	-p 'n_estimators=150' \
+		--labels-config=labels-config.json \
+		-p 'n_estimators=150' \
 		-p 'max_depth=5' \
-	   	-p 'max_features="log2"' \
-	   	-p 'learning_rate=0.1' \
+		-p 'max_features="log2"' \
+		-p 'learning_rate=0.1' \
 		--version=$(drafttopic_major_minor).0 \
-	   	--folds=5 \
+		--folds=5 \
 		--multilabel > $@
 
-	revscoring model_info $@ > model_info/kowiki.articletopic.md
+	revscoring model_info $@ > model_info/hywiki.articletopic.md
 
 
-tuning_reports/kowiki.drafttopic.md: \
-		datasets/kowiki.balanced_article_sample.w_draft_cache.json
+tuning_reports/hywiki.drafttopic.md: \
+		datasets/hywiki.balanced_article_sample.w_draft_cache.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
-		drafttopic.feature_lists.kowiki.drafttopic \
-	   	taxo_labels pr_auc.macro \
-	   	--debug \
-	   	--verbose \
-	   	--multilabel \
-	   	--labels-config=labels-config.json \
-	   	--folds=3 > $@
+		drafttopic.feature_lists.hywiki.drafttopic \
+		taxo_labels pr_auc.macro \
+		--debug \
+		--verbose \
+		--multilabel \
+		--labels-config=labels-config.json \
+		--folds=3 > $@
 
-tuning_reports/kowiki.articletopic.md: \
-		datasets/kowiki.balanced_article_sample.w_article_cache.json
+tuning_reports/hywiki.articletopic.md: \
+		datasets/hywiki.balanced_article_sample.w_article_cache.json
 	cat $< | \
 	revscoring tune config/gradient_boosting.params.yaml \
-		drafttopic.feature_lists.kowiki.articletopic \
-	   	taxo_labels pr_auc.macro \
-	   	--debug \
-	   	--verbose \
-	   	--multilabel \
-	   	--labels-config=labels-config.json \
-	   	--folds=3 > $@
+		drafttopic.feature_lists.hywiki.articletopic \
+		taxo_labels pr_auc.macro \
+		--debug \
+		--verbose \
+		--multilabel \
+		--labels-config=labels-config.json \
+		--folds=3 > $@
 
 
 ###################### Vietnamese Wikipedia #########################

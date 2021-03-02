@@ -3,23 +3,23 @@ from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 
 
-kowiki_kvs = vectorizers.word2vec.load_gensim_kv(
-    filename="kowiki-20201201-learned_vectors.50_cell.10k.kv", mmap='r')
+zhwiki_kvs = vectorizers.word2vec.load_gensim_kv(
+    filename="zhwiki-20201201-learned_vectors.50_cell.10k.kv", mmap='r')
 
 
 def vectorize_words(words):
-    return vectorizers.word2vec.vectorize_words(kowiki_kvs, words)
+    return vectorizers.word2vec.vectorize_words(zhwiki_kvs, words)
 
 
 revision_text_vectors = vectorizers.word2vec(
     wikitext.revision.datasources.cjk.cjks,
     vectorize_words,
-    name="revision.text.ko_vectors")
+    name="revision.text.zh_vectors")
 
 w2v = aggregators.mean(
     revision_text_vectors,
     vector=True,
-    name="revision.text.ko_vectors_mean"
+    name="revision.text.zh_vectors_mean"
 )
 
 drafttopic = [w2v]

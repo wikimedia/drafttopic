@@ -96,7 +96,6 @@ def build_fetch_text(get_first_revision):
                 rev_doc = page_doc['revisions'][0]
                 text = rev_doc['slots']['main']['content']
                 if is_article(text):
-
                     obs['text'] = text
                     obs['title'] = page_doc['title']
                     obs['rev_id'] = rev_doc['revid']
