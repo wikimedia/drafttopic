@@ -12,7 +12,7 @@ def vectorize_words(words):
 
 
 revision_text_vectors = vectorizers.word2vec(
-    mappers.lower_case(wikitext.revision.datasources.words),
+    wikitext.revision.datasources.cjk.cjks,
     vectorize_words,
     name="revision.text.ko_vectors")
 

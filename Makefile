@@ -7,7 +7,16 @@ models: \
 	drafttopic_models
 
 drafttopic_models: \
-	models/hywiki.drafttopic.gradient_boosting.model
+        models/arwiki.drafttopic.gradient_boosting.model \
+        models/cswiki.drafttopic.gradient_boosting.model \
+        models/enwiki.drafttopic.gradient_boosting.model \
+        models/kowiki.drafttopic.gradient_boosting.model \
+        models/viwiki.drafttopic.gradient_boosting.model \
+        models/wikidata.drafttopic.gradient_boosting.model \
+        models/hywiki.drafttopic.gradient_boosting.model \
+        models/zhwiki.drafttopic.gradient_boosting.model \
+        models/jawiki.drafttopic.gradient_boosting.model \
+        models/kowiki.drafttopic.gradient_boosting.model
 
 articletopic_models: \
 	models/arwiki.articletopic.gradient_boosting.model \
@@ -16,11 +25,34 @@ articletopic_models: \
 	models/kowiki.articletopic.gradient_boosting.model \
 	models/viwiki.articletopic.gradient_boosting.model \
 	models/wikidata.articletopic.gradient_boosting.model \
-	models/hywiki.articletopic.gradient_boosting.model
+	models/hywiki.articletopic.gradient_boosting.model \
+        models/zhwiki.articletopic.gradient_boosting.model \
+        models/jawiki.articletopic.gradient_boosting.model \
+        models/kowiki.articletopic.gradient_boosting.model
 
-tuning_models: \
-	tuning_reports/hywiki.articletopic.md \
-	tuning_reports/hywiki.drafttopic.md
+tuning_drafttopic_models: \
+        tuning_reports/arwiki.drafttopic.md \
+        tuning_reports/cswiki.drafttopic.md \
+        tuning_reports/enwiki.drafttopic.md \
+        tuning_reports/kowiki.drafttopic.md \
+        tuning_reports/viwiki.drafttopic.md \
+        tuning_reports/wikidata.drafttopic.md \
+        tuning_reports/hywiki.drafttopic.md \
+        tuning_reports/zhwiki.drafttopic.md \
+        tuning_reports/jawiki.drafttopic.md \
+        tuning_reports/kowiki.drafttopic.md
+
+tuning_articletopic_models: \
+        tuning_reports/arwiki.articletopic.md \
+        tuning_reports/cswiki.articletopic.md \
+        tuning_reports/enwiki.articletopic.md \
+        tuning_reports/kowiki.articletopic.md \
+        tuning_reports/viwiki.articletopic.md \
+        tuning_reports/wikidata.articletopic.md \
+        tuning_reports/hywiki.articletopic.md \
+        tuning_reports/zhwiki.articletopic.md \
+        tuning_reports/jawiki.articletopic.md \
+        tuning_reports/kowiki.articletopic.md
 
 
 ################## Common datasets #################################

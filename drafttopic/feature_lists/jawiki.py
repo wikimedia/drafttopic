@@ -3,16 +3,16 @@ from revscoring.features import wikitext
 from revscoring.features.meta import aggregators
 
 
-kowiki_kvs = vectorizers.word2vec.load_gensim_kv(
+jawiki_kvs = vectorizers.word2vec.load_gensim_kv(
     filename="jawiki-20201201-learned_vectors.50_cell.10k.kv", mmap='r')
 
 
 def vectorize_words(words):
-    return vectorizers.word2vec.vectorize_words(kowiki_kvs, words)
+    return vectorizers.word2vec.vectorize_words(jawiki_kvs, words)
 
 
 revision_text_vectors = vectorizers.word2vec(
-    mappers.lower_case(wikitext.revision.datasources.words),
+    wikitext.revision.datasources.cjk.cjks,
     vectorize_words,
     name="revision.text.ja_vectors")
 
