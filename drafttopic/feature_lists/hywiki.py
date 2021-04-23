@@ -4,7 +4,7 @@ from revscoring.features.meta import aggregators
 
 
 hywiki_kvs = vectorizers.word2vec.load_gensim_kv(
-    filename="hywiki-20200501-learned_vectors.50_cell.10k.kv", mmap='r')
+    filename="hywiki-20201201-learned_vectors.50_cell.10k.kv", mmap='r')
 
 
 def vectorize_words(words):

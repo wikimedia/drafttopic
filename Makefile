@@ -15,7 +15,6 @@ drafttopic_models: \
 	models/kowiki.drafttopic.gradient_boosting.model \
 	models/ukwiki.drafttopic.gradient_boosting.model \
 	models/viwiki.drafttopic.gradient_boosting.model \
-	models/wikidata.drafttopic.gradient_boosting.model
 
 articletopic_models: \
 	models/arwiki.articletopic.gradient_boosting.model \
@@ -405,7 +404,7 @@ word2vec/euwiki-20201201-learned_vectors.50_cell.10k.kv:
 
 datasets/euwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/euwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/euwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/euwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.euwiki.drafttopic \
 		--input=$< \
@@ -414,7 +413,7 @@ datasets/euwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/euwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/euwiki.balanced_article_sample.w_article_text.json \
-		word2vec/euwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/euwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.euwiki.articletopic \
 		--input=$< \
@@ -616,7 +615,7 @@ word2vec/hywiki-20201201-learned_vectors.50_cell.10k.kv:
 
 datasets/hywiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/hywiki.balanced_article_sample.w_draft_text.json \
-		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/hywiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.hywiki.drafttopic \
 		--input=$< \
@@ -625,7 +624,7 @@ datasets/hywiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/hywiki.balanced_article_sample.w_article_cache.json: \
 		datasets/hywiki.balanced_article_sample.w_article_text.json \
-		word2vec/hywiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/hywiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.hywiki.articletopic \
 		--input=$< \
@@ -934,7 +933,7 @@ word2vec/ukwiki-20201201-learned_vectors.50_cell.10k.kv:
 
 datasets/ukwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/ukwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/ukwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/ukwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.ukwiki.drafttopic \
 		--input=$< \
@@ -943,7 +942,7 @@ datasets/ukwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/ukwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/ukwiki.balanced_article_sample.w_article_text.json \
-		word2vec/ukwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/ukwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.ukwiki.articletopic \
 		--input=$< \
