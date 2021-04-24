@@ -11,8 +11,10 @@ drafttopic_models: \
 	models/cswiki.drafttopic.gradient_boosting.model \
 	models/enwiki.drafttopic.gradient_boosting.model \
 	models/euwiki.drafttopic.gradient_boosting.model \
+	models/huwiki.drafttopic.gradient_boosting.model \
 	models/hywiki.drafttopic.gradient_boosting.model \
 	models/kowiki.drafttopic.gradient_boosting.model \
+	models/srwiki.drafttopic.gradient_boosting.model \
 	models/ukwiki.drafttopic.gradient_boosting.model \
 	models/viwiki.drafttopic.gradient_boosting.model \
 
@@ -21,8 +23,10 @@ articletopic_models: \
 	models/cswiki.articletopic.gradient_boosting.model \
 	models/enwiki.articletopic.gradient_boosting.model \
 	models/euwiki.articletopic.gradient_boosting.model \
+	models/huwiki.articletopic.gradient_boosting.model \
 	models/hywiki.articletopic.gradient_boosting.model \
 	models/kowiki.articletopic.gradient_boosting.model \
+	models/srwiki.articletopic.gradient_boosting.model \
 	models/ukwiki.articletopic.gradient_boosting.model \
 	models/viwiki.articletopic.gradient_boosting.model \
 	models/wikidata.articletopic.gradient_boosting.model
@@ -510,7 +514,7 @@ word2vec/huwiki-20201201-learned_vectors.50_cell.10k.kv:
 
 datasets/huwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/huwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/huwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/huwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.huwiki.drafttopic \
 		--input=$< \
@@ -519,7 +523,7 @@ datasets/huwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/huwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/huwiki.balanced_article_sample.w_article_text.json \
-		word2vec/huwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/huwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.huwiki.articletopic \
 		--input=$< \
@@ -827,7 +831,7 @@ word2vec/srwiki-20201201-learned_vectors.50_cell.10k.kv:
 
 datasets/srwiki.balanced_article_sample.w_draft_cache.json: \
 		datasets/srwiki.balanced_article_sample.w_draft_text.json \
-		word2vec/srwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/srwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.srwiki.drafttopic \
 		--input=$< \
@@ -836,7 +840,7 @@ datasets/srwiki.balanced_article_sample.w_draft_cache.json: \
 
 datasets/srwiki.balanced_article_sample.w_article_cache.json: \
 		datasets/srwiki.balanced_article_sample.w_article_text.json \
-		word2vec/srwiki-20200501-learned_vectors.50_cell.10k.kv
+		word2vec/srwiki-20201201-learned_vectors.50_cell.10k.kv
 	./utility extract_from_text \
 		drafttopic.feature_lists.srwiki.articletopic \
 		--input=$< \
