@@ -1,496 +1,496 @@
 Model Information:
 	 - type: GradientBoosting
-	 - version: 1.3.0
-	 - params: {'loss': 'deviance', 'validation_fraction': 0.1, 'min_weight_fraction_leaf': 0.0, 'ccp_alpha': 0.0, 'population_rates': None, 'presort': 'deprecated', 'center': False, 'min_samples_leaf': 1, 'min_samples_split': 2, 'warm_start': False, 'n_iter_no_change': None, 'criterion': 'friedman_mse', 'min_impurity_split': None, 'multilabel': True, 'learning_rate': 0.1, 'labels': ['Culture.Biography.Biography*', 'Culture.Biography.Women', 'Culture.Food and drink', 'Culture.Internet culture', 'Culture.Linguistics', 'Culture.Literature', 'Culture.Media.Books', 'Culture.Media.Entertainment', 'Culture.Media.Films', 'Culture.Media.Media*', 'Culture.Media.Music', 'Culture.Media.Radio', 'Culture.Media.Software', 'Culture.Media.Television', 'Culture.Media.Video games', 'Culture.Performing arts', 'Culture.Philosophy and religion', 'Culture.Sports', 'Culture.Visual arts.Architecture', 'Culture.Visual arts.Comics and Anime', 'Culture.Visual arts.Fashion', 'Culture.Visual arts.Visual arts*', 'Geography.Geographical', 'Geography.Regions.Africa.Africa*', 'Geography.Regions.Africa.Central Africa', 'Geography.Regions.Africa.Eastern Africa', 'Geography.Regions.Africa.Northern Africa', 'Geography.Regions.Africa.Southern Africa', 'Geography.Regions.Africa.Western Africa', 'Geography.Regions.Americas.Central America', 'Geography.Regions.Americas.North America', 'Geography.Regions.Americas.South America', 'Geography.Regions.Asia.Asia*', 'Geography.Regions.Asia.Central Asia', 'Geography.Regions.Asia.East Asia', 'Geography.Regions.Asia.North Asia', 'Geography.Regions.Asia.South Asia', 'Geography.Regions.Asia.Southeast Asia', 'Geography.Regions.Asia.West Asia', 'Geography.Regions.Europe.Eastern Europe', 'Geography.Regions.Europe.Europe*', 'Geography.Regions.Europe.Northern Europe', 'Geography.Regions.Europe.Southern Europe', 'Geography.Regions.Europe.Western Europe', 'Geography.Regions.Oceania', 'History and Society.Business and economics', 'History and Society.Education', 'History and Society.History', 'History and Society.Military and warfare', 'History and Society.Politics and government', 'History and Society.Society', 'History and Society.Transportation', 'STEM.Biology', 'STEM.Chemistry', 'STEM.Computing', 'STEM.Earth and environment', 'STEM.Engineering', 'STEM.Libraries & Information', 'STEM.Mathematics', 'STEM.Medicine & Health', 'STEM.Physics', 'STEM.STEM*', 'STEM.Space', 'STEM.Technology'], 'init': None, 'n_estimators': 150, 'subsample': 1.0, 'verbose': 0, 'max_depth': 5, 'scale': False, 'tol': 0.0001, 'max_leaf_nodes': None, 'min_impurity_decrease': 0.0, 'label_weights': {}, 'random_state': None, 'max_features': 'log2'}
+	 - version: 1.4.0
+	 - params: {'scale': False, 'center': False, 'labels': ['Culture.Biography.Biography*', 'Culture.Biography.Women', 'Culture.Food and drink', 'Culture.Internet culture', 'Culture.Linguistics', 'Culture.Literature', 'Culture.Media.Books', 'Culture.Media.Entertainment', 'Culture.Media.Films', 'Culture.Media.Media*', 'Culture.Media.Music', 'Culture.Media.Radio', 'Culture.Media.Software', 'Culture.Media.Television', 'Culture.Media.Video games', 'Culture.Performing arts', 'Culture.Philosophy and religion', 'Culture.Sports', 'Culture.Visual arts.Architecture', 'Culture.Visual arts.Comics and Anime', 'Culture.Visual arts.Fashion', 'Culture.Visual arts.Visual arts*', 'Geography.Geographical', 'Geography.Regions.Africa.Africa*', 'Geography.Regions.Africa.Central Africa', 'Geography.Regions.Africa.Eastern Africa', 'Geography.Regions.Africa.Northern Africa', 'Geography.Regions.Africa.Southern Africa', 'Geography.Regions.Africa.Western Africa', 'Geography.Regions.Americas.Central America', 'Geography.Regions.Americas.North America', 'Geography.Regions.Americas.South America', 'Geography.Regions.Asia.Asia*', 'Geography.Regions.Asia.Central Asia', 'Geography.Regions.Asia.East Asia', 'Geography.Regions.Asia.North Asia', 'Geography.Regions.Asia.South Asia', 'Geography.Regions.Asia.Southeast Asia', 'Geography.Regions.Asia.West Asia', 'Geography.Regions.Europe.Eastern Europe', 'Geography.Regions.Europe.Europe*', 'Geography.Regions.Europe.Northern Europe', 'Geography.Regions.Europe.Southern Europe', 'Geography.Regions.Europe.Western Europe', 'Geography.Regions.Oceania', 'History and Society.Business and economics', 'History and Society.Education', 'History and Society.History', 'History and Society.Military and warfare', 'History and Society.Politics and government', 'History and Society.Society', 'History and Society.Transportation', 'STEM.Biology', 'STEM.Chemistry', 'STEM.Computing', 'STEM.Earth and environment', 'STEM.Engineering', 'STEM.Libraries & Information', 'STEM.Mathematics', 'STEM.Medicine & Health', 'STEM.Physics', 'STEM.STEM*', 'STEM.Space', 'STEM.Technology'], 'multilabel': True, 'population_rates': None, 'ccp_alpha': 0.0, 'criterion': 'friedman_mse', 'init': None, 'learning_rate': 0.1, 'loss': 'deviance', 'max_depth': 5, 'max_features': 'log2', 'max_leaf_nodes': None, 'min_impurity_decrease': 0.0, 'min_impurity_split': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 150, 'n_iter_no_change': None, 'presort': 'deprecated', 'random_state': None, 'subsample': 1.0, 'tol': 0.0001, 'validation_fraction': 0.1, 'verbose': 0, 'warm_start': False, 'label_weights': {}}
 	Environment:
 	 - revscoring_version: '2.8.2'
-	 - platform: 'Linux-4.9.0-8-amd64-x86_64-with-debian-9.4'
+	 - platform: 'Linux-4.19.0-14-amd64-x86_64-with-debian-10.9'
 	 - machine: 'x86_64'
-	 - version: '#1 SMP Debian 4.9.144-3.1 (2019-02-19)'
+	 - version: '#1 SMP Debian 4.19.171-2 (2021-01-30)'
 	 - system: 'Linux'
 	 - processor: ''
-	 - python_build: ('default', 'Sep 27 2018 17:25:39')
-	 - python_compiler: 'GCC 6.3.0 20170516'
+	 - python_build: ('default', 'Jul 25 2020 13:03:44')
+	 - python_compiler: 'GCC 8.3.0'
 	 - python_branch: ''
 	 - python_implementation: 'CPython'
 	 - python_revision: ''
-	 - python_version: '3.5.3'
-	 - release: '4.9.0-8-amd64'
+	 - python_version: '3.7.3'
+	 - release: '4.19.0-14-amd64'
 	
 	Statistics:
-	counts (n=59164):
+	counts (n=59344):
 			label                                              n          TP    FP    FN     TN
 			---------------------------------------------  -----  ---  -----  ----  ----  -----
-			'Culture.Biography.Biography*'                 16062  -->  14427  1635   889  42213
-			'Culture.Biography.Women'                       3473  -->   2380  1093   349  55342
-			'Culture.Food and drink'                        1497  -->    949   548   170  57497
-			'Culture.Internet culture'                      3248  -->   2722   526   205  55711
-			'Culture.Linguistics'                           1605  -->   1139   466   108  57451
-			'Culture.Literature'                            5508  -->   4091  1417   518  53138
-			'Culture.Media.Books'                           1634  -->   1301   333   121  57409
-			'Culture.Media.Entertainment'                   2283  -->    929  1354   270  56611
-			'Culture.Media.Films'                           2945  -->   2474   471   164  56055
-			'Culture.Media.Media*'                         14272  -->  12658  1614  1265  43627
-			'Culture.Media.Music'                           3213  -->   2699   514   265  55686
-			'Culture.Media.Radio'                            310  -->    138   172    31  58823
-			'Culture.Media.Software'                        2144  -->   1735   409   284  56736
-			'Culture.Media.Television'                      2543  -->   2034   509   164  56457
-			'Culture.Media.Video games'                     2140  -->   1962   178    67  56957
-			'Culture.Performing arts'                       1472  -->    833   639   123  57569
-			'Culture.Philosophy and religion'               3931  -->   2281  1650   418  54815
-			'Culture.Sports'                                6366  -->   5673   693   231  52567
-			'Culture.Visual arts.Architecture'              2014  -->   1394   620   255  56895
-			'Culture.Visual arts.Comics and Anime'          1888  -->   1586   302    85  57191
-			'Culture.Visual arts.Fashion'                    790  -->    473   317    68  58306
-			'Culture.Visual arts.Visual arts*'              5332  -->   3722  1610   474  53358
-			'Geography.Geographical'                        3781  -->   2468  1313   607  54776
-			'Geography.Regions.Africa.Africa*'              4003  -->   2648  1355   365  54796
-			'Geography.Regions.Africa.Central Africa'        850  -->    518   332    79  58235
-			'Geography.Regions.Africa.Eastern Africa'        330  -->    186   144    58  58776
-			'Geography.Regions.Africa.Northern Africa'      1500  -->    877   623   124  57540
-			'Geography.Regions.Africa.Southern Africa'       665  -->    456   209    51  58448
-			'Geography.Regions.Africa.Western Africa'        158  -->     77    81    49  58957
-			'Geography.Regions.Americas.Central America'    1345  -->    700   645   115  57704
-			'Geography.Regions.Americas.North America'      5707  -->   3667  2040   928  52529
-			'Geography.Regions.Americas.South America'      1566  -->    993   573   146  57452
-			'Geography.Regions.Asia.Asia*'                 11315  -->   8974  2341   967  46882
-			'Geography.Regions.Asia.Central Asia'           1049  -->    595   454    86  58029
-			'Geography.Regions.Asia.East Asia'              3337  -->   2588   749   239  55588
-			'Geography.Regions.Asia.North Asia'             2979  -->   2187   792   256  55929
-			'Geography.Regions.Asia.South Asia'             1683  -->   1108   575   100  57381
-			'Geography.Regions.Asia.Southeast Asia'         1580  -->    873   707   115  57469
-			'Geography.Regions.Asia.West Asia'              2267  -->   1543   724   192  56705
-			'Geography.Regions.Europe.Eastern Europe'       5812  -->   4396  1416   594  52758
-			'Geography.Regions.Europe.Europe*'             17938  -->  14647  3291  2351  38875
-			'Geography.Regions.Europe.Northern Europe'      3606  -->   2420  1186   423  55135
-			'Geography.Regions.Europe.Southern Europe'      4063  -->   2986  1077   385  54716
-			'Geography.Regions.Europe.Western Europe'       5296  -->   4062  1234   602  53266
-			'Geography.Regions.Oceania'                     1308  -->    753   555   112  57744
-			'History and Society.Business and economics'    3052  -->   1610  1442   350  55762
-			'History and Society.Education'                 1566  -->    627   939   161  57437
-			'History and Society.History'                   5704  -->   3472  2232   791  52669
-			'History and Society.Military and warfare'      4317  -->   2925  1392   433  54414
-			'History and Society.Politics and government'   3186  -->   1637  1549   362  55616
-			'History and Society.Society'                   4069  -->   1186  2883   246  54849
-			'History and Society.Transportation'            4200  -->   3795   405   190  54774
-			'STEM.Biology'                                  4703  -->   4077   626   164  54297
-			'STEM.Chemistry'                                1590  -->   1282   308   143  57431
-			'STEM.Computing'                                2426  -->   1980   446   293  56445
-			'STEM.Earth and environment'                    1840  -->   1252   588   147  57177
-			'STEM.Engineering'                              2415  -->   1712   703   174  56575
-			'STEM.Libraries & Information'                   489  -->    258   231    42  58633
-			'STEM.Mathematics'                               956  -->    765   191    59  58149
-			'STEM.Medicine & Health'                        1930  -->   1366   564   165  57069
-			'STEM.Physics'                                  1411  -->    948   463   175  57578
-			'STEM.STEM*'                                   18294  -->  16383  1911   940  39930
-			'STEM.Space'                                    2265  -->   2098   167    31  56868
-			'STEM.Technology'                               4794  -->   3614  1180   564  53806
+			'Culture.Biography.Biography*'                 15526  -->  14154  1372   779  43039
+			'Culture.Biography.Women'                       3586  -->   2498  1088   353  55405
+			'Culture.Food and drink'                        1513  -->    985   528   131  57700
+			'Culture.Internet culture'                      3266  -->   2754   512   198  55880
+			'Culture.Linguistics'                           1643  -->   1170   473    97  57604
+			'Culture.Literature'                            5570  -->   4162  1408   514  53260
+			'Culture.Media.Books'                           1732  -->   1384   348   105  57507
+			'Culture.Media.Entertainment'                   2340  -->   1064  1276   284  56720
+			'Culture.Media.Films'                           2888  -->   2403   485   145  56311
+			'Culture.Media.Media*'                         14392  -->  12706  1686  1219  43733
+			'Culture.Media.Music'                           3309  -->   2800   509   246  55789
+			'Culture.Media.Radio'                            330  -->    161   169    15  58999
+			'Culture.Media.Software'                        2170  -->   1752   418   274  56900
+			'Culture.Media.Television'                      2469  -->   1986   483   136  56739
+			'Culture.Media.Video games'                     2087  -->   1941   146    48  57209
+			'Culture.Performing arts'                       1491  -->    948   543   114  57739
+			'Culture.Philosophy and religion'               4003  -->   2356  1647   417  54924
+			'Culture.Sports'                                6230  -->   5587   643   179  52935
+			'Culture.Visual arts.Architecture'              2030  -->   1416   614   250  57064
+			'Culture.Visual arts.Comics and Anime'          1854  -->   1526   328    95  57395
+			'Culture.Visual arts.Fashion'                    806  -->    485   321    54  58484
+			'Culture.Visual arts.Visual arts*'              5379  -->   3710  1669   421  53544
+			'Geography.Geographical'                        3887  -->   2579  1308   537  54920
+			'Geography.Regions.Africa.Africa*'              4049  -->   2762  1287   331  54964
+			'Geography.Regions.Africa.Central Africa'        880  -->    570   310    72  58392
+			'Geography.Regions.Africa.Eastern Africa'        369  -->    233   136    41  58934
+			'Geography.Regions.Africa.Northern Africa'      1503  -->    940   563   126  57715
+			'Geography.Regions.Africa.Southern Africa'       695  -->    515   180    47  58602
+			'Geography.Regions.Africa.Western Africa'        155  -->     64    91    29  59160
+			'Geography.Regions.Americas.Central America'    1381  -->    789   592   102  57861
+			'Geography.Regions.Americas.North America'      5628  -->   3631  1997   930  52786
+			'Geography.Regions.Americas.South America'      1610  -->   1097   513   126  57608
+			'Geography.Regions.Asia.Asia*'                 10749  -->   8632  2117   945  47650
+			'Geography.Regions.Asia.Central Asia'           1349  -->    938   411   103  57892
+			'Geography.Regions.Asia.East Asia'              3424  -->   2703   721   219  55701
+			'Geography.Regions.Asia.North Asia'             1888  -->   1385   503   229  57227
+			'Geography.Regions.Asia.South Asia'             1826  -->   1268   558   110  57408
+			'Geography.Regions.Asia.Southeast Asia'         1601  -->    974   627   116  57627
+			'Geography.Regions.Asia.West Asia'              2495  -->   1794   701   200  56649
+			'Geography.Regions.Europe.Eastern Europe'       4951  -->   3665  1286   556  53837
+			'Geography.Regions.Europe.Europe*'             16846  -->  13610  3236  2259  40239
+			'Geography.Regions.Europe.Northern Europe'      3617  -->   2386  1231   378  55349
+			'Geography.Regions.Europe.Southern Europe'      4056  -->   2998  1058   359  54929
+			'Geography.Regions.Europe.Western Europe'       5217  -->   4004  1213   551  53576
+			'Geography.Regions.Oceania'                     1853  -->   1310   543   121  57370
+			'History and Society.Business and economics'    3192  -->   1728  1464   324  55828
+			'History and Society.Education'                 1612  -->    735   877   165  57567
+			'History and Society.History'                   6143  -->   3880  2263   739  52462
+			'History and Society.Military and warfare'      5039  -->   3575  1464   471  53834
+			'History and Society.Politics and government'   4453  -->   2632  1821   436  54455
+			'History and Society.Society'                   6223  -->   2897  3326   552  52569
+			'History and Society.Transportation'            4094  -->   3714   380   159  55091
+			'STEM.Biology'                                  4751  -->   4126   625   137  54456
+			'STEM.Chemistry'                                1620  -->   1312   308   166  57558
+			'STEM.Computing'                                2449  -->   1986   463   283  56612
+			'STEM.Earth and environment'                    1882  -->   1335   547   131  57331
+			'STEM.Engineering'                              2505  -->   1786   719   215  56624
+			'STEM.Libraries & Information'                   510  -->    289   221    38  58796
+			'STEM.Mathematics'                               990  -->    785   205    63  58291
+			'STEM.Medicine & Health'                        1939  -->   1405   534   160  57245
+			'STEM.Physics'                                  1419  -->    958   461   166  57759
+			'STEM.STEM*'                                   18523  -->  16670  1853   917  39904
+			'STEM.Space'                                    2372  -->   2227   145    42  56930
+			'STEM.Technology'                               4874  -->   3669  1205   597  53873
 	rates:
 		                                               sample    population
 		-------------------------------------------  --------  ------------
-		Culture.Biography.Biography*                    0.271         0.13
-		Culture.Biography.Women                         0.059         0.015
-		Culture.Food and drink                          0.025         0.003
-		Culture.Internet culture                        0.055         0.004
-		Culture.Linguistics                             0.027         0.008
-		Culture.Literature                              0.093         0.015
-		Culture.Media.Books                             0.028         0.004
+		Culture.Biography.Biography*                    0.262         0.123
+		Culture.Biography.Women                         0.06          0.015
+		Culture.Food and drink                          0.025         0.002
+		Culture.Internet culture                        0.055         0.003
+		Culture.Linguistics                             0.028         0.007
+		Culture.Literature                              0.094         0.015
+		Culture.Media.Books                             0.029         0.004
 		Culture.Media.Entertainment                     0.039         0.004
-		Culture.Media.Films                             0.05          0.012
-		Culture.Media.Media*                            0.241         0.056
-		Culture.Media.Music                             0.054         0.021
-		Culture.Media.Radio                             0.005         0.002
-		Culture.Media.Software                          0.036         0.001
-		Culture.Media.Television                        0.043         0.009
-		Culture.Media.Video games                       0.036         0.003
+		Culture.Media.Films                             0.049         0.011
+		Culture.Media.Media*                            0.243         0.058
+		Culture.Media.Music                             0.056         0.024
+		Culture.Media.Radio                             0.006         0.002
+		Culture.Media.Software                          0.037         0.001
+		Culture.Media.Television                        0.042         0.009
+		Culture.Media.Video games                       0.035         0.003
 		Culture.Performing arts                         0.025         0.003
-		Culture.Philosophy and religion                 0.066         0.011
-		Culture.Sports                                  0.108         0.061
+		Culture.Philosophy and religion                 0.067         0.011
+		Culture.Sports                                  0.105         0.071
 		Culture.Visual arts.Architecture                0.034         0.011
-		Culture.Visual arts.Comics and Anime            0.032         0.002
-		Culture.Visual arts.Fashion                     0.013         0.001
-		Culture.Visual arts.Visual arts*                0.09          0.018
-		Geography.Geographical                          0.064         0.021
-		Geography.Regions.Africa.Africa*                0.068         0.009
-		Geography.Regions.Africa.Central Africa         0.014         0.001
-		Geography.Regions.Africa.Eastern Africa         0.006         0.001
+		Culture.Visual arts.Comics and Anime            0.031         0.002
+		Culture.Visual arts.Fashion                     0.014         0.001
+		Culture.Visual arts.Visual arts*                0.091         0.018
+		Geography.Geographical                          0.065         0.024
+		Geography.Regions.Africa.Africa*                0.068         0.008
+		Geography.Regions.Africa.Central Africa         0.015         0.001
+		Geography.Regions.Africa.Eastern Africa         0.006         0
 		Geography.Regions.Africa.Northern Africa        0.025         0.001
-		Geography.Regions.Africa.Southern Africa        0.011         0.001
+		Geography.Regions.Africa.Southern Africa        0.012         0.001
 		Geography.Regions.Africa.Western Africa         0.003         0.001
-		Geography.Regions.Americas.Central America      0.023         0.004
-		Geography.Regions.Americas.North America        0.096         0.064
-		Geography.Regions.Americas.South America        0.026         0.007
-		Geography.Regions.Asia.Asia*                    0.191         0.053
-		Geography.Regions.Asia.Central Asia             0.018         0.001
-		Geography.Regions.Asia.East Asia                0.056         0.012
-		Geography.Regions.Asia.North Asia               0.05          0.006
-		Geography.Regions.Asia.South Asia               0.028         0.017
+		Geography.Regions.Americas.Central America      0.023         0.003
+		Geography.Regions.Americas.North America        0.095         0.064
+		Geography.Regions.Americas.South America        0.027         0.006
+		Geography.Regions.Asia.Asia*                    0.181         0.045
+		Geography.Regions.Asia.Central Asia             0.023         0.001
+		Geography.Regions.Asia.East Asia                0.058         0.011
+		Geography.Regions.Asia.North Asia               0.032         0.001
+		Geography.Regions.Asia.South Asia               0.031         0.015
 		Geography.Regions.Asia.Southeast Asia           0.027         0.006
-		Geography.Regions.Asia.West Asia                0.038         0.012
-		Geography.Regions.Europe.Eastern Europe         0.098         0.019
-		Geography.Regions.Europe.Europe*                0.303         0.082
-		Geography.Regions.Europe.Northern Europe        0.061         0.029
-		Geography.Regions.Europe.Southern Europe        0.069         0.014
-		Geography.Regions.Europe.Western Europe         0.09          0.021
-		Geography.Regions.Oceania                       0.022         0.005
-		History and Society.Business and economics      0.052         0.01
-		History and Society.Education                   0.026         0.008
-		History and Society.History                     0.096         0.011
-		History and Society.Military and warfare        0.073         0.016
-		History and Society.Politics and government     0.054         0.017
-		History and Society.Society                     0.069         0.008
-		History and Society.Transportation              0.071         0.016
-		STEM.Biology                                    0.079         0.035
+		Geography.Regions.Asia.West Asia                0.042         0.011
+		Geography.Regions.Europe.Eastern Europe         0.083         0.013
+		Geography.Regions.Europe.Europe*                0.284         0.076
+		Geography.Regions.Europe.Northern Europe        0.061         0.031
+		Geography.Regions.Europe.Southern Europe        0.068         0.013
+		Geography.Regions.Europe.Western Europe         0.088         0.019
+		Geography.Regions.Oceania                       0.031         0.015
+		History and Society.Business and economics      0.054         0.01
+		History and Society.Education                   0.027         0.007
+		History and Society.History                     0.104         0.011
+		History and Society.Military and warfare        0.085         0.014
+		History and Society.Politics and government     0.075         0.028
+		History and Society.Society                     0.105         0.013
+		History and Society.Transportation              0.069         0.015
+		STEM.Biology                                    0.08          0.034
 		STEM.Chemistry                                  0.027         0.002
 		STEM.Computing                                  0.041         0.003
-		STEM.Earth and environment                      0.031         0.005
-		STEM.Engineering                                0.041         0.006
-		STEM.Libraries & Information                    0.008         0.001
-		STEM.Mathematics                                0.016         0
-		STEM.Medicine & Health                          0.033         0.007
+		STEM.Earth and environment                      0.032         0.005
+		STEM.Engineering                                0.042         0.005
+		STEM.Libraries & Information                    0.009         0.001
+		STEM.Mathematics                                0.017         0
+		STEM.Medicine & Health                          0.033         0.006
 		STEM.Physics                                    0.024         0.001
-		STEM.STEM*                                      0.309         0.066
-		STEM.Space                                      0.038         0.004
-		STEM.Technology                                 0.081         0.005
-	match_rate (micro=0.056, macro=0.018):
+		STEM.STEM*                                      0.312         0.069
+		STEM.Space                                      0.04          0.006
+		STEM.Technology                                 0.082         0.005
+	match_rate (micro=0.054, macro=0.018):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.134
-		Culture.Biography.Women                      0.017
-		Culture.Food and drink                       0.005
-		Culture.Internet culture                     0.007
-		Culture.Linguistics                          0.008
+		Culture.Biography.Biography*                 0.128
+		Culture.Biography.Women                      0.016
+		Culture.Food and drink                       0.004
+		Culture.Internet culture                     0.006
+		Culture.Linguistics                          0.007
 		Culture.Literature                           0.021
-		Culture.Media.Books                          0.006
-		Culture.Media.Entertainment                  0.006
-		Culture.Media.Films                          0.013
-		Culture.Media.Media*                         0.076
-		Culture.Media.Music                          0.023
-		Culture.Media.Radio                          0.002
+		Culture.Media.Books                          0.005
+		Culture.Media.Entertainment                  0.007
+		Culture.Media.Films                          0.011
+		Culture.Media.Media*                         0.077
+		Culture.Media.Music                          0.025
+		Culture.Media.Radio                          0.001
 		Culture.Media.Software                       0.006
-		Culture.Media.Television                     0.01
-		Culture.Media.Video games                    0.004
+		Culture.Media.Television                     0.009
+		Culture.Media.Video games                    0.003
 		Culture.Performing arts                      0.004
 		Culture.Philosophy and religion              0.014
-		Culture.Sports                               0.059
+		Culture.Sports                               0.067
 		Culture.Visual arts.Architecture             0.012
-		Culture.Visual arts.Comics and Anime         0.004
-		Culture.Visual arts.Fashion                  0.002
-		Culture.Visual arts.Visual arts*             0.021
+		Culture.Visual arts.Comics and Anime         0.003
+		Culture.Visual arts.Fashion                  0.001
+		Culture.Visual arts.Visual arts*             0.02
 		Geography.Geographical                       0.025
-		Geography.Regions.Africa.Africa*             0.012
+		Geography.Regions.Africa.Africa*             0.011
 		Geography.Regions.Africa.Central Africa      0.002
 		Geography.Regions.Africa.Eastern Africa      0.001
 		Geography.Regions.Africa.Northern Africa     0.003
 		Geography.Regions.Africa.Southern Africa     0.002
 		Geography.Regions.Africa.Western Africa      0.001
 		Geography.Regions.Americas.Central America   0.004
-		Geography.Regions.Americas.North America     0.057
-		Geography.Regions.Americas.South America     0.007
-		Geography.Regions.Asia.Asia*                 0.061
+		Geography.Regions.Americas.North America     0.058
+		Geography.Regions.Americas.South America     0.006
+		Geography.Regions.Asia.Asia*                 0.055
 		Geography.Regions.Asia.Central Asia          0.002
-		Geography.Regions.Asia.East Asia             0.014
-		Geography.Regions.Asia.North Asia            0.009
-		Geography.Regions.Asia.South Asia            0.013
-		Geography.Regions.Asia.Southeast Asia        0.005
+		Geography.Regions.Asia.East Asia             0.013
+		Geography.Regions.Asia.North Asia            0.005
+		Geography.Regions.Asia.South Asia            0.012
+		Geography.Regions.Asia.Southeast Asia        0.006
 		Geography.Regions.Asia.West Asia             0.011
-		Geography.Regions.Europe.Eastern Europe      0.025
-		Geography.Regions.Europe.Europe*             0.119
+		Geography.Regions.Europe.Eastern Europe      0.02
+		Geography.Regions.Europe.Europe*             0.111
 		Geography.Regions.Europe.Northern Europe     0.027
-		Geography.Regions.Europe.Southern Europe     0.017
-		Geography.Regions.Europe.Western Europe      0.027
-		Geography.Regions.Oceania                    0.005
+		Geography.Regions.Europe.Southern Europe     0.016
+		Geography.Regions.Europe.Western Europe      0.025
+		Geography.Regions.Oceania                    0.013
 		History and Society.Business and economics   0.011
 		History and Society.Education                0.006
 		History and Society.History                  0.021
-		History and Society.Military and warfare     0.018
-		History and Society.Politics and government  0.015
-		History and Society.Society                  0.007
-		History and Society.Transportation           0.018
-		STEM.Biology                                 0.033
+		History and Society.Military and warfare     0.019
+		History and Society.Politics and government  0.024
+		History and Society.Society                  0.016
+		History and Society.Transportation           0.017
+		STEM.Biology                                 0.032
 		STEM.Chemistry                               0.004
 		STEM.Computing                               0.007
-		STEM.Earth and environment                   0.006
+		STEM.Earth and environment                   0.005
 		STEM.Engineering                             0.007
 		STEM.Libraries & Information                 0.001
 		STEM.Mathematics                             0.001
 		STEM.Medicine & Health                       0.007
-		STEM.Physics                                 0.004
-		STEM.STEM*                                   0.081
-		STEM.Space                                   0.005
-		STEM.Technology                              0.014
+		STEM.Physics                                 0.003
+		STEM.STEM*                                   0.083
+		STEM.Space                                   0.006
+		STEM.Technology                              0.015
 		-------------------------------------------  -----
-	filter_rate (micro=0.944, macro=0.982):
+	filter_rate (micro=0.946, macro=0.982):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.866
-		Culture.Biography.Women                      0.983
-		Culture.Food and drink                       0.995
-		Culture.Internet culture                     0.993
-		Culture.Linguistics                          0.992
+		Culture.Biography.Biography*                 0.872
+		Culture.Biography.Women                      0.984
+		Culture.Food and drink                       0.996
+		Culture.Internet culture                     0.994
+		Culture.Linguistics                          0.993
 		Culture.Literature                           0.979
-		Culture.Media.Books                          0.994
-		Culture.Media.Entertainment                  0.994
-		Culture.Media.Films                          0.987
-		Culture.Media.Media*                         0.924
-		Culture.Media.Music                          0.977
-		Culture.Media.Radio                          0.998
+		Culture.Media.Books                          0.995
+		Culture.Media.Entertainment                  0.993
+		Culture.Media.Films                          0.989
+		Culture.Media.Media*                         0.923
+		Culture.Media.Music                          0.975
+		Culture.Media.Radio                          0.999
 		Culture.Media.Software                       0.994
-		Culture.Media.Television                     0.99
-		Culture.Media.Video games                    0.996
+		Culture.Media.Television                     0.991
+		Culture.Media.Video games                    0.997
 		Culture.Performing arts                      0.996
 		Culture.Philosophy and religion              0.986
-		Culture.Sports                               0.941
+		Culture.Sports                               0.933
 		Culture.Visual arts.Architecture             0.988
-		Culture.Visual arts.Comics and Anime         0.996
-		Culture.Visual arts.Fashion                  0.998
-		Culture.Visual arts.Visual arts*             0.979
+		Culture.Visual arts.Comics and Anime         0.997
+		Culture.Visual arts.Fashion                  0.999
+		Culture.Visual arts.Visual arts*             0.98
 		Geography.Geographical                       0.975
-		Geography.Regions.Africa.Africa*             0.988
+		Geography.Regions.Africa.Africa*             0.989
 		Geography.Regions.Africa.Central Africa      0.998
 		Geography.Regions.Africa.Eastern Africa      0.999
 		Geography.Regions.Africa.Northern Africa     0.997
 		Geography.Regions.Africa.Southern Africa     0.998
 		Geography.Regions.Africa.Western Africa      0.999
 		Geography.Regions.Americas.Central America   0.996
-		Geography.Regions.Americas.North America     0.943
-		Geography.Regions.Americas.South America     0.993
-		Geography.Regions.Asia.Asia*                 0.939
+		Geography.Regions.Americas.North America     0.942
+		Geography.Regions.Americas.South America     0.994
+		Geography.Regions.Asia.Asia*                 0.945
 		Geography.Regions.Asia.Central Asia          0.998
-		Geography.Regions.Asia.East Asia             0.986
-		Geography.Regions.Asia.North Asia            0.991
-		Geography.Regions.Asia.South Asia            0.987
-		Geography.Regions.Asia.Southeast Asia        0.995
+		Geography.Regions.Asia.East Asia             0.987
+		Geography.Regions.Asia.North Asia            0.995
+		Geography.Regions.Asia.South Asia            0.988
+		Geography.Regions.Asia.Southeast Asia        0.994
 		Geography.Regions.Asia.West Asia             0.989
-		Geography.Regions.Europe.Eastern Europe      0.975
-		Geography.Regions.Europe.Europe*             0.881
+		Geography.Regions.Europe.Eastern Europe      0.98
+		Geography.Regions.Europe.Europe*             0.889
 		Geography.Regions.Europe.Northern Europe     0.973
-		Geography.Regions.Europe.Southern Europe     0.983
-		Geography.Regions.Europe.Western Europe      0.973
-		Geography.Regions.Oceania                    0.995
+		Geography.Regions.Europe.Southern Europe     0.984
+		Geography.Regions.Europe.Western Europe      0.975
+		Geography.Regions.Oceania                    0.987
 		History and Society.Business and economics   0.989
 		History and Society.Education                0.994
 		History and Society.History                  0.979
-		History and Society.Military and warfare     0.982
-		History and Society.Politics and government  0.985
-		History and Society.Society                  0.993
-		History and Society.Transportation           0.982
-		STEM.Biology                                 0.967
+		History and Society.Military and warfare     0.981
+		History and Society.Politics and government  0.976
+		History and Society.Society                  0.984
+		History and Society.Transportation           0.983
+		STEM.Biology                                 0.968
 		STEM.Chemistry                               0.996
 		STEM.Computing                               0.993
-		STEM.Earth and environment                   0.994
+		STEM.Earth and environment                   0.995
 		STEM.Engineering                             0.993
 		STEM.Libraries & Information                 0.999
 		STEM.Mathematics                             0.999
 		STEM.Medicine & Health                       0.993
-		STEM.Physics                                 0.996
-		STEM.STEM*                                   0.919
-		STEM.Space                                   0.995
-		STEM.Technology                              0.986
+		STEM.Physics                                 0.997
+		STEM.STEM*                                   0.917
+		STEM.Space                                   0.994
+		STEM.Technology                              0.985
 		-------------------------------------------  -----
-	recall (micro=0.772, macro=0.693):
+	recall (micro=0.78, macro=0.714):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.898
-		Culture.Biography.Women                      0.685
-		Culture.Food and drink                       0.634
-		Culture.Internet culture                     0.838
-		Culture.Linguistics                          0.71
-		Culture.Literature                           0.743
-		Culture.Media.Books                          0.796
-		Culture.Media.Entertainment                  0.407
-		Culture.Media.Films                          0.84
-		Culture.Media.Media*                         0.887
-		Culture.Media.Music                          0.84
-		Culture.Media.Radio                          0.445
-		Culture.Media.Software                       0.809
-		Culture.Media.Television                     0.8
-		Culture.Media.Video games                    0.917
-		Culture.Performing arts                      0.566
-		Culture.Philosophy and religion              0.58
-		Culture.Sports                               0.891
-		Culture.Visual arts.Architecture             0.692
-		Culture.Visual arts.Comics and Anime         0.84
-		Culture.Visual arts.Fashion                  0.599
-		Culture.Visual arts.Visual arts*             0.698
-		Geography.Geographical                       0.653
-		Geography.Regions.Africa.Africa*             0.662
-		Geography.Regions.Africa.Central Africa      0.609
-		Geography.Regions.Africa.Eastern Africa      0.564
-		Geography.Regions.Africa.Northern Africa     0.585
-		Geography.Regions.Africa.Southern Africa     0.686
-		Geography.Regions.Africa.Western Africa      0.487
-		Geography.Regions.Americas.Central America   0.52
-		Geography.Regions.Americas.North America     0.643
-		Geography.Regions.Americas.South America     0.634
-		Geography.Regions.Asia.Asia*                 0.793
-		Geography.Regions.Asia.Central Asia          0.567
-		Geography.Regions.Asia.East Asia             0.776
+		Culture.Biography.Biography*                 0.912
+		Culture.Biography.Women                      0.697
+		Culture.Food and drink                       0.651
+		Culture.Internet culture                     0.843
+		Culture.Linguistics                          0.712
+		Culture.Literature                           0.747
+		Culture.Media.Books                          0.799
+		Culture.Media.Entertainment                  0.455
+		Culture.Media.Films                          0.832
+		Culture.Media.Media*                         0.883
+		Culture.Media.Music                          0.846
+		Culture.Media.Radio                          0.488
+		Culture.Media.Software                       0.807
+		Culture.Media.Television                     0.804
+		Culture.Media.Video games                    0.93
+		Culture.Performing arts                      0.636
+		Culture.Philosophy and religion              0.589
+		Culture.Sports                               0.897
+		Culture.Visual arts.Architecture             0.698
+		Culture.Visual arts.Comics and Anime         0.823
+		Culture.Visual arts.Fashion                  0.602
+		Culture.Visual arts.Visual arts*             0.69
+		Geography.Geographical                       0.663
+		Geography.Regions.Africa.Africa*             0.682
+		Geography.Regions.Africa.Central Africa      0.648
+		Geography.Regions.Africa.Eastern Africa      0.631
+		Geography.Regions.Africa.Northern Africa     0.625
+		Geography.Regions.Africa.Southern Africa     0.741
+		Geography.Regions.Africa.Western Africa      0.413
+		Geography.Regions.Americas.Central America   0.571
+		Geography.Regions.Americas.North America     0.645
+		Geography.Regions.Americas.South America     0.681
+		Geography.Regions.Asia.Asia*                 0.803
+		Geography.Regions.Asia.Central Asia          0.695
+		Geography.Regions.Asia.East Asia             0.789
 		Geography.Regions.Asia.North Asia            0.734
-		Geography.Regions.Asia.South Asia            0.658
-		Geography.Regions.Asia.Southeast Asia        0.553
-		Geography.Regions.Asia.West Asia             0.681
-		Geography.Regions.Europe.Eastern Europe      0.756
-		Geography.Regions.Europe.Europe*             0.817
-		Geography.Regions.Europe.Northern Europe     0.671
-		Geography.Regions.Europe.Southern Europe     0.735
+		Geography.Regions.Asia.South Asia            0.694
+		Geography.Regions.Asia.Southeast Asia        0.608
+		Geography.Regions.Asia.West Asia             0.719
+		Geography.Regions.Europe.Eastern Europe      0.74
+		Geography.Regions.Europe.Europe*             0.808
+		Geography.Regions.Europe.Northern Europe     0.66
+		Geography.Regions.Europe.Southern Europe     0.739
 		Geography.Regions.Europe.Western Europe      0.767
-		Geography.Regions.Oceania                    0.576
-		History and Society.Business and economics   0.528
-		History and Society.Education                0.4
-		History and Society.History                  0.609
-		History and Society.Military and warfare     0.678
-		History and Society.Politics and government  0.514
-		History and Society.Society                  0.291
-		History and Society.Transportation           0.904
-		STEM.Biology                                 0.867
-		STEM.Chemistry                               0.806
-		STEM.Computing                               0.816
-		STEM.Earth and environment                   0.68
-		STEM.Engineering                             0.709
-		STEM.Libraries & Information                 0.528
-		STEM.Mathematics                             0.8
-		STEM.Medicine & Health                       0.708
-		STEM.Physics                                 0.672
-		STEM.STEM*                                   0.896
-		STEM.Space                                   0.926
-		STEM.Technology                              0.754
+		Geography.Regions.Oceania                    0.707
+		History and Society.Business and economics   0.541
+		History and Society.Education                0.456
+		History and Society.History                  0.632
+		History and Society.Military and warfare     0.709
+		History and Society.Politics and government  0.591
+		History and Society.Society                  0.466
+		History and Society.Transportation           0.907
+		STEM.Biology                                 0.868
+		STEM.Chemistry                               0.81
+		STEM.Computing                               0.811
+		STEM.Earth and environment                   0.709
+		STEM.Engineering                             0.713
+		STEM.Libraries & Information                 0.567
+		STEM.Mathematics                             0.793
+		STEM.Medicine & Health                       0.725
+		STEM.Physics                                 0.675
+		STEM.STEM*                                   0.9
+		STEM.Space                                   0.939
+		STEM.Technology                              0.753
 		-------------------------------------------  -----
-	!recall (micro=0.984, macro=0.994):
+	!recall (micro=0.986, macro=0.994):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.979
+		Culture.Biography.Biography*                 0.982
 		Culture.Biography.Women                      0.994
-		Culture.Food and drink                       0.997
+		Culture.Food and drink                       0.998
 		Culture.Internet culture                     0.996
 		Culture.Linguistics                          0.998
 		Culture.Literature                           0.99
 		Culture.Media.Books                          0.998
 		Culture.Media.Entertainment                  0.995
 		Culture.Media.Films                          0.997
-		Culture.Media.Media*                         0.972
-		Culture.Media.Music                          0.995
-		Culture.Media.Radio                          0.999
+		Culture.Media.Media*                         0.973
+		Culture.Media.Music                          0.996
+		Culture.Media.Radio                          1
 		Culture.Media.Software                       0.995
-		Culture.Media.Television                     0.997
+		Culture.Media.Television                     0.998
 		Culture.Media.Video games                    0.999
 		Culture.Performing arts                      0.998
 		Culture.Philosophy and religion              0.992
-		Culture.Sports                               0.996
+		Culture.Sports                               0.997
 		Culture.Visual arts.Architecture             0.996
-		Culture.Visual arts.Comics and Anime         0.999
+		Culture.Visual arts.Comics and Anime         0.998
 		Culture.Visual arts.Fashion                  0.999
-		Culture.Visual arts.Visual arts*             0.991
-		Geography.Geographical                       0.989
-		Geography.Regions.Africa.Africa*             0.993
+		Culture.Visual arts.Visual arts*             0.992
+		Geography.Geographical                       0.99
+		Geography.Regions.Africa.Africa*             0.994
 		Geography.Regions.Africa.Central Africa      0.999
 		Geography.Regions.Africa.Eastern Africa      0.999
 		Geography.Regions.Africa.Northern Africa     0.998
 		Geography.Regions.Africa.Southern Africa     0.999
-		Geography.Regions.Africa.Western Africa      0.999
+		Geography.Regions.Africa.Western Africa      1
 		Geography.Regions.Americas.Central America   0.998
 		Geography.Regions.Americas.North America     0.983
-		Geography.Regions.Americas.South America     0.997
-		Geography.Regions.Asia.Asia*                 0.98
-		Geography.Regions.Asia.Central Asia          0.999
+		Geography.Regions.Americas.South America     0.998
+		Geography.Regions.Asia.Asia*                 0.981
+		Geography.Regions.Asia.Central Asia          0.998
 		Geography.Regions.Asia.East Asia             0.996
-		Geography.Regions.Asia.North Asia            0.995
+		Geography.Regions.Asia.North Asia            0.996
 		Geography.Regions.Asia.South Asia            0.998
 		Geography.Regions.Asia.Southeast Asia        0.998
-		Geography.Regions.Asia.West Asia             0.997
-		Geography.Regions.Europe.Eastern Europe      0.989
-		Geography.Regions.Europe.Europe*             0.943
-		Geography.Regions.Europe.Northern Europe     0.992
-		Geography.Regions.Europe.Southern Europe     0.993
-		Geography.Regions.Europe.Western Europe      0.989
+		Geography.Regions.Asia.West Asia             0.996
+		Geography.Regions.Europe.Eastern Europe      0.99
+		Geography.Regions.Europe.Europe*             0.947
+		Geography.Regions.Europe.Northern Europe     0.993
+		Geography.Regions.Europe.Southern Europe     0.994
+		Geography.Regions.Europe.Western Europe      0.99
 		Geography.Regions.Oceania                    0.998
 		History and Society.Business and economics   0.994
 		History and Society.Education                0.997
-		History and Society.History                  0.985
-		History and Society.Military and warfare     0.992
-		History and Society.Politics and government  0.994
-		History and Society.Society                  0.996
+		History and Society.History                  0.986
+		History and Society.Military and warfare     0.991
+		History and Society.Politics and government  0.992
+		History and Society.Society                  0.99
 		History and Society.Transportation           0.997
 		STEM.Biology                                 0.997
-		STEM.Chemistry                               0.998
+		STEM.Chemistry                               0.997
 		STEM.Computing                               0.995
-		STEM.Earth and environment                   0.997
-		STEM.Engineering                             0.997
+		STEM.Earth and environment                   0.998
+		STEM.Engineering                             0.996
 		STEM.Libraries & Information                 0.999
 		STEM.Mathematics                             0.999
 		STEM.Medicine & Health                       0.997
 		STEM.Physics                                 0.997
-		STEM.STEM*                                   0.977
+		STEM.STEM*                                   0.978
 		STEM.Space                                   0.999
-		STEM.Technology                              0.99
+		STEM.Technology                              0.989
 		-------------------------------------------  -----
-	precision (micro=0.688, macro=0.545):
+	precision (micro=0.704, macro=0.554):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.867
-		Culture.Biography.Women                      0.628
-		Culture.Food and drink                       0.358
-		Culture.Internet culture                     0.465
-		Culture.Linguistics                          0.756
-		Culture.Literature                           0.541
-		Culture.Media.Books                          0.625
-		Culture.Media.Entertainment                  0.256
-		Culture.Media.Films                          0.773
-		Culture.Media.Media*                         0.65
-		Culture.Media.Music                          0.794
-		Culture.Media.Radio                          0.666
-		Culture.Media.Software                       0.178
-		Culture.Media.Television                     0.715
-		Culture.Media.Video games                    0.698
-		Culture.Performing arts                      0.452
-		Culture.Philosophy and religion              0.449
-		Culture.Sports                               0.93
-		Culture.Visual arts.Architecture             0.632
-		Culture.Visual arts.Comics and Anime         0.579
-		Culture.Visual arts.Fashion                  0.319
-		Culture.Visual arts.Visual arts*             0.597
-		Geography.Geographical                       0.566
-		Geography.Regions.Africa.Africa*             0.465
-		Geography.Regions.Africa.Central Africa      0.243
-		Geography.Regions.Africa.Eastern Africa      0.226
-		Geography.Regions.Africa.Northern Africa     0.271
-		Geography.Regions.Africa.Southern Africa     0.511
-		Geography.Regions.Africa.Western Africa      0.308
-		Geography.Regions.Americas.Central America   0.479
-		Geography.Regions.Americas.North America     0.716
-		Geography.Regions.Americas.South America     0.636
-		Geography.Regions.Asia.Asia*                 0.688
-		Geography.Regions.Asia.Central Asia          0.237
-		Geography.Regions.Asia.East Asia             0.693
-		Geography.Regions.Asia.North Asia            0.479
-		Geography.Regions.Asia.South Asia            0.866
-		Geography.Regions.Asia.Southeast Asia        0.638
-		Geography.Regions.Asia.West Asia             0.708
-		Geography.Regions.Europe.Eastern Europe      0.562
-		Geography.Regions.Europe.Europe*             0.561
-		Geography.Regions.Europe.Northern Europe     0.727
-		Geography.Regions.Europe.Southern Europe     0.6
-		Geography.Regions.Europe.Western Europe      0.593
-		Geography.Regions.Oceania                    0.579
-		History and Society.Business and economics   0.457
-		History and Society.Education                0.537
-		History and Society.History                  0.314
-		History and Society.Military and warfare     0.575
-		History and Society.Politics and government  0.572
-		History and Society.Society                  0.356
-		History and Society.Transportation           0.814
-		STEM.Biology                                 0.913
-		STEM.Chemistry                               0.358
-		STEM.Computing                               0.312
-		STEM.Earth and environment                   0.561
-		STEM.Engineering                             0.575
-		STEM.Libraries & Information                 0.339
-		STEM.Mathematics                             0.27
-		STEM.Medicine & Health                       0.617
-		STEM.Physics                                 0.174
-		STEM.STEM*                                   0.733
-		STEM.Space                                   0.881
-		STEM.Technology                              0.276
+		Culture.Biography.Biography*                 0.878
+		Culture.Biography.Women                      0.619
+		Culture.Food and drink                       0.415
+		Culture.Internet culture                     0.456
+		Culture.Linguistics                          0.758
+		Culture.Literature                           0.552
+		Culture.Media.Books                          0.639
+		Culture.Media.Entertainment                  0.247
+		Culture.Media.Films                          0.775
+		Culture.Media.Media*                         0.669
+		Culture.Media.Music                          0.825
+		Culture.Media.Radio                          0.806
+		Culture.Media.Software                       0.183
+		Culture.Media.Television                     0.749
+		Culture.Media.Video games                    0.744
+		Culture.Performing arts                      0.483
+		Culture.Philosophy and religion              0.457
+		Culture.Sports                               0.953
+		Culture.Visual arts.Architecture             0.631
+		Culture.Visual arts.Comics and Anime         0.523
+		Culture.Visual arts.Fashion                  0.346
+		Culture.Visual arts.Visual arts*             0.622
+		Geography.Geographical                       0.623
+		Geography.Regions.Africa.Africa*             0.472
+		Geography.Regions.Africa.Central Africa      0.249
+		Geography.Regions.Africa.Eastern Africa      0.292
+		Geography.Regions.Africa.Northern Africa     0.261
+		Geography.Regions.Africa.Southern Africa     0.521
+		Geography.Regions.Africa.Western Africa      0.366
+		Geography.Regions.Americas.Central America   0.518
+		Geography.Regions.Americas.North America     0.719
+		Geography.Regions.Americas.South America     0.665
+		Geography.Regions.Asia.Asia*                 0.663
+		Geography.Regions.Asia.Central Asia          0.253
+		Geography.Regions.Asia.East Asia             0.699
+		Geography.Regions.Asia.North Asia            0.145
+		Geography.Regions.Asia.South Asia            0.848
+		Geography.Regions.Asia.Southeast Asia        0.647
+		Geography.Regions.Asia.West Asia             0.693
+		Geography.Regions.Europe.Eastern Europe      0.485
+		Geography.Regions.Europe.Europe*             0.556
+		Geography.Regions.Europe.Northern Europe     0.754
+		Geography.Regions.Europe.Southern Europe     0.601
+		Geography.Regions.Europe.Western Europe      0.596
+		Geography.Regions.Oceania                    0.838
+		History and Society.Business and economics   0.489
+		History and Society.Education                0.542
+		History and Society.History                  0.332
+		History and Society.Military and warfare     0.539
+		History and Society.Politics and government  0.683
+		History and Society.Society                  0.364
+		History and Society.Transportation           0.828
+		STEM.Biology                                 0.923
+		STEM.Chemistry                               0.305
+		STEM.Computing                               0.305
+		STEM.Earth and environment                   0.586
+		STEM.Engineering                             0.498
+		STEM.Libraries & Information                 0.353
+		STEM.Mathematics                             0.234
+		STEM.Medicine & Health                       0.626
+		STEM.Physics                                 0.167
+		STEM.STEM*                                   0.748
+		STEM.Space                                   0.885
+		STEM.Technology                              0.262
 		-------------------------------------------  -----
 	!precision (micro=0.991, macro=0.996):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.985
-		Culture.Biography.Women                      0.995
+		Culture.Biography.Biography*                 0.988
+		Culture.Biography.Women                      0.996
 		Culture.Food and drink                       0.999
 		Culture.Internet culture                     0.999
 		Culture.Linguistics                          0.998
@@ -499,14 +499,14 @@ Model Information:
 		Culture.Media.Entertainment                  0.998
 		Culture.Media.Films                          0.998
 		Culture.Media.Media*                         0.993
-		Culture.Media.Music                          0.997
+		Culture.Media.Music                          0.996
 		Culture.Media.Radio                          0.999
 		Culture.Media.Software                       1
 		Culture.Media.Television                     0.998
 		Culture.Media.Video games                    1
 		Culture.Performing arts                      0.999
 		Culture.Philosophy and religion              0.996
-		Culture.Sports                               0.993
+		Culture.Sports                               0.992
 		Culture.Visual arts.Architecture             0.997
 		Culture.Visual arts.Comics and Anime         1
 		Culture.Visual arts.Fashion                  1
@@ -515,124 +515,124 @@ Model Information:
 		Geography.Regions.Africa.Africa*             0.997
 		Geography.Regions.Africa.Central Africa      1
 		Geography.Regions.Africa.Eastern Africa      1
-		Geography.Regions.Africa.Northern Africa     0.999
+		Geography.Regions.Africa.Northern Africa     1
 		Geography.Regions.Africa.Southern Africa     1
 		Geography.Regions.Africa.Western Africa      1
-		Geography.Regions.Americas.Central America   0.998
+		Geography.Regions.Americas.Central America   0.999
 		Geography.Regions.Americas.North America     0.976
-		Geography.Regions.Americas.South America     0.997
-		Geography.Regions.Asia.Asia*                 0.988
+		Geography.Regions.Americas.South America     0.998
+		Geography.Regions.Asia.Asia*                 0.991
 		Geography.Regions.Asia.Central Asia          1
-		Geography.Regions.Asia.East Asia             0.997
-		Geography.Regions.Asia.North Asia            0.998
-		Geography.Regions.Asia.South Asia            0.994
-		Geography.Regions.Asia.Southeast Asia        0.997
-		Geography.Regions.Asia.West Asia             0.996
-		Geography.Regions.Europe.Eastern Europe      0.995
-		Geography.Regions.Europe.Europe*             0.983
-		Geography.Regions.Europe.Northern Europe     0.99
-		Geography.Regions.Europe.Southern Europe     0.996
+		Geography.Regions.Asia.East Asia             0.998
+		Geography.Regions.Asia.North Asia            1
+		Geography.Regions.Asia.South Asia            0.995
+		Geography.Regions.Asia.Southeast Asia        0.998
+		Geography.Regions.Asia.West Asia             0.997
+		Geography.Regions.Europe.Eastern Europe      0.997
+		Geography.Regions.Europe.Europe*             0.984
+		Geography.Regions.Europe.Northern Europe     0.989
+		Geography.Regions.Europe.Southern Europe     0.997
 		Geography.Regions.Europe.Western Europe      0.995
-		Geography.Regions.Oceania                    0.998
+		Geography.Regions.Oceania                    0.996
 		History and Society.Business and economics   0.995
-		History and Society.Education                0.995
+		History and Society.Education                0.996
 		History and Society.History                  0.996
-		History and Society.Military and warfare     0.995
-		History and Society.Politics and government  0.992
-		History and Society.Society                  0.994
-		History and Society.Transportation           0.998
+		History and Society.Military and warfare     0.996
+		History and Society.Politics and government  0.988
+		History and Society.Society                  0.993
+		History and Society.Transportation           0.999
 		STEM.Biology                                 0.995
 		STEM.Chemistry                               1
 		STEM.Computing                               0.999
-		STEM.Earth and environment                   0.998
+		STEM.Earth and environment                   0.999
 		STEM.Engineering                             0.998
 		STEM.Libraries & Information                 1
 		STEM.Mathematics                             1
 		STEM.Medicine & Health                       0.998
 		STEM.Physics                                 1
-		STEM.STEM*                                   0.993
+		STEM.STEM*                                   0.992
 		STEM.Space                                   1
 		STEM.Technology                              0.999
 		-------------------------------------------  -----
-	f1 (micro=0.721, macro=0.594):
+	f1 (micro=0.733, macro=0.603):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.882
-		Culture.Biography.Women                      0.655
-		Culture.Food and drink                       0.458
-		Culture.Internet culture                     0.598
-		Culture.Linguistics                          0.732
-		Culture.Literature                           0.626
-		Culture.Media.Books                          0.7
-		Culture.Media.Entertainment                  0.314
-		Culture.Media.Films                          0.805
-		Culture.Media.Media*                         0.75
-		Culture.Media.Music                          0.816
-		Culture.Media.Radio                          0.534
-		Culture.Media.Software                       0.291
-		Culture.Media.Television                     0.755
-		Culture.Media.Video games                    0.792
-		Culture.Performing arts                      0.502
-		Culture.Philosophy and religion              0.506
-		Culture.Sports                               0.91
-		Culture.Visual arts.Architecture             0.661
-		Culture.Visual arts.Comics and Anime         0.686
-		Culture.Visual arts.Fashion                  0.416
-		Culture.Visual arts.Visual arts*             0.643
-		Geography.Geographical                       0.606
-		Geography.Regions.Africa.Africa*             0.546
-		Geography.Regions.Africa.Central Africa      0.347
-		Geography.Regions.Africa.Eastern Africa      0.322
-		Geography.Regions.Africa.Northern Africa     0.371
-		Geography.Regions.Africa.Southern Africa     0.585
-		Geography.Regions.Africa.Western Africa      0.377
-		Geography.Regions.Americas.Central America   0.499
-		Geography.Regions.Americas.North America     0.677
-		Geography.Regions.Americas.South America     0.635
-		Geography.Regions.Asia.Asia*                 0.737
-		Geography.Regions.Asia.Central Asia          0.334
-		Geography.Regions.Asia.East Asia             0.732
-		Geography.Regions.Asia.North Asia            0.58
-		Geography.Regions.Asia.South Asia            0.748
-		Geography.Regions.Asia.Southeast Asia        0.592
-		Geography.Regions.Asia.West Asia             0.694
-		Geography.Regions.Europe.Eastern Europe      0.645
-		Geography.Regions.Europe.Europe*             0.665
-		Geography.Regions.Europe.Northern Europe     0.698
-		Geography.Regions.Europe.Southern Europe     0.661
-		Geography.Regions.Europe.Western Europe      0.669
-		Geography.Regions.Oceania                    0.577
-		History and Society.Business and economics   0.49
-		History and Society.Education                0.459
-		History and Society.History                  0.414
-		History and Society.Military and warfare     0.622
-		History and Society.Politics and government  0.541
-		History and Society.Society                  0.32
-		History and Society.Transportation           0.857
-		STEM.Biology                                 0.889
-		STEM.Chemistry                               0.496
-		STEM.Computing                               0.451
-		STEM.Earth and environment                   0.615
-		STEM.Engineering                             0.635
-		STEM.Libraries & Information                 0.412
-		STEM.Mathematics                             0.404
-		STEM.Medicine & Health                       0.659
-		STEM.Physics                                 0.276
-		STEM.STEM*                                   0.806
-		STEM.Space                                   0.903
-		STEM.Technology                              0.404
+		Culture.Biography.Biography*                 0.895
+		Culture.Biography.Women                      0.656
+		Culture.Food and drink                       0.507
+		Culture.Internet culture                     0.592
+		Culture.Linguistics                          0.734
+		Culture.Literature                           0.635
+		Culture.Media.Books                          0.71
+		Culture.Media.Entertainment                  0.32
+		Culture.Media.Films                          0.802
+		Culture.Media.Media*                         0.761
+		Culture.Media.Music                          0.836
+		Culture.Media.Radio                          0.608
+		Culture.Media.Software                       0.298
+		Culture.Media.Television                     0.776
+		Culture.Media.Video games                    0.827
+		Culture.Performing arts                      0.549
+		Culture.Philosophy and religion              0.514
+		Culture.Sports                               0.924
+		Culture.Visual arts.Architecture             0.662
+		Culture.Visual arts.Comics and Anime         0.64
+		Culture.Visual arts.Fashion                  0.439
+		Culture.Visual arts.Visual arts*             0.654
+		Geography.Geographical                       0.643
+		Geography.Regions.Africa.Africa*             0.558
+		Geography.Regions.Africa.Central Africa      0.36
+		Geography.Regions.Africa.Eastern Africa      0.4
+		Geography.Regions.Africa.Northern Africa     0.368
+		Geography.Regions.Africa.Southern Africa     0.612
+		Geography.Regions.Africa.Western Africa      0.388
+		Geography.Regions.Americas.Central America   0.543
+		Geography.Regions.Americas.North America     0.68
+		Geography.Regions.Americas.South America     0.673
+		Geography.Regions.Asia.Asia*                 0.726
+		Geography.Regions.Asia.Central Asia          0.371
+		Geography.Regions.Asia.East Asia             0.742
+		Geography.Regions.Asia.North Asia            0.243
+		Geography.Regions.Asia.South Asia            0.764
+		Geography.Regions.Asia.Southeast Asia        0.627
+		Geography.Regions.Asia.West Asia             0.706
+		Geography.Regions.Europe.Eastern Europe      0.586
+		Geography.Regions.Europe.Europe*             0.659
+		Geography.Regions.Europe.Northern Europe     0.704
+		Geography.Regions.Europe.Southern Europe     0.663
+		Geography.Regions.Europe.Western Europe      0.671
+		Geography.Regions.Oceania                    0.767
+		History and Society.Business and economics   0.514
+		History and Society.Education                0.495
+		History and Society.History                  0.436
+		History and Society.Military and warfare     0.612
+		History and Society.Politics and government  0.634
+		History and Society.Society                  0.409
+		History and Society.Transportation           0.866
+		STEM.Biology                                 0.895
+		STEM.Chemistry                               0.443
+		STEM.Computing                               0.444
+		STEM.Earth and environment                   0.642
+		STEM.Engineering                             0.586
+		STEM.Libraries & Information                 0.435
+		STEM.Mathematics                             0.362
+		STEM.Medicine & Health                       0.672
+		STEM.Physics                                 0.267
+		STEM.STEM*                                   0.817
+		STEM.Space                                   0.911
+		STEM.Technology                              0.388
 		-------------------------------------------  -----
 	!f1 (micro=0.988, macro=0.995):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.982
-		Culture.Biography.Women                      0.994
+		Culture.Biography.Biography*                 0.985
+		Culture.Biography.Women                      0.995
 		Culture.Food and drink                       0.998
 		Culture.Internet culture                     0.998
 		Culture.Linguistics                          0.998
 		Culture.Literature                           0.993
-		Culture.Media.Books                          0.998
-		Culture.Media.Entertainment                  0.996
+		Culture.Media.Books                          0.999
+		Culture.Media.Entertainment                  0.997
 		Culture.Media.Films                          0.998
-		Culture.Media.Media*                         0.982
+		Culture.Media.Media*                         0.983
 		Culture.Media.Music                          0.996
 		Culture.Media.Radio                          0.999
 		Culture.Media.Software                       0.997
@@ -646,105 +646,105 @@ Model Information:
 		Culture.Visual arts.Fashion                  0.999
 		Culture.Visual arts.Visual arts*             0.993
 		Geography.Geographical                       0.991
-		Geography.Regions.Africa.Africa*             0.995
+		Geography.Regions.Africa.Africa*             0.996
 		Geography.Regions.Africa.Central Africa      0.999
-		Geography.Regions.Africa.Eastern Africa      0.999
+		Geography.Regions.Africa.Eastern Africa      1
 		Geography.Regions.Africa.Northern Africa     0.999
 		Geography.Regions.Africa.Southern Africa     0.999
-		Geography.Regions.Africa.Western Africa      0.999
+		Geography.Regions.Africa.Western Africa      1
 		Geography.Regions.Americas.Central America   0.998
 		Geography.Regions.Americas.North America     0.979
-		Geography.Regions.Americas.South America     0.997
-		Geography.Regions.Asia.Asia*                 0.984
+		Geography.Regions.Americas.South America     0.998
+		Geography.Regions.Asia.Asia*                 0.986
 		Geography.Regions.Asia.Central Asia          0.999
-		Geography.Regions.Asia.East Asia             0.996
-		Geography.Regions.Asia.North Asia            0.997
-		Geography.Regions.Asia.South Asia            0.996
+		Geography.Regions.Asia.East Asia             0.997
+		Geography.Regions.Asia.North Asia            0.998
+		Geography.Regions.Asia.South Asia            0.997
 		Geography.Regions.Asia.Southeast Asia        0.998
-		Geography.Regions.Asia.West Asia             0.996
-		Geography.Regions.Europe.Eastern Europe      0.992
-		Geography.Regions.Europe.Europe*             0.963
+		Geography.Regions.Asia.West Asia             0.997
+		Geography.Regions.Europe.Eastern Europe      0.993
+		Geography.Regions.Europe.Europe*             0.965
 		Geography.Regions.Europe.Northern Europe     0.991
 		Geography.Regions.Europe.Southern Europe     0.995
-		Geography.Regions.Europe.Western Europe      0.992
-		Geography.Regions.Oceania                    0.998
+		Geography.Regions.Europe.Western Europe      0.993
+		Geography.Regions.Oceania                    0.997
 		History and Society.Business and economics   0.995
-		History and Society.Education                0.996
-		History and Society.History                  0.99
+		History and Society.Education                0.997
+		History and Society.History                  0.991
 		History and Society.Military and warfare     0.994
-		History and Society.Politics and government  0.993
-		History and Society.Society                  0.995
-		History and Society.Transportation           0.997
+		History and Society.Politics and government  0.99
+		History and Society.Society                  0.991
+		History and Society.Transportation           0.998
 		STEM.Biology                                 0.996
-		STEM.Chemistry                               0.999
+		STEM.Chemistry                               0.998
 		STEM.Computing                               0.997
 		STEM.Earth and environment                   0.998
-		STEM.Engineering                             0.998
-		STEM.Libraries & Information                 0.999
+		STEM.Engineering                             0.997
+		STEM.Libraries & Information                 1
 		STEM.Mathematics                             0.999
 		STEM.Medicine & Health                       0.998
 		STEM.Physics                                 0.998
 		STEM.STEM*                                   0.985
-		STEM.Space                                   1
+		STEM.Space                                   0.999
 		STEM.Technology                              0.994
 		-------------------------------------------  -----
-	accuracy (micro=0.977, macro=0.99):
+	accuracy (micro=0.979, macro=0.991):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.969
+		Culture.Biography.Biography*                 0.974
 		Culture.Biography.Women                      0.989
-		Culture.Food and drink                       0.996
+		Culture.Food and drink                       0.997
 		Culture.Internet culture                     0.996
 		Culture.Linguistics                          0.996
 		Culture.Literature                           0.987
 		Culture.Media.Books                          0.997
 		Culture.Media.Entertainment                  0.993
-		Culture.Media.Films                          0.995
-		Culture.Media.Media*                         0.967
+		Culture.Media.Films                          0.996
+		Culture.Media.Media*                         0.968
 		Culture.Media.Music                          0.992
-		Culture.Media.Radio                          0.998
+		Culture.Media.Radio                          0.999
 		Culture.Media.Software                       0.995
-		Culture.Media.Television                     0.995
+		Culture.Media.Television                     0.996
 		Culture.Media.Video games                    0.999
 		Culture.Performing arts                      0.997
 		Culture.Philosophy and religion              0.988
-		Culture.Sports                               0.989
+		Culture.Sports                               0.99
 		Culture.Visual arts.Architecture             0.992
 		Culture.Visual arts.Comics and Anime         0.998
-		Culture.Visual arts.Fashion                  0.998
-		Culture.Visual arts.Visual arts*             0.986
-		Geography.Geographical                       0.982
-		Geography.Regions.Africa.Africa*             0.991
-		Geography.Regions.Africa.Central Africa      0.998
+		Culture.Visual arts.Fashion                  0.999
+		Culture.Visual arts.Visual arts*             0.987
+		Geography.Geographical                       0.983
+		Geography.Regions.Africa.Africa*             0.992
+		Geography.Regions.Africa.Central Africa      0.999
 		Geography.Regions.Africa.Eastern Africa      0.999
 		Geography.Regions.Africa.Northern Africa     0.997
 		Geography.Regions.Africa.Southern Africa     0.999
 		Geography.Regions.Africa.Western Africa      0.999
-		Geography.Regions.Americas.Central America   0.996
+		Geography.Regions.Americas.Central America   0.997
 		Geography.Regions.Americas.North America     0.961
-		Geography.Regions.Americas.South America     0.995
-		Geography.Regions.Asia.Asia*                 0.97
+		Geography.Regions.Americas.South America     0.996
+		Geography.Regions.Asia.Asia*                 0.972
 		Geography.Regions.Asia.Central Asia          0.998
-		Geography.Regions.Asia.East Asia             0.993
-		Geography.Regions.Asia.North Asia            0.994
+		Geography.Regions.Asia.East Asia             0.994
+		Geography.Regions.Asia.North Asia            0.996
 		Geography.Regions.Asia.South Asia            0.993
-		Geography.Regions.Asia.Southeast Asia        0.995
+		Geography.Regions.Asia.Southeast Asia        0.996
 		Geography.Regions.Asia.West Asia             0.993
-		Geography.Regions.Europe.Eastern Europe      0.985
-		Geography.Regions.Europe.Europe*             0.933
+		Geography.Regions.Europe.Eastern Europe      0.987
+		Geography.Regions.Europe.Europe*             0.936
 		Geography.Regions.Europe.Northern Europe     0.983
-		Geography.Regions.Europe.Southern Europe     0.989
-		Geography.Regions.Europe.Western Europe      0.984
-		Geography.Regions.Oceania                    0.996
-		History and Society.Business and economics   0.989
-		History and Society.Education                0.992
-		History and Society.History                  0.981
+		Geography.Regions.Europe.Southern Europe     0.99
+		Geography.Regions.Europe.Western Europe      0.986
+		Geography.Regions.Oceania                    0.993
+		History and Society.Business and economics   0.99
+		History and Society.Education                0.993
+		History and Society.History                  0.982
 		History and Society.Military and warfare     0.987
-		History and Society.Politics and government  0.986
-		History and Society.Society                  0.99
-		History and Society.Transportation           0.995
-		STEM.Biology                                 0.992
+		History and Society.Politics and government  0.981
+		History and Society.Society                  0.983
+		History and Society.Transportation           0.996
+		STEM.Biology                                 0.993
 		STEM.Chemistry                               0.997
-		STEM.Computing                               0.994
+		STEM.Computing                               0.995
 		STEM.Earth and environment                   0.996
 		STEM.Engineering                             0.995
 		STEM.Libraries & Information                 0.999
@@ -755,207 +755,207 @@ Model Information:
 		STEM.Space                                   0.999
 		STEM.Technology                              0.988
 		-------------------------------------------  -----
-	fpr (micro=0.016, macro=0.006):
+	fpr (micro=0.014, macro=0.006):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.021
+		Culture.Biography.Biography*                 0.018
 		Culture.Biography.Women                      0.006
-		Culture.Food and drink                       0.003
+		Culture.Food and drink                       0.002
 		Culture.Internet culture                     0.004
 		Culture.Linguistics                          0.002
 		Culture.Literature                           0.01
 		Culture.Media.Books                          0.002
 		Culture.Media.Entertainment                  0.005
 		Culture.Media.Films                          0.003
-		Culture.Media.Media*                         0.028
-		Culture.Media.Music                          0.005
-		Culture.Media.Radio                          0.001
+		Culture.Media.Media*                         0.027
+		Culture.Media.Music                          0.004
+		Culture.Media.Radio                          0
 		Culture.Media.Software                       0.005
-		Culture.Media.Television                     0.003
+		Culture.Media.Television                     0.002
 		Culture.Media.Video games                    0.001
 		Culture.Performing arts                      0.002
 		Culture.Philosophy and religion              0.008
-		Culture.Sports                               0.004
+		Culture.Sports                               0.003
 		Culture.Visual arts.Architecture             0.004
-		Culture.Visual arts.Comics and Anime         0.001
+		Culture.Visual arts.Comics and Anime         0.002
 		Culture.Visual arts.Fashion                  0.001
-		Culture.Visual arts.Visual arts*             0.009
-		Geography.Geographical                       0.011
-		Geography.Regions.Africa.Africa*             0.007
+		Culture.Visual arts.Visual arts*             0.008
+		Geography.Geographical                       0.01
+		Geography.Regions.Africa.Africa*             0.006
 		Geography.Regions.Africa.Central Africa      0.001
 		Geography.Regions.Africa.Eastern Africa      0.001
 		Geography.Regions.Africa.Northern Africa     0.002
 		Geography.Regions.Africa.Southern Africa     0.001
-		Geography.Regions.Africa.Western Africa      0.001
+		Geography.Regions.Africa.Western Africa      0
 		Geography.Regions.Americas.Central America   0.002
 		Geography.Regions.Americas.North America     0.017
-		Geography.Regions.Americas.South America     0.003
-		Geography.Regions.Asia.Asia*                 0.02
-		Geography.Regions.Asia.Central Asia          0.001
+		Geography.Regions.Americas.South America     0.002
+		Geography.Regions.Asia.Asia*                 0.019
+		Geography.Regions.Asia.Central Asia          0.002
 		Geography.Regions.Asia.East Asia             0.004
-		Geography.Regions.Asia.North Asia            0.005
+		Geography.Regions.Asia.North Asia            0.004
 		Geography.Regions.Asia.South Asia            0.002
 		Geography.Regions.Asia.Southeast Asia        0.002
-		Geography.Regions.Asia.West Asia             0.003
-		Geography.Regions.Europe.Eastern Europe      0.011
-		Geography.Regions.Europe.Europe*             0.057
-		Geography.Regions.Europe.Northern Europe     0.008
-		Geography.Regions.Europe.Southern Europe     0.007
-		Geography.Regions.Europe.Western Europe      0.011
+		Geography.Regions.Asia.West Asia             0.004
+		Geography.Regions.Europe.Eastern Europe      0.01
+		Geography.Regions.Europe.Europe*             0.053
+		Geography.Regions.Europe.Northern Europe     0.007
+		Geography.Regions.Europe.Southern Europe     0.006
+		Geography.Regions.Europe.Western Europe      0.01
 		Geography.Regions.Oceania                    0.002
 		History and Society.Business and economics   0.006
 		History and Society.Education                0.003
-		History and Society.History                  0.015
-		History and Society.Military and warfare     0.008
-		History and Society.Politics and government  0.006
-		History and Society.Society                  0.004
+		History and Society.History                  0.014
+		History and Society.Military and warfare     0.009
+		History and Society.Politics and government  0.008
+		History and Society.Society                  0.01
 		History and Society.Transportation           0.003
 		STEM.Biology                                 0.003
-		STEM.Chemistry                               0.002
+		STEM.Chemistry                               0.003
 		STEM.Computing                               0.005
-		STEM.Earth and environment                   0.003
-		STEM.Engineering                             0.003
+		STEM.Earth and environment                   0.002
+		STEM.Engineering                             0.004
 		STEM.Libraries & Information                 0.001
 		STEM.Mathematics                             0.001
 		STEM.Medicine & Health                       0.003
 		STEM.Physics                                 0.003
-		STEM.STEM*                                   0.023
+		STEM.STEM*                                   0.022
 		STEM.Space                                   0.001
-		STEM.Technology                              0.01
+		STEM.Technology                              0.011
 		-------------------------------------------  -----
-	roc_auc (micro=0.972, macro=0.972):
+	roc_auc (micro=0.974, macro=0.973):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.978
-		Culture.Biography.Women                      0.976
-		Culture.Food and drink                       0.972
+		Culture.Biography.Biography*                 0.982
+		Culture.Biography.Women                      0.978
+		Culture.Food and drink                       0.976
 		Culture.Internet culture                     0.985
-		Culture.Linguistics                          0.976
+		Culture.Linguistics                          0.973
 		Culture.Literature                           0.977
-		Culture.Media.Books                          0.985
-		Culture.Media.Entertainment                  0.962
+		Culture.Media.Books                          0.984
+		Culture.Media.Entertainment                  0.965
 		Culture.Media.Films                          0.984
 		Culture.Media.Media*                         0.98
 		Culture.Media.Music                          0.985
-		Culture.Media.Radio                          0.936
-		Culture.Media.Software                       0.985
-		Culture.Media.Television                     0.983
-		Culture.Media.Video games                    0.989
-		Culture.Performing arts                      0.975
-		Culture.Philosophy and religion              0.956
-		Culture.Sports                               0.98
-		Culture.Visual arts.Architecture             0.978
+		Culture.Media.Radio                          0.938
+		Culture.Media.Software                       0.987
+		Culture.Media.Television                     0.985
+		Culture.Media.Video games                    0.99
+		Culture.Performing arts                      0.976
+		Culture.Philosophy and religion              0.958
+		Culture.Sports                               0.981
+		Culture.Visual arts.Architecture             0.979
 		Culture.Visual arts.Comics and Anime         0.987
 		Culture.Visual arts.Fashion                  0.97
-		Culture.Visual arts.Visual arts*             0.97
-		Geography.Geographical                       0.968
-		Geography.Regions.Africa.Africa*             0.969
-		Geography.Regions.Africa.Central Africa      0.982
-		Geography.Regions.Africa.Eastern Africa      0.954
-		Geography.Regions.Africa.Northern Africa     0.973
-		Geography.Regions.Africa.Southern Africa     0.974
-		Geography.Regions.Africa.Western Africa      0.906
-		Geography.Regions.Americas.Central America   0.967
-		Geography.Regions.Americas.North America     0.962
-		Geography.Regions.Americas.South America     0.976
-		Geography.Regions.Asia.Asia*                 0.966
-		Geography.Regions.Asia.Central Asia          0.974
-		Geography.Regions.Asia.East Asia             0.979
-		Geography.Regions.Asia.North Asia            0.976
-		Geography.Regions.Asia.South Asia            0.974
-		Geography.Regions.Asia.Southeast Asia        0.969
-		Geography.Regions.Asia.West Asia             0.974
-		Geography.Regions.Europe.Eastern Europe      0.973
-		Geography.Regions.Europe.Europe*             0.956
+		Culture.Visual arts.Visual arts*             0.969
+		Geography.Geographical                       0.971
+		Geography.Regions.Africa.Africa*             0.971
+		Geography.Regions.Africa.Central Africa      0.981
+		Geography.Regions.Africa.Eastern Africa      0.96
+		Geography.Regions.Africa.Northern Africa     0.975
+		Geography.Regions.Africa.Southern Africa     0.976
+		Geography.Regions.Africa.Western Africa      0.881
+		Geography.Regions.Americas.Central America   0.969
+		Geography.Regions.Americas.North America     0.963
+		Geography.Regions.Americas.South America     0.975
+		Geography.Regions.Asia.Asia*                 0.971
+		Geography.Regions.Asia.Central Asia          0.98
+		Geography.Regions.Asia.East Asia             0.98
+		Geography.Regions.Asia.North Asia            0.984
+		Geography.Regions.Asia.South Asia            0.973
+		Geography.Regions.Asia.Southeast Asia        0.972
+		Geography.Regions.Asia.West Asia             0.977
+		Geography.Regions.Europe.Eastern Europe      0.975
+		Geography.Regions.Europe.Europe*             0.958
 		Geography.Regions.Europe.Northern Europe     0.971
 		Geography.Regions.Europe.Southern Europe     0.974
-		Geography.Regions.Europe.Western Europe      0.977
-		Geography.Regions.Oceania                    0.97
-		History and Society.Business and economics   0.954
-		History and Society.Education                0.953
-		History and Society.History                  0.956
-		History and Society.Military and warfare     0.972
-		History and Society.Politics and government  0.952
-		History and Society.Society                  0.909
+		Geography.Regions.Europe.Western Europe      0.979
+		Geography.Regions.Oceania                    0.976
+		History and Society.Business and economics   0.958
+		History and Society.Education                0.961
+		History and Society.History                  0.961
+		History and Society.Military and warfare     0.973
+		History and Society.Politics and government  0.954
+		History and Society.Society                  0.93
 		History and Society.Transportation           0.986
 		STEM.Biology                                 0.982
-		STEM.Chemistry                               0.986
+		STEM.Chemistry                               0.984
 		STEM.Computing                               0.986
-		STEM.Earth and environment                   0.975
-		STEM.Engineering                             0.977
-		STEM.Libraries & Information                 0.962
-		STEM.Mathematics                             0.987
-		STEM.Medicine & Health                       0.976
-		STEM.Physics                                 0.983
-		STEM.STEM*                                   0.977
+		STEM.Earth and environment                   0.973
+		STEM.Engineering                             0.979
+		STEM.Libraries & Information                 0.963
+		STEM.Mathematics                             0.981
+		STEM.Medicine & Health                       0.979
+		STEM.Physics                                 0.981
+		STEM.STEM*                                   0.978
 		STEM.Space                                   0.994
-		STEM.Technology                              0.976
+		STEM.Technology                              0.977
 		-------------------------------------------  -----
-	pr_auc (micro=0.768, macro=0.595):
+	pr_auc (micro=0.782, macro=0.608):
 		-------------------------------------------  -----
-		Culture.Biography.Biography*                 0.94
-		Culture.Biography.Women                      0.639
-		Culture.Food and drink                       0.391
-		Culture.Internet culture                     0.662
-		Culture.Linguistics                          0.72
-		Culture.Literature                           0.7
-		Culture.Media.Books                          0.779
-		Culture.Media.Entertainment                  0.233
-		Culture.Media.Films                          0.82
-		Culture.Media.Media*                         0.854
-		Culture.Media.Music                          0.874
-		Culture.Media.Radio                          0.323
-		Culture.Media.Software                       0.33
-		Culture.Media.Television                     0.769
-		Culture.Media.Video games                    0.87
-		Culture.Performing arts                      0.461
-		Culture.Philosophy and religion              0.498
-		Culture.Sports                               0.93
-		Culture.Visual arts.Architecture             0.698
-		Culture.Visual arts.Comics and Anime         0.757
-		Culture.Visual arts.Fashion                  0.324
-		Culture.Visual arts.Visual arts*             0.676
-		Geography.Geographical                       0.623
-		Geography.Regions.Africa.Africa*             0.54
-		Geography.Regions.Africa.Central Africa      0.238
-		Geography.Regions.Africa.Eastern Africa      0.151
-		Geography.Regions.Africa.Northern Africa     0.296
-		Geography.Regions.Africa.Southern Africa     0.43
-		Geography.Regions.Africa.Western Africa      0.186
-		Geography.Regions.Americas.Central America   0.445
-		Geography.Regions.Americas.North America     0.745
-		Geography.Regions.Americas.South America     0.625
-		Geography.Regions.Asia.Asia*                 0.796
-		Geography.Regions.Asia.Central Asia          0.273
-		Geography.Regions.Asia.East Asia             0.779
-		Geography.Regions.Asia.North Asia            0.613
-		Geography.Regions.Asia.South Asia            0.779
-		Geography.Regions.Asia.Southeast Asia        0.535
-		Geography.Regions.Asia.West Asia             0.704
-		Geography.Regions.Europe.Eastern Europe      0.705
-		Geography.Regions.Europe.Europe*             0.766
-		Geography.Regions.Europe.Northern Europe     0.742
-		Geography.Regions.Europe.Southern Europe     0.718
-		Geography.Regions.Europe.Western Europe      0.713
-		Geography.Regions.Oceania                    0.531
-		History and Society.Business and economics   0.441
-		History and Society.Education                0.381
-		History and Society.History                  0.472
-		History and Society.Military and warfare     0.667
-		History and Society.Politics and government  0.558
-		History and Society.Society                  0.258
-		History and Society.Transportation           0.902
-		STEM.Biology                                 0.935
-		STEM.Chemistry                               0.515
-		STEM.Computing                               0.5
-		STEM.Earth and environment                   0.634
-		STEM.Engineering                             0.661
-		STEM.Libraries & Information                 0.198
-		STEM.Mathematics                             0.507
-		STEM.Medicine & Health                       0.661
-		STEM.Physics                                 0.21
+		Culture.Biography.Biography*                 0.953
+		Culture.Biography.Women                      0.687
+		Culture.Food and drink                       0.477
+		Culture.Internet culture                     0.678
+		Culture.Linguistics                          0.719
+		Culture.Literature                           0.722
+		Culture.Media.Books                          0.798
+		Culture.Media.Entertainment                  0.226
+		Culture.Media.Films                          0.844
+		Culture.Media.Media*                         0.866
+		Culture.Media.Music                          0.88
+		Culture.Media.Radio                          0.438
+		Culture.Media.Software                       0.347
+		Culture.Media.Television                     0.807
+		Culture.Media.Video games                    0.857
+		Culture.Performing arts                      0.575
+		Culture.Philosophy and religion              0.495
+		Culture.Sports                               0.952
+		Culture.Visual arts.Architecture             0.683
+		Culture.Visual arts.Comics and Anime         0.701
+		Culture.Visual arts.Fashion                  0.303
+		Culture.Visual arts.Visual arts*             0.667
+		Geography.Geographical                       0.66
+		Geography.Regions.Africa.Africa*             0.534
+		Geography.Regions.Africa.Central Africa      0.266
+		Geography.Regions.Africa.Eastern Africa      0.195
+		Geography.Regions.Africa.Northern Africa     0.336
+		Geography.Regions.Africa.Southern Africa     0.51
+		Geography.Regions.Africa.Western Africa      0.24
+		Geography.Regions.Americas.Central America   0.442
+		Geography.Regions.Americas.North America     0.752
+		Geography.Regions.Americas.South America     0.663
+		Geography.Regions.Asia.Asia*                 0.794
+		Geography.Regions.Asia.Central Asia          0.305
+		Geography.Regions.Asia.East Asia             0.799
+		Geography.Regions.Asia.North Asia            0.202
+		Geography.Regions.Asia.South Asia            0.796
+		Geography.Regions.Asia.Southeast Asia        0.578
+		Geography.Regions.Asia.West Asia             0.73
+		Geography.Regions.Europe.Eastern Europe      0.616
+		Geography.Regions.Europe.Europe*             0.762
+		Geography.Regions.Europe.Northern Europe     0.767
+		Geography.Regions.Europe.Southern Europe     0.714
+		Geography.Regions.Europe.Western Europe      0.755
+		Geography.Regions.Oceania                    0.803
+		History and Society.Business and economics   0.472
+		History and Society.Education                0.432
+		History and Society.History                  0.486
+		History and Society.Military and warfare     0.668
+		History and Society.Politics and government  0.662
+		History and Society.Society                  0.37
+		History and Society.Transportation           0.905
+		STEM.Biology                                 0.931
+		STEM.Chemistry                               0.544
+		STEM.Computing                               0.489
+		STEM.Earth and environment                   0.648
+		STEM.Engineering                             0.624
+		STEM.Libraries & Information                 0.22
+		STEM.Mathematics                             0.389
+		STEM.Medicine & Health                       0.648
+		STEM.Physics                                 0.168
 		STEM.STEM*                                   0.896
-		STEM.Space                                   0.94
-		STEM.Technology                              0.534
+		STEM.Space                                   0.963
+		STEM.Technology                              0.51
 		-------------------------------------------  -----
 	
-	 - score_schema: {'properties': {'probability': {'description': 'A mapping of probabilities onto each of the potential output labels', 'properties': {'Culture.Media.Books': {'type': 'number'}, 'Culture.Visual arts.Fashion': {'type': 'number'}, 'Geography.Regions.Oceania': {'type': 'number'}, 'STEM.Medicine & Health': {'type': 'number'}, 'Geography.Regions.Asia.North Asia': {'type': 'number'}, 'Culture.Media.Films': {'type': 'number'}, 'History and Society.Business and economics': {'type': 'number'}, 'Culture.Media.Music': {'type': 'number'}, 'Culture.Media.Entertainment': {'type': 'number'}, 'Culture.Sports': {'type': 'number'}, 'Culture.Internet culture': {'type': 'number'}, 'Geography.Regions.Asia.West Asia': {'type': 'number'}, 'Geography.Regions.Africa.Northern Africa': {'type': 'number'}, 'Geography.Regions.Europe.Western Europe': {'type': 'number'}, 'History and Society.History': {'type': 'number'}, 'Geography.Regions.Europe.Northern Europe': {'type': 'number'}, 'Culture.Visual arts.Architecture': {'type': 'number'}, 'STEM.Libraries & Information': {'type': 'number'}, 'Geography.Regions.Africa.Southern Africa': {'type': 'number'}, 'Culture.Food and drink': {'type': 'number'}, 'History and Society.Education': {'type': 'number'}, 'Geography.Regions.Americas.South America': {'type': 'number'}, 'STEM.Computing': {'type': 'number'}, 'Geography.Regions.Asia.East Asia': {'type': 'number'}, 'STEM.Biology': {'type': 'number'}, 'STEM.Engineering': {'type': 'number'}, 'Geography.Regions.Africa.Central Africa': {'type': 'number'}, 'Geography.Regions.Europe.Eastern Europe': {'type': 'number'}, 'Culture.Media.Media*': {'type': 'number'}, 'STEM.Chemistry': {'type': 'number'}, 'Geography.Regions.Africa.Eastern Africa': {'type': 'number'}, 'History and Society.Military and warfare': {'type': 'number'}, 'Geography.Regions.Asia.Asia*': {'type': 'number'}, 'STEM.Physics': {'type': 'number'}, 'History and Society.Transportation': {'type': 'number'}, 'Geography.Regions.Asia.Southeast Asia': {'type': 'number'}, 'STEM.Space': {'type': 'number'}, 'Culture.Visual arts.Visual arts*': {'type': 'number'}, 'Culture.Biography.Biography*': {'type': 'number'}, 'Culture.Media.Radio': {'type': 'number'}, 'STEM.Mathematics': {'type': 'number'}, 'Culture.Media.Software': {'type': 'number'}, 'History and Society.Politics and government': {'type': 'number'}, 'Geography.Regions.Asia.Central Asia': {'type': 'number'}, 'STEM.STEM*': {'type': 'number'}, 'Geography.Regions.Americas.Central America': {'type': 'number'}, 'Culture.Visual arts.Comics and Anime': {'type': 'number'}, 'STEM.Technology': {'type': 'number'}, 'Culture.Media.Television': {'type': 'number'}, 'Geography.Regions.Africa.Western Africa': {'type': 'number'}, 'History and Society.Society': {'type': 'number'}, 'Geography.Regions.Europe.Southern Europe': {'type': 'number'}, 'Culture.Literature': {'type': 'number'}, 'STEM.Earth and environment': {'type': 'number'}, 'Geography.Regions.Asia.South Asia': {'type': 'number'}, 'Culture.Biography.Women': {'type': 'number'}, 'Culture.Performing arts': {'type': 'number'}, 'Geography.Regions.Europe.Europe*': {'type': 'number'}, 'Culture.Linguistics': {'type': 'number'}, 'Geography.Regions.Africa.Africa*': {'type': 'number'}, 'Culture.Philosophy and religion': {'type': 'number'}, 'Geography.Geographical': {'type': 'number'}, 'Culture.Media.Video games': {'type': 'number'}, 'Geography.Regions.Americas.North America': {'type': 'number'}}, 'type': 'object'}, 'prediction': {'description': 'The most likely labels predicted by the estimator', 'type': 'array', 'items': {'type': 'string'}}}, 'type': 'object', 'title': 'Scikit learn-based classifier score with probability'}
+	 - score_schema: {'title': 'Scikit learn-based classifier score with probability', 'type': 'object', 'properties': {'prediction': {'description': 'The most likely labels predicted by the estimator', 'type': 'array', 'items': {'type': 'string'}}, 'probability': {'description': 'A mapping of probabilities onto each of the potential output labels', 'type': 'object', 'properties': {'Culture.Biography.Biography*': {'type': 'number'}, 'Culture.Biography.Women': {'type': 'number'}, 'Culture.Food and drink': {'type': 'number'}, 'Culture.Internet culture': {'type': 'number'}, 'Culture.Linguistics': {'type': 'number'}, 'Culture.Literature': {'type': 'number'}, 'Culture.Media.Books': {'type': 'number'}, 'Culture.Media.Entertainment': {'type': 'number'}, 'Culture.Media.Films': {'type': 'number'}, 'Culture.Media.Media*': {'type': 'number'}, 'Culture.Media.Music': {'type': 'number'}, 'Culture.Media.Radio': {'type': 'number'}, 'Culture.Media.Software': {'type': 'number'}, 'Culture.Media.Television': {'type': 'number'}, 'Culture.Media.Video games': {'type': 'number'}, 'Culture.Performing arts': {'type': 'number'}, 'Culture.Philosophy and religion': {'type': 'number'}, 'Culture.Sports': {'type': 'number'}, 'Culture.Visual arts.Architecture': {'type': 'number'}, 'Culture.Visual arts.Comics and Anime': {'type': 'number'}, 'Culture.Visual arts.Fashion': {'type': 'number'}, 'Culture.Visual arts.Visual arts*': {'type': 'number'}, 'Geography.Geographical': {'type': 'number'}, 'Geography.Regions.Africa.Africa*': {'type': 'number'}, 'Geography.Regions.Africa.Central Africa': {'type': 'number'}, 'Geography.Regions.Africa.Eastern Africa': {'type': 'number'}, 'Geography.Regions.Africa.Northern Africa': {'type': 'number'}, 'Geography.Regions.Africa.Southern Africa': {'type': 'number'}, 'Geography.Regions.Africa.Western Africa': {'type': 'number'}, 'Geography.Regions.Americas.Central America': {'type': 'number'}, 'Geography.Regions.Americas.North America': {'type': 'number'}, 'Geography.Regions.Americas.South America': {'type': 'number'}, 'Geography.Regions.Asia.Asia*': {'type': 'number'}, 'Geography.Regions.Asia.Central Asia': {'type': 'number'}, 'Geography.Regions.Asia.East Asia': {'type': 'number'}, 'Geography.Regions.Asia.North Asia': {'type': 'number'}, 'Geography.Regions.Asia.South Asia': {'type': 'number'}, 'Geography.Regions.Asia.Southeast Asia': {'type': 'number'}, 'Geography.Regions.Asia.West Asia': {'type': 'number'}, 'Geography.Regions.Europe.Eastern Europe': {'type': 'number'}, 'Geography.Regions.Europe.Europe*': {'type': 'number'}, 'Geography.Regions.Europe.Northern Europe': {'type': 'number'}, 'Geography.Regions.Europe.Southern Europe': {'type': 'number'}, 'Geography.Regions.Europe.Western Europe': {'type': 'number'}, 'Geography.Regions.Oceania': {'type': 'number'}, 'History and Society.Business and economics': {'type': 'number'}, 'History and Society.Education': {'type': 'number'}, 'History and Society.History': {'type': 'number'}, 'History and Society.Military and warfare': {'type': 'number'}, 'History and Society.Politics and government': {'type': 'number'}, 'History and Society.Society': {'type': 'number'}, 'History and Society.Transportation': {'type': 'number'}, 'STEM.Biology': {'type': 'number'}, 'STEM.Chemistry': {'type': 'number'}, 'STEM.Computing': {'type': 'number'}, 'STEM.Earth and environment': {'type': 'number'}, 'STEM.Engineering': {'type': 'number'}, 'STEM.Libraries & Information': {'type': 'number'}, 'STEM.Mathematics': {'type': 'number'}, 'STEM.Medicine & Health': {'type': 'number'}, 'STEM.Physics': {'type': 'number'}, 'STEM.STEM*': {'type': 'number'}, 'STEM.Space': {'type': 'number'}, 'STEM.Technology': {'type': 'number'}}}}}
 
