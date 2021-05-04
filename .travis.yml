@@ -38,8 +38,8 @@ after_success:
   - coverage report
   - codecov
 
-deploy:
-  provider: script
-  script: bash scripts/deploy.sh
-  on:
-    branch: master
+#deploy:
+#  provider: script
+#  script: bash scripts/deploy.sh
+#  on:
+#    branch: master
