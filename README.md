@@ -17,38 +17,25 @@ Install the library using:
 python setup.py install
 ```
 
-## Generating machine-readable WikiProjects data
+## Generating models
 
-Use the following utility from root directory to generate machine-readable WikiProjects data:
+This repository contains a Makefile that will implement the modeling pipeline:
 
+### Generating a single model
+
+You can generate a specific model by asking make to generate it directly. 
 ```
-./utility fetch_wikiprojects --output <output_file_name.json>
-```
-
-## Generating mid-level category to WikiProjects mapping
-
-Use the following utility from root directory to generate a mapping of high-level topic categories to list of WikiProjects contained in them:
-
-```
-./utility trim_wikiprojects --wikiprojects wp --output outmid
+make models/enwiki.articletopic.gradient_boosting.model
 ```
 
-## Labeling a list of page-ids with the wikiprojects and mid-level categories each page belongs to
+### Generating all models
 
-Use the following utility from root directory to label a list of page-ids with the wikiprojects and the mid-level categories the page belongs to.
-
+The following command will regenerate the data pipeline for all models in this project. 
 ```
-./utility fetch_page_wikiprojects --api-host=https://en.wikipedia.org/ --input=wikiproject_page_ids.json --output=enwiki.labeled_wikiprojects.json --mid_level_wp=outmid.json --verbose
+make models
 ```
-
-In above, the input to the script should be a json containing a list of
-observations, each observation having a **page\_id: \<page-id\>** mapping.
-Additionally also pass the mid-level wikiprojects json for the script to
-generate wikiprojects to mid-level categories mapping. The script augments the
-given list with the mentioned fields, writing them to a new file specified by
-**"output"**
 
 ## Generating predictions for a set of page-ids on Wikipedia
 
-For generating topic predictions for a set of revision-ids, download the relevant model and use revscoring's [score](https://github.com/wikimedia/revscoring/blob/master/revscoring/utilities/score.py) API
-to generate predictions. Note that the revision-ids need to be in a file with a format specified by the API. Use the revision ID of the most recent revision for a page to get a good prediction.
+For generating topic predictions for a set of revision-ids, download the relevant model and use revscoring's [score](https://github.com/wikimedia/revscoring/blob/master/revscoring/utilities/score.py) utility
+to generate predictions. Note that the revision-ids need to be in a file with a format specified by the utility. Use the revision ID of the most recent revision for a page to get a good prediction.
