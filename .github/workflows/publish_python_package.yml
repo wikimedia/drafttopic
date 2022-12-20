@@ -5,7 +5,7 @@ on:
     branches:
       - feature-publish-pypi
     paths:
-      - 'revscoring/about.py'
+      - 'drafttopic/about.py'
 
 
 jobs:
