@@ -1,5 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.3.1]
+
+### Added
+* Add Github Action that build & pushes to PYPI index
 
 ## [0.3.0]
 
