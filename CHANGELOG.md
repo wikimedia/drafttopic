@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 * Add Github Action that build & pushes to PYPI index
 
+## [0.4.0]
+
+### Changed
+* Rebuild to add compatibility for revscoring 2.11
+
 ## [0.3.0]
 
 ### Added
